@@ -1,369 +1,1223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wedding Police - Podcast</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wedding Police Podcast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Outfit:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --hot-pink: #FF1493;
+    --neon-pink: #FF69B4;
+    --soft-pink: #FFB6C1;
+    --blush: #FFF0F5;
+    --silver: #C0C0C0;
+    --bright-silver: #E8E8E8;
+    --disco-gold: #FFD700;
+    --deep-plum: #1a0a1a;
+    --midnight: #0d0d1a;
+    --glass-white: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+  }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b3d 100%);
-            color: #ffffff;
-            overflow-x: hidden;
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4rem 2rem;
-            position: relative;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b3d 50%, #4a1942 100%);
-            overflow: hidden;
-        }
+  html { scroll-behavior: smooth; }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(255, 20, 147, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--midnight);
+    color: #fff;
+    overflow-x: hidden;
+  }
 
-        /* Shimmer/Sparkle Effect */
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-                radial-gradient(circle, rgba(255, 105, 180, 0.15) 1px, transparent 1px),
-                radial-gradient(circle, rgba(255, 20, 147, 0.1) 2px, transparent 2px);
-            background-size: 50px 50px, 80px 80px, 100px 100px;
-            background-position: 0 0, 40px 40px, 20px 20px;
-            animation: shimmer 20s linear infinite;
-            pointer-events: none;
-            opacity: 0.6;
-        }
+  /* ============ DISCO BALL CURSOR TRAIL ============ */
+  .sparkle {
+    position: fixed;
+    pointer-events: none;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--hot-pink);
+    z-index: 9999;
+    animation: sparkle-fade 0.8s ease-out forwards;
+  }
 
-        @keyframes shimmer {
-            0% {
-                transform: translate(0, 0);
-            }
-            100% {
-                transform: translate(50px, 50px);
-            }
-        }
+  @keyframes sparkle-fade {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+  }
 
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
+  /* ============ NAVIGATION ============ */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    background: rgba(13, 13, 26, 0.7);
+    border-bottom: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+  }
 
-        .hero-left {
-            text-align: left;
-        }
+  nav.scrolled {
+    padding: 0.8rem 2rem;
+    background: rgba(13, 13, 26, 0.95);
+  }
 
-        .hero-right {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+  .nav-logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.5rem;
+    color: var(--hot-pink);
+    text-decoration: none;
+    text-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
+  }
 
-        .logo-container {
-            animation: fadeInRight 1s ease-out;
-        }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+  }
 
-        .logo-image {
-            max-width: 100%;
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(0 10px 30px rgba(255, 20, 147, 0.4));
-            animation: float 6s ease-in-out infinite;
-        }
+  .nav-links a {
+    color: var(--bright-silver);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    transition: color 0.3s;
+    position: relative;
+  }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--hot-pink);
+    transition: width 0.3s;
+    box-shadow: 0 0 8px var(--hot-pink);
+  }
 
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+  .nav-links a:hover { color: #fff; }
+  .nav-links a:hover::after { width: 100%; }
 
-        .tagline {
-            font-size: 1.5rem;
-            font-weight: 400;
-            margin-bottom: 2rem;
-            color: #ff69b4;
-            animation: fadeInLeft 1s ease-out 0.3s both;
-        }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--hot-pink), #c70070);
+    color: #fff !important;
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+    font-weight: 600 !important;
+    transition: transform 0.3s, box-shadow 0.3s !important;
+    box-shadow: 0 4px 20px rgba(255, 20, 147, 0.4);
+  }
 
-        .description {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 3rem;
-            color: #e0e0e0;
-            animation: fadeInLeft 1s ease-out 0.6s both;
-        }
+  .nav-cta::after { display: none !important; }
+  .nav-cta:hover { transform: translateY(-2px) !important; box-shadow: 0 6px 30px rgba(255, 20, 147, 0.6) !important; }
 
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+  .mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+  }
 
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            animation: fadeInLeft 1s ease-out 0.9s both;
-        }
+  .mobile-toggle span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: var(--neon-pink);
+    transition: all 0.3s;
+  }
 
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
-            color: white;
-            padding: 18px 40px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(29, 185, 84, 0.4);
-        }
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 2rem 4rem;
+  }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(29, 185, 84, 0.6);
-            background: linear-gradient(135deg, #1ed760 0%, #1DB954 100%);
-        }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(255, 20, 147, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(192, 192, 192, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 40%),
+      var(--midnight);
+  }
 
-        .cta-button.facebook {
-            background: linear-gradient(135deg, #1877f2 0%, #4a9ff5 100%);
-            box-shadow: 0 10px 30px rgba(24, 119, 242, 0.4);
-        }
+  /* Animated disco lights */
+  .disco-light {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    animation: disco-pulse 4s ease-in-out infinite alternate;
+  }
 
-        .cta-button.facebook:hover {
-            background: linear-gradient(135deg, #4a9ff5 0%, #1877f2 100%);
-            box-shadow: 0 15px 40px rgba(24, 119, 242, 0.6);
-        }
+  .disco-light:nth-child(1) {
+    width: 400px; height: 400px;
+    background: var(--hot-pink);
+    top: -100px; left: -100px;
+    animation-delay: 0s;
+  }
 
-        .spotify-icon {
-            width: 32px;
-            height: 32px;
-        }
+  .disco-light:nth-child(2) {
+    width: 300px; height: 300px;
+    background: var(--disco-gold);
+    bottom: -50px; right: -50px;
+    animation-delay: 1s;
+  }
 
-        /* About Section */
-        .about-section {
-            padding: 4rem 2rem;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-        }
+  .disco-light:nth-child(3) {
+    width: 250px; height: 250px;
+    background: var(--silver);
+    top: 30%; right: 10%;
+    animation-delay: 2s;
+  }
 
-        .about-content {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-        }
+  @keyframes disco-pulse {
+    0% { transform: scale(1); opacity: 0.2; }
+    100% { transform: scale(1.3); opacity: 0.4; }
+  }
 
-        .about-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+  /* Floating disco squares */
+  .disco-squares {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
 
-        .about-content p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            color: #e0e0e0;
-        }
+  .disco-square {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    animation: float-square 15s linear infinite;
+  }
 
-        /* Footer */
-        .footer {
-            padding: 2rem;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.5);
-            color: #999;
-        }
+  @keyframes float-square {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+  }
 
-        /* Animations */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    max-width: 1200px;
+    width: 100%;
+  }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  .hero-image-wrapper {
+    flex-shrink: 0;
+    position: relative;
+  }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
+  .hero-image-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, var(--hot-pink), var(--disco-gold), var(--silver), var(--hot-pink));
+    background-size: 400% 400%;
+    animation: gradient-spin 4s ease infinite;
+    z-index: -1;
+  }
 
-            .hero-right {
-                order: -1;
-            }
+  @keyframes gradient-spin {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
-            .hero-left {
-                text-align: center;
-            }
+  .hero-image {
+    width: 380px;
+    height: 380px;
+    border-radius: 20px;
+    object-fit: cover;
+    display: block;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
 
-            .logo-image {
-                width: 100%;
-            }
+  .badge-float {
+    position: absolute;
+    background: var(--glass-white);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    animation: badge-bob 3s ease-in-out infinite;
+    white-space: nowrap;
+  }
 
-            .tagline {
-                font-size: 1.2rem;
-            }
+  .badge-float:nth-child(2) {
+    top: -15px; right: -30px;
+    animation-delay: 0s;
+  }
 
-            .description {
-                font-size: 1rem;
-            }
+  .badge-float:nth-child(3) {
+    bottom: 20px; left: -40px;
+    animation-delay: 1.5s;
+  }
 
-            .cta-buttons {
-                flex-direction: column;
-                width: 100%;
-                align-items: center;
-            }
+  @keyframes badge-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
 
-            .cta-button {
-                font-size: 1.1rem;
-                padding: 15px 30px;
-                width: 100%;
-                max-width: 300px;
-            }
+  .hero-text {
+    flex: 1;
+  }
 
-            .about-content h2 {
-                font-size: 2rem;
-            }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--glass-white);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--neon-pink);
+    margin-bottom: 1.5rem;
+    animation: fade-in-up 0.8s ease-out 0.2s both;
+  }
 
-            .about-content p {
-                font-size: 1rem;
-            }
-        }
-    </style>
+  .hero-title {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+    animation: fade-in-up 0.8s ease-out 0.4s both;
+    background: linear-gradient(135deg, #fff 0%, var(--neon-pink) 50%, var(--hot-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 4px 20px rgba(255, 20, 147, 0.3));
+  }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--soft-pink);
+    margin-bottom: 1.5rem;
+    animation: fade-in-up 0.8s ease-out 0.5s both;
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+    max-width: 500px;
+    margin-bottom: 2rem;
+    animation: fade-in-up 0.8s ease-out 0.6s both;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fade-in-up 0.8s ease-out 0.8s both;
+  }
+
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 2rem;
+    border-radius: 60px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--hot-pink), #c70070);
+    color: #fff;
+    box-shadow: 0 4px 25px rgba(255, 20, 147, 0.5);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 35px rgba(255, 20, 147, 0.7);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: #fff;
+    border: 2px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--neon-pink);
+    background: rgba(255, 20, 147, 0.1);
+    transform: translateY(-3px);
+  }
+
+  .spotify-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* ============ SECTION STYLES ============ */
+  section {
+    padding: 6rem 2rem;
+    position: relative;
+  }
+
+  .section-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--hot-pink);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 30px;
+    height: 2px;
+    background: var(--hot-pink);
+    box-shadow: 0 0 8px var(--hot-pink);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .section-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 550px;
+    line-height: 1.6;
+  }
+
+  /* ============ ABOUT ============ */
+  .about {
+    background:
+      radial-gradient(ellipse at 80% 50%, rgba(255, 20, 147, 0.08) 0%, transparent 50%),
+      var(--midnight);
+  }
+
+  .about-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .feature-card {
+    background: var(--glass-white);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--hot-pink);
+    box-shadow: 0 8px 30px rgba(255, 20, 147, 0.15);
+  }
+
+  .feature-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .feature-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .feature-card p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.5;
+  }
+
+  .about-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .badge-display {
+    width: 320px;
+    height: 380px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .badge-outer {
+    width: 260px;
+    height: 320px;
+    background: linear-gradient(145deg, rgba(255, 20, 147, 0.15), rgba(192, 192, 192, 0.1));
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    backdrop-filter: blur(20px);
+  }
+
+  .badge-star {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: badge-bob 2s ease-in-out infinite;
+  }
+
+  .badge-outer h3 {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.6rem;
+    color: var(--hot-pink);
+    margin-bottom: 0.5rem;
+  }
+
+  .badge-outer p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.5;
+  }
+
+  .orbit-ring {
+    position: absolute;
+    border: 1px dashed rgba(255, 20, 147, 0.2);
+    border-radius: 50%;
+    animation: orbit-spin 20s linear infinite;
+  }
+
+  .orbit-ring:nth-child(1) { width: 350px; height: 400px; }
+  .orbit-ring:nth-child(2) { width: 320px; height: 370px; animation-direction: reverse; animation-duration: 25s; }
+
+  @keyframes orbit-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  .orbit-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--hot-pink);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--hot-pink);
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* ============ EPISODES ============ */
+  .episodes {
+    background:
+      radial-gradient(ellipse at 20% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+      var(--deep-plum);
+  }
+
+  .episodes-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .episodes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+  }
+
+  .episode-cards {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .episode-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: var(--glass-white);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 1.5rem;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .episode-card:hover {
+    transform: translateX(8px);
+    border-color: var(--hot-pink);
+    background: rgba(255, 20, 147, 0.08);
+  }
+
+  .episode-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--hot-pink);
+    opacity: 0.4;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  .episode-info { flex: 1; }
+
+  .episode-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .episode-info p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.5;
+  }
+
+  .episode-meta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .episode-meta span {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.35);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .episode-play {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--hot-pink), #c70070);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+  }
+
+  .episode-card:hover .episode-play {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(255, 20, 147, 0.5);
+  }
+
+  .episode-play svg {
+    width: 18px;
+    height: 18px;
+    fill: #fff;
+    margin-left: 2px;
+  }
+
+  /* ============ CTA / LISTEN ============ */
+  .cta-section {
+    padding: 8rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--midnight);
+  }
+
+  .cta-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 20, 147, 0.2), transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: disco-pulse 3s ease-in-out infinite alternate;
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cta-content .section-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
+  }
+
+  .cta-content .section-subtitle {
+    max-width: 100%;
+    margin: 0 auto 2.5rem;
+    font-size: 1.2rem;
+  }
+
+  .listen-platforms {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .platform-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 1rem 2rem;
+    border-radius: 60px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-white);
+    backdrop-filter: blur(10px);
+  }
+
+  .platform-btn:hover {
+    transform: translateY(-3px);
+    border-color: var(--hot-pink);
+    box-shadow: 0 8px 30px rgba(255, 20, 147, 0.2);
+  }
+
+  .platform-btn.spotify {
+    background: linear-gradient(135deg, #1DB954, #1aa34a);
+    border-color: transparent;
+    box-shadow: 0 4px 20px rgba(29, 185, 84, 0.4);
+  }
+
+  .platform-btn.spotify:hover {
+    box-shadow: 0 8px 35px rgba(29, 185, 84, 0.6);
+  }
+
+  .platform-btn.facebook {
+    background: linear-gradient(135deg, #1877F2, #0d5bbd);
+    border-color: transparent;
+    box-shadow: 0 4px 20px rgba(24, 119, 242, 0.4);
+  }
+
+  .platform-btn.facebook:hover {
+    box-shadow: 0 8px 35px rgba(24, 119, 242, 0.6);
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--glass-border);
+    background: rgba(13, 13, 26, 0.9);
+  }
+
+  .footer-logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.8rem;
+    color: var(--hot-pink);
+    text-shadow: 0 0 20px rgba(255, 20, 147, 0.4);
+    margin-bottom: 1rem;
+  }
+
+  .footer-tagline {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-socials a {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .footer-socials a:hover {
+    border-color: var(--hot-pink);
+    color: var(--hot-pink);
+    background: rgba(255, 20, 147, 0.1);
+    transform: translateY(-3px);
+  }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  /* ============ MARQUEE ============ */
+  .marquee-strip {
+    overflow: hidden;
+    padding: 1.2rem 0;
+    border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+    background: rgba(255, 20, 147, 0.03);
+  }
+
+  .marquee-inner {
+    display: flex;
+    gap: 3rem;
+    animation: marquee-scroll 25s linear infinite;
+    width: max-content;
+  }
+
+  .marquee-item {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.25);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .marquee-item span.dot {
+    width: 6px;
+    height: 6px;
+    background: var(--hot-pink);
+    border-radius: 50%;
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ============ HANDCUFF DIVIDER ============ */
+  .divider {
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 1.5rem;
+    opacity: 0.3;
+    letter-spacing: 1rem;
+  }
+
+  /* ============ SCROLL REVEAL ============ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .hero-content {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .hero-image { width: 280px; height: 280px; }
+    .hero-desc { margin: 0 auto 2rem; }
+    .hero-buttons { justify-content: center; }
+    .badge-float:nth-child(2) { right: -10px; }
+    .badge-float:nth-child(3) { left: -10px; }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .about-visual { order: -1; }
+    .badge-display { width: 260px; height: 320px; }
+    .badge-outer { width: 220px; height: 270px; }
+    .orbit-ring:nth-child(1) { width: 290px; height: 340px; }
+    .orbit-ring:nth-child(2) { width: 260px; height: 310px; }
+    .about-features { grid-template-columns: 1fr; }
+
+    .episodes-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem; }
+
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(13, 13, 26, 0.97);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      padding: 2rem;
+      gap: 1.5rem;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .nav-links.open { display: flex; }
+
+    .mobile-toggle { display: flex; }
+
+    .hero { padding: 5rem 1.5rem 3rem; }
+    .hero-image { width: 240px; height: 240px; }
+    .hero-title { font-size: 2.5rem; }
+
+    .episode-card { flex-direction: column; text-align: center; }
+    .episode-number { min-width: auto; }
+
+    .listen-platforms { flex-direction: column; align-items: center; }
+    .platform-btn { width: 100%; max-width: 300px; justify-content: center; }
+
+    section { padding: 4rem 1.5rem; }
+  }
+</style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-left">
-                <p class="tagline">Keeping Your Big Day Fabulous & Drama-Free</p>
-                
-                <p class="description">
-                    Join us as we patrol the wild world of weddings, calling out the chaos, celebrating the love, 
-                    and making sure everyone stays on their best behavior. From bridezilla tales to venue disasters, 
-                    we've got the badges and the stories to prove it!
-                </p>
-                
-                <div class="cta-buttons">
-                    <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" 
-                       target="_blank" 
-                       class="cta-button">
-                        <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
-                        </svg>
-                        Listen on Spotify
-                    </a>
-                    
-                    <a href="https://www.facebook.com/profile.php?id=61586443233812" 
-                       target="_blank" 
-                       class="cta-button facebook">
-                        <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
-                        Follow on Facebook
-                    </a>
-                </div>
-            </div>
-            
-            <div class="hero-right">
-                <div class="logo-container">
-                    <img src="police.png" alt="The Wedding Police" class="logo-image">
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- About Section -->
-    <section class="about-section">
-        <div class="about-content">
-            <h2>About The Show</h2>
-            <p>
-                Welcome to The Wedding Police, where disco balls meet drama and love conquers all. We're here to share the most outrageous, hilarious, and heartwarming wedding stories and tips from around the globe.
-            </p>
-            <p>
-                Whether you're planning your own big day, recently survived one, or just love a good wedding tale, grab your badge and join the patrol. New episodes drop regularly on Spotify!
-            </p>
-        </div>
-    </section>
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">The Wedding Police</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#episodes">Episodes</a></li>
+    <li><a href="https://www.facebook.com/profile.php?id=61586443233812" target="_blank">Facebook</a></li>
+    <li><a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" class="nav-cta">🎧 Listen Now</a></li>
+  </ul>
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2025 The Wedding Police. All rights reserved.</p>
-    </footer>
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="disco-light"></div>
+  <div class="disco-light"></div>
+  <div class="disco-light"></div>
+
+  <div class="disco-squares" id="discoSquares"></div>
+
+  <div class="hero-content">
+    <div class="hero-image-wrapper">
+      <img src="police.png" alt="The Wedding Police Podcast Cover" class="hero-image">
+      <div class="badge-float">🚨 New Episodes</div>
+      <div class="badge-float">💍 Wedding Crimes</div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-eyebrow">🔊 The Podcast That Keeps Weddings in Check</div>
+      <h1 class="hero-title">The Wedding Police</h1>
+      <p class="hero-subtitle">You have the right to a fabulous wedding.</p>
+      <p class="hero-desc">
+        Patrolling the wild world of weddings — from jaw-dropping stories to expert tips. 
+        We're here to call out the crimes against matrimony and celebrate the wins. 
+        Consider yourself served. 💎
+      </p>
+      <div class="hero-buttons">
+        <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" class="btn btn-primary">
+          <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Listen on Spotify
+        </a>
+        <a href="#about" class="btn btn-outline">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-strip">
+  <div class="marquee-inner" id="marquee">
+    <div class="marquee-item"><span class="dot"></span>Bad Bridesmaid Dresses</div>
+    <div class="marquee-item"><span class="dot"></span>DJ Disasters</div>
+    <div class="marquee-item"><span class="dot"></span>Cake Catastrophes</div>
+    <div class="marquee-item"><span class="dot"></span>Venue Violations</div>
+    <div class="marquee-item"><span class="dot"></span>Toast Takedowns</div>
+    <div class="marquee-item"><span class="dot"></span>Seating Chart Scandals</div>
+    <div class="marquee-item"><span class="dot"></span>Budget Busts</div>
+    <div class="marquee-item"><span class="dot"></span>Mother-in-Law Meltdowns</div>
+    <div class="marquee-item"><span class="dot"></span>Bad Bridesmaid Dresses</div>
+    <div class="marquee-item"><span class="dot"></span>DJ Disasters</div>
+    <div class="marquee-item"><span class="dot"></span>Cake Catastrophes</div>
+    <div class="marquee-item"><span class="dot"></span>Venue Violations</div>
+    <div class="marquee-item"><span class="dot"></span>Toast Takedowns</div>
+    <div class="marquee-item"><span class="dot"></span>Seating Chart Scandals</div>
+    <div class="marquee-item"><span class="dot"></span>Budget Busts</div>
+    <div class="marquee-item"><span class="dot"></span>Mother-in-Law Meltdowns</div>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="section-label">Who We Are</div>
+      <h2 class="section-title">Keeping Weddings in Line Since Day One</h2>
+      <p class="section-subtitle">
+        We're the self-appointed authorities on all things weddings. From the beautiful to the bizarre, 
+        no ceremony escapes our investigation. Tune in for unfiltered takes, hilarious stories, 
+        and the kind of wedding advice your friends are too polite to give you.
+      </p>
+      <div class="about-features">
+        <div class="feature-card">
+          <span class="feature-icon">🚔</span>
+          <h3>Wedding Crimes</h3>
+          <p>The most outrageous wedding fails, dissected with love.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">💒</span>
+          <h3>Real Stories</h3>
+          <p>True tales from brides, grooms, planners & guests.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🎤</span>
+          <h3>Expert Guests</h3>
+          <p>Industry pros spilling the tea on what really happens.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">⚖️</span>
+          <h3>The Verdict</h3>
+          <p>Our final ruling on the hottest wedding debates.</p>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual reveal">
+      <div class="badge-display">
+        <div class="orbit-ring"><div class="orbit-dot"></div></div>
+        <div class="orbit-ring"><div class="orbit-dot"></div></div>
+        <div class="badge-outer">
+          <div class="badge-star">⭐</div>
+          <h3>On Patrol</h3>
+          <p>New episodes dropping weekly. No wedding crime goes unnoticed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Episodes -->
+<section class="episodes" id="episodes">
+  <div class="episodes-container">
+    <div class="episodes-header reveal">
+      <div>
+        <div class="section-label">Latest Dispatches</div>
+        <h2 class="section-title">Recent Episodes</h2>
+        <p class="section-subtitle">Catch up on the latest from HQ</p>
+      </div>
+      <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" class="btn btn-outline" style="white-space:nowrap;">View All Episodes →</a>
+    </div>
+
+    <div class="episode-cards">
+      <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" class="episode-card reveal">
+        <div class="episode-number">01</div>
+        <div class="episode-info">
+          <h3>The Case of the Catastrophic Cake Smash</h3>
+          <p>When a $2,000 wedding cake meets an over-enthusiastic groomsman. We investigate.</p>
+          <div class="episode-meta">
+            <span>🎧 Listen Now</span>
+          </div>
+        </div>
+        <div class="episode-play">
+          <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+      </a>
+
+      <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" class="episode-card reveal">
+        <div class="episode-number">02</div>
+        <div class="episode-info">
+          <h3>Bridezilla or Justified? You Decide</h3>
+          <p>The bride said no phones, the mother-in-law said watch me. Who's right?</p>
+          <div class="episode-meta">
+            <span>🎧 Listen Now</span>
+          </div>
+        </div>
+        <div class="episode-play">
+          <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+      </a>
+
+      <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" class="episode-card reveal">
+        <div class="episode-number">03</div>
+        <div class="episode-info">
+          <h3>Best Man Speech Disasters: A Deep Dive</h3>
+          <p>Three words: "funny" college stories. We review the worst toasts of all time.</p>
+          <div class="episode-meta">
+            <span>🎧 Listen Now</span>
+          </div>
+        </div>
+        <div class="episode-play">
+          <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="listen">
+  <div class="cta-glow"></div>
+  <div class="cta-content reveal">
+    <div class="section-label" style="justify-content: center;">Tune In</div>
+    <h2 class="section-title">Ready to Join<br>the Squad?</h2>
+    <p class="section-subtitle">
+      Follow The Wedding Police on your favorite platform. 
+      New episodes, exclusive content, and community discussions await.
+    </p>
+    <div class="listen-platforms">
+      <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" class="platform-btn spotify">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        Spotify
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61586443233812" target="_blank" class="platform-btn facebook">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">The Wedding Police</div>
+  <p class="footer-tagline">Patrolling weddings so you don't have to. 🚨💍</p>
+  <div class="footer-socials">
+    <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" title="Spotify">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+    </a>
+    <a href="https://www.facebook.com/profile.php?id=61586443233812" target="_blank" title="Facebook">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+  </div>
+  <p class="footer-copy">© 2025 The Wedding Police Podcast. All rights reserved. No weddings were harmed in the making of this podcast.</p>
+</footer>
+
+<script>
+  // Mobile Nav Toggle
+  const toggle = document.getElementById('mobileToggle');
+  const navLinks = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Disco squares
+  const container = document.getElementById('discoSquares');
+  for (let i = 0; i < 30; i++) {
+    const sq = document.createElement('div');
+    sq.className = 'disco-square';
+    sq.style.left = Math.random() * 100 + '%';
+    sq.style.animationDelay = Math.random() * 15 + 's';
+    sq.style.animationDuration = (10 + Math.random() * 15) + 's';
+    sq.style.width = sq.style.height = (4 + Math.random() * 8) + 'px';
+    const colors = ['rgba(255,20,147,0.15)', 'rgba(192,192,192,0.15)', 'rgba(255,215,0,0.1)', 'rgba(255,255,255,0.08)'];
+    sq.style.background = colors[Math.floor(Math.random() * colors.length)];
+    container.appendChild(sq);
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Sparkle cursor effect (subtle)
+  let lastSparkle = 0;
+  document.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+    if (now - lastSparkle < 80) return;
+    lastSparkle = now;
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = e.clientX + 'px';
+    sparkle.style.top = e.clientY + 'px';
+    const colors = ['#FF1493', '#FFD700', '#C0C0C0', '#FF69B4'];
+    sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
+    sparkle.style.width = sparkle.style.height = (3 + Math.random() * 5) + 'px';
+    document.body.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 800);
+  });
+</script>
 </body>
 </html>
