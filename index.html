@@ -41,12 +41,14 @@
     border-radius: 50%;
     background: var(--hot-pink);
     z-index: 9999;
-    animation: sparkle-fade 0.8s ease-out forwards;
+    animation: sparkle-fade 1s ease-out forwards;
+    box-shadow: 0 0 6px currentColor, 0 0 12px currentColor;
   }
 
   @keyframes sparkle-fade {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(0); opacity: 0; }
+    0% { transform: scale(0.5); opacity: 1; }
+    30% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0) translateY(-15px); opacity: 0; }
   }
 
   /* ============ NAVIGATION ============ */
@@ -1181,21 +1183,29 @@
   }, { threshold: 0.15 });
   reveals.forEach(el => observer.observe(el));
 
-  // Sparkle cursor effect (subtle)
+  // Sparkle cursor effect (amplified)
   let lastSparkle = 0;
   document.addEventListener('mousemove', (e) => {
     const now = Date.now();
-    if (now - lastSparkle < 80) return;
+    if (now - lastSparkle < 30) return;
     lastSparkle = now;
-    const sparkle = document.createElement('div');
-    sparkle.className = 'sparkle';
-    sparkle.style.left = e.clientX + 'px';
-    sparkle.style.top = e.clientY + 'px';
-    const colors = ['#FF1493', '#FFD700', '#C0C0C0', '#FF69B4'];
-    sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
-    sparkle.style.width = sparkle.style.height = (3 + Math.random() * 5) + 'px';
-    document.body.appendChild(sparkle);
-    setTimeout(() => sparkle.remove(), 800);
+    const count = 2 + Math.floor(Math.random() * 3); // 2-4 sparkles per move
+    for (let i = 0; i < count; i++) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      const offsetX = (Math.random() - 0.5) * 30;
+      const offsetY = (Math.random() - 0.5) * 30;
+      sparkle.style.left = (e.clientX + offsetX) + 'px';
+      sparkle.style.top = (e.clientY + offsetY) + 'px';
+      const colors = ['#FF1493', '#FFD700', '#C0C0C0', '#FF69B4', '#fff'];
+      sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
+      const size = 3 + Math.random() * 8;
+      sparkle.style.width = size + 'px';
+      sparkle.style.height = size + 'px';
+      sparkle.style.animationDuration = (0.6 + Math.random() * 0.8) + 's';
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1400);
+    }
   });
 </script>
 </body>
