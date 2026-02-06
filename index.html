@@ -150,7 +150,8 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    overflow: hidden;
+    overflow-x: clip;
+    overflow-y: visible;
     padding: 6rem 2rem 4rem;
   }
 
@@ -230,6 +231,7 @@
     gap: 4rem;
     max-width: 1200px;
     width: 100%;
+    overflow: visible;
   }
 
   .hero-image-wrapper {
@@ -255,8 +257,8 @@
   }
 
   .hero-image {
-    width: 420px;
-    height: 320px;
+    width: 360px;
+    height: 270px;
     border-radius: 20px;
     object-fit: cover;
     display: block;
@@ -293,6 +295,8 @@
 
   .hero-text {
     flex: 1;
+    min-width: 0;
+    overflow: visible;
   }
 
   .hero-eyebrow {
@@ -313,15 +317,13 @@
 
   .hero-title {
     font-family: 'Pacifico', cursive;
-    font-size: clamp(3rem, 6vw, 5rem);
-    line-height: 1.1;
+    font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+    line-height: 1.2;
     margin-bottom: 0.3rem;
+    white-space: nowrap;
     animation: fade-in-up 0.8s ease-out 0.4s both;
-    background: linear-gradient(135deg, #fff 0%, var(--neon-pink) 50%, var(--hot-pink) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 4px 20px rgba(255, 20, 147, 0.3));
+    color: var(--neon-pink);
+    text-shadow: 0 0 40px rgba(255, 20, 147, 0.4), 0 4px 20px rgba(255, 20, 147, 0.2);
   }
 
   .hero-subtitle {
@@ -942,7 +944,7 @@
 
     .hero { padding: 5rem 1.5rem 3rem; }
     .hero-image { width: 280px; height: 210px; }
-    .hero-title { font-size: 2.5rem; }
+    .hero-title { font-size: 2.2rem; white-space: normal; }
 
     .embed-frame { padding: 0.8rem; }
     .embed-badges { flex-direction: column; align-items: center; gap: 0.6rem; }
