@@ -581,100 +581,105 @@
     margin: 0 auto;
   }
 
-  .episodes-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 3rem;
+  .episodes-header .section-subtitle {
+    max-width: 500px;
   }
 
-  .episode-cards {
-    display: grid;
-    gap: 1.5rem;
+  .spotify-embed-wrapper {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
   }
 
-  .episode-card {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    background: var(--glass-white);
-    backdrop-filter: blur(10px);
+  .embed-glow {
+    position: absolute;
+    inset: -40px;
+    border-radius: 36px;
+    background: radial-gradient(ellipse at center, rgba(255, 20, 147, 0.14), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    animation: disco-pulse 4s ease-in-out infinite alternate;
+  }
+
+  .embed-frame {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(145deg, rgba(255, 20, 147, 0.06), rgba(13, 13, 26, 0.8));
+    backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
-    padding: 1.5rem;
-    transition: all 0.4s ease;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
+    padding: 1.4rem;
+    transition: border-color 0.4s, box-shadow 0.4s;
+    overflow: hidden;
   }
 
-  .episode-card:hover {
-    transform: translateX(8px);
-    border-color: var(--hot-pink);
-    background: rgba(255, 20, 147, 0.08);
-  }
-
-  .episode-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: var(--hot-pink);
+  .embed-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--hot-pink), transparent 40%, transparent 60%, var(--disco-gold));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
     opacity: 0.4;
-    min-width: 60px;
-    text-align: center;
+    transition: opacity 0.4s;
   }
 
-  .episode-info { flex: 1; }
-
-  .episode-info h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    margin-bottom: 0.4rem;
+  .embed-frame:hover {
+    border-color: rgba(255, 20, 147, 0.3);
+    box-shadow: 0 16px 60px rgba(255, 20, 147, 0.15);
   }
 
-  .episode-info p {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.5);
-    line-height: 1.5;
+  .embed-frame:hover::before {
+    opacity: 0.7;
   }
 
-  .episode-meta {
-    display: flex;
-    gap: 1rem;
-    margin-top: 0.5rem;
+  .embed-frame iframe {
+    display: block;
+    border-radius: 12px;
   }
 
-  .episode-meta span {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.35);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .episode-play {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--hot-pink), #c70070);
+  .embed-bottom-row {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .embed-hint {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-style: italic;
+  }
+
+  .embed-badges {
+    display: flex;
+    gap: 1.5rem;
     justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+    margin-top: 2rem;
+    position: relative;
+    z-index: 1;
   }
 
-  .episode-card:hover .episode-play {
-    transform: scale(1.1);
-    box-shadow: 0 6px 25px rgba(255, 20, 147, 0.5);
+  .embed-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.35);
+    font-weight: 500;
+    letter-spacing: 0.5px;
   }
 
-  .episode-play svg {
-    width: 18px;
-    height: 18px;
-    fill: #fff;
-    margin-left: 2px;
+  .embed-badge span {
+    font-size: 1rem;
   }
 
   /* ============ CTA / LISTEN ============ */
@@ -906,10 +911,9 @@
     .orbit-ring:nth-child(2) { width: 260px; height: 310px; }
     .about-features { grid-template-columns: 1fr; }
 
-    .episodes-header {
+    .embed-bottom-row {
       flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
+      text-align: center;
     }
   }
 
@@ -938,8 +942,9 @@
     .hero-image { width: 240px; height: 240px; }
     .hero-title { font-size: 2.5rem; }
 
-    .episode-card { flex-direction: column; text-align: center; }
-    .episode-number { min-width: auto; }
+    .embed-frame { padding: 0.8rem; }
+    .embed-badges { flex-direction: column; align-items: center; gap: 0.6rem; }
+    .embed-bottom-row { flex-direction: column; text-align: center; }
 
     .listen-platforms { flex-direction: column; align-items: center; }
     .platform-btn { width: 100%; max-width: 300px; justify-content: center; }
@@ -1072,57 +1077,26 @@
 <!-- Episodes -->
 <section class="episodes" id="episodes">
   <div class="episodes-container">
-    <div class="episodes-header reveal">
-      <div>
-        <div class="section-label">Latest Dispatches</div>
-        <h2 class="section-title">Recent Episodes</h2>
-        <p class="section-subtitle">Catch up on the latest from HQ</p>
-      </div>
-      <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" class="btn btn-outline" style="white-space:nowrap;">View All Episodes →</a>
+    <div class="episodes-header reveal" style="text-align:center; display:block; margin-bottom:2.5rem;">
+      <div class="section-label" style="justify-content:center;">Latest Dispatches</div>
+      <h2 class="section-title">Listen Now</h2>
+      <p class="section-subtitle" style="margin:0.5rem auto 0;">Catch up on the latest from HQ — play any episode right here.</p>
     </div>
 
-    <div class="episode-cards">
-      <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" class="episode-card reveal">
-        <div class="episode-number">01</div>
-        <div class="episode-info">
-          <h3>The Case of the Catastrophic Cake Smash</h3>
-          <p>When a $2,000 wedding cake meets an over-enthusiastic groomsman. We investigate.</p>
-          <div class="episode-meta">
-            <span>🎧 Listen Now</span>
-          </div>
-        </div>
-        <div class="episode-play">
-          <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-        </div>
-      </a>
-
-      <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" class="episode-card reveal">
-        <div class="episode-number">02</div>
-        <div class="episode-info">
-          <h3>Bridezilla or Justified? You Decide</h3>
-          <p>The bride said no phones, the mother-in-law said watch me. Who's right?</p>
-          <div class="episode-meta">
-            <span>🎧 Listen Now</span>
-          </div>
-        </div>
-        <div class="episode-play">
-          <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-        </div>
-      </a>
-
-      <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" class="episode-card reveal">
-        <div class="episode-number">03</div>
-        <div class="episode-info">
-          <h3>Best Man Speech Disasters: A Deep Dive</h3>
-          <p>Three words: "funny" college stories. We review the worst toasts of all time.</p>
-          <div class="episode-meta">
-            <span>🎧 Listen Now</span>
-          </div>
-        </div>
-        <div class="episode-play">
-          <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-        </div>
-      </a>
+    <div class="spotify-embed-wrapper reveal">
+      <div class="embed-glow"></div>
+      <div class="embed-frame">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/00XbQ3oSRLm3CeETc8bwdl?utm_source=generator&theme=0" width="100%" height="452" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+      <div class="embed-bottom-row">
+        <p class="embed-hint">🎧 Browse episodes above, hit play, and let us do the patrolling.</p>
+        <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" class="btn btn-primary" style="font-size:0.9rem; padding:0.75rem 1.6rem;">Open in Spotify →</a>
+      </div>
+      <div class="embed-badges">
+        <div class="embed-badge"><span>🚨</span> Wedding Crimes Investigated</div>
+        <div class="embed-badge"><span>💍</span> Unfiltered Takes</div>
+        <div class="embed-badge"><span>🎤</span> New Episodes Weekly</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1170,6 +1144,11 @@
   const toggle = document.getElementById('mobileToggle');
   const navLinks = document.getElementById('navLinks');
   toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+  // Close mobile nav when a link is clicked
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
 
   // Navbar scroll effect
   const navbar = document.getElementById('navbar');
