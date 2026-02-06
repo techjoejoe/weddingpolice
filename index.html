@@ -25,13 +25,12 @@
         .hero {
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding: 2rem;
+            padding: 4rem 2rem;
             position: relative;
             background: linear-gradient(135deg, #1a1a1a 0%, #2d1b3d 50%, #4a1942 100%);
+            overflow: hidden;
         }
 
         .hero::before {
@@ -46,22 +45,85 @@
             pointer-events: none;
         }
 
+        /* Shimmer/Sparkle Effect */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                radial-gradient(circle, rgba(255, 105, 180, 0.15) 1px, transparent 1px),
+                radial-gradient(circle, rgba(255, 20, 147, 0.1) 2px, transparent 2px);
+            background-size: 50px 50px, 80px 80px, 100px 100px;
+            background-position: 0 0, 40px 40px, 20px 20px;
+            animation: shimmer 20s linear infinite;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
         .hero-content {
             position: relative;
             z-index: 1;
             max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-left {
+            text-align: left;
+        }
+
+        .hero-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .logo-container {
-            margin-bottom: 2rem;
-            animation: fadeInDown 1s ease-out;
+            animation: fadeInRight 1s ease-out;
         }
 
         .logo-image {
             max-width: 100%;
-            width: 800px;
+            width: 100%;
             height: auto;
             filter: drop-shadow(0 10px 30px rgba(255, 20, 147, 0.4));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .tagline {
@@ -69,24 +131,33 @@
             font-weight: 400;
             margin-bottom: 2rem;
             color: #ff69b4;
-            animation: fadeInUp 1s ease-out 0.3s both;
+            animation: fadeInLeft 1s ease-out 0.3s both;
         }
 
         .description {
             font-size: 1.2rem;
             line-height: 1.8;
-            max-width: 700px;
-            margin: 0 auto 3rem;
+            margin-bottom: 3rem;
             color: #e0e0e0;
-            animation: fadeInUp 1s ease-out 0.6s both;
+            animation: fadeInLeft 1s ease-out 0.6s both;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .cta-buttons {
             display: flex;
             gap: 20px;
-            justify-content: center;
             flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out 0.9s both;
+            animation: fadeInLeft 1s ease-out 0.9s both;
         }
 
         .cta-button {
@@ -187,6 +258,19 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-right {
+                order: -1;
+            }
+
+            .hero-left {
+                text-align: center;
+            }
+
             .logo-image {
                 width: 100%;
             }
@@ -202,6 +286,7 @@
             .cta-buttons {
                 flex-direction: column;
                 width: 100%;
+                align-items: center;
             }
 
             .cta-button {
@@ -225,36 +310,40 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <div class="logo-container">
-                <img src="police.png" alt="The Wedding Police" class="logo-image">
+            <div class="hero-left">
+                <p class="tagline">Keeping Your Big Day Fabulous & Drama-Free</p>
+                
+                <p class="description">
+                    Join us as we patrol the wild world of weddings, calling out the chaos, celebrating the love, 
+                    and making sure everyone stays on their best behavior. From bridezilla tales to venue disasters, 
+                    we've got the badges and the stories to prove it!
+                </p>
+                
+                <div class="cta-buttons">
+                    <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" 
+                       target="_blank" 
+                       class="cta-button">
+                        <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+                        </svg>
+                        Listen on Spotify
+                    </a>
+                    
+                    <a href="https://www.facebook.com/profile.php?id=61586443233812" 
+                       target="_blank" 
+                       class="cta-button facebook">
+                        <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                        Follow on Facebook
+                    </a>
+                </div>
             </div>
             
-            <p class="tagline">Keeping Your Big Day Fabulous & Drama-Free</p>
-            
-            <p class="description">
-                Join us as we patrol the wild world of weddings, calling out the chaos, celebrating the love, 
-                and making sure everyone stays on their best behavior. From bridezilla tales to venue disasters, 
-                we've got the badges and the stories to prove it!
-            </p>
-            
-            <div class="cta-buttons">
-                <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" 
-                   target="_blank" 
-                   class="cta-button">
-                    <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
-                    </svg>
-                    Listen on Spotify
-                </a>
-                
-                <a href="https://www.facebook.com/profile.php?id=61586443233812" 
-                   target="_blank" 
-                   class="cta-button facebook">
-                    <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                    Follow on Facebook
-                </a>
+            <div class="hero-right">
+                <div class="logo-container">
+                    <img src="police.png" alt="The Wedding Police" class="logo-image">
+                </div>
             </div>
         </div>
     </section>
