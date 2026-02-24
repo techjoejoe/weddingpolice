@@ -61,18 +61,6 @@
   .nav-cta::after { display: none !important; }
   .nav-cta:hover { transform: translateY(-2px) !important; box-shadow: 0 6px 30px rgba(255, 20, 147, 0.6) !important; }
 
-  /* ✅ NEW: Apple Podcasts nav button */
-  .nav-apple {
-    display: inline-flex !important; align-items: center; gap: 0.4rem;
-    background: linear-gradient(135deg, #872ec4, #6a1fa0);
-    color: #fff !important; padding: 0.6rem 1.2rem; border-radius: 50px;
-    font-weight: 600 !important; transition: transform 0.3s, box-shadow 0.3s !important;
-    box-shadow: 0 4px 20px rgba(135, 46, 196, 0.4);
-  }
-  .nav-apple::after { display: none !important; }
-  .nav-apple:hover { transform: translateY(-2px) !important; box-shadow: 0 6px 30px rgba(135, 46, 196, 0.6) !important; }
-  .nav-apple img { width: 18px; height: 18px; object-fit: contain; filter: brightness(0) invert(1); vertical-align: middle; }
-
   .mobile-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
   .mobile-toggle span { display: block; width: 25px; height: 2px; background: var(--neon-pink); transition: all 0.3s; }
 
@@ -112,6 +100,8 @@
   .btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 1rem 2rem; border-radius: 60px; font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; }
   .btn-primary { background: linear-gradient(135deg, var(--hot-pink), #c70070); color: #fff; box-shadow: 0 4px 25px rgba(255, 20, 147, 0.5); }
   .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 35px rgba(255, 20, 147, 0.7); }
+  .btn-apple { background: linear-gradient(135deg, #872ec4, #6a1fa0); color: #fff; box-shadow: 0 4px 25px rgba(135, 46, 196, 0.5); }
+  .btn-apple:hover { transform: translateY(-3px); box-shadow: 0 8px 35px rgba(135, 46, 196, 0.7); }
   .btn-outline { background: transparent; color: #fff; border: 2px solid var(--glass-border); backdrop-filter: blur(10px); }
   .btn-outline:hover { border-color: var(--neon-pink); background: rgba(255, 20, 147, 0.1); transform: translateY(-3px); }
   .spotify-icon { width: 22px; height: 22px; }
@@ -194,10 +184,12 @@
   /* ✅ NEW: Apple Podcasts platform button */
   .platform-btn.apple { background: linear-gradient(135deg, #872ec4, #6a1fa0); border-color: transparent; box-shadow: 0 4px 20px rgba(135, 46, 196, 0.4); }
   .platform-btn.apple:hover { transform: translateY(-3px); box-shadow: 0 8px 35px rgba(135, 46, 196, 0.6); }
-  .platform-btn.apple img { width: 22px; height: 22px; object-fit: contain; filter: brightness(0) invert(1); }
 
   .platform-btn.facebook { background: linear-gradient(135deg, #1877F2, #0d5bbd); border-color: transparent; box-shadow: 0 4px 20px rgba(24, 119, 242, 0.4); }
   .platform-btn.facebook:hover { box-shadow: 0 8px 35px rgba(24, 119, 242, 0.6); }
+
+  .platform-btn.instagram { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-color: transparent; box-shadow: 0 4px 20px rgba(220, 39, 67, 0.4); }
+  .platform-btn.instagram:hover { transform: translateY(-3px); box-shadow: 0 8px 35px rgba(220, 39, 67, 0.6); }
 
   /* ============ FOOTER ============ */
   footer { padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(13, 13, 26, 0.9); }
@@ -206,9 +198,6 @@
   .footer-socials { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
   .footer-socials a { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: all 0.3s; }
   .footer-socials a:hover { border-color: var(--hot-pink); color: var(--hot-pink); background: rgba(255, 20, 147, 0.1); transform: translateY(-3px); }
-  /* ✅ NEW: Apple icon styling in footer */
-  .footer-socials a img { width: 20px; height: 20px; object-fit: contain; filter: brightness(0) invert(0.6); transition: filter 0.3s; }
-  .footer-socials a:hover img { filter: brightness(0) saturate(100%) invert(17%) sepia(95%) saturate(4000%) hue-rotate(295deg) brightness(1.1); }
   .footer-copy { font-size: 0.8rem; color: rgba(255, 255, 255, 0.25); }
 
   /* ============ MARQUEE ============ */
@@ -266,9 +255,8 @@
     <li><a href="#about">About</a></li>
     <li><a href="#episodes">Episodes</a></li>
     <li><a href="https://www.facebook.com/profile.php?id=61586443233812" target="_blank">Facebook</a></li>
-    <!-- ✅ NEW: Apple Podcasts in nav -->
-    <li><a href="https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" target="_blank" class="nav-apple"><img src="Applepodcast.png" alt="Apple Podcasts"> Apple</a></li>
-    <li><a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" class="nav-cta">🎧 Listen Now</a></li>
+    <li><a href="https://www.instagram.com/theweddingpolicepodcast/" target="_blank">Instagram</a></li>
+    <li><a href="#episodes" class="nav-cta">🎧 Listen Now</a></li>
   </ul>
   <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
     <span></span><span></span><span></span>
@@ -301,6 +289,10 @@
         <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" class="btn btn-primary">
           <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
           Listen on Spotify
+        </a>
+        <a href="https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" target="_blank" class="btn btn-apple">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a4 4 0 0 1 4 4v4a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4zm0 14.5A6.5 6.5 0 0 0 18.5 10H20a8 8 0 0 1-7 7.938V21h-2v-3.062A8 8 0 0 1 4 10h1.5A6.5 6.5 0 0 0 12 16.5z"/></svg>
+          Listen on Apple
         </a>
         <a href="#about" class="btn btn-outline">Learn More</a>
       </div>
@@ -383,7 +375,7 @@
       <!-- ✅ NEW: Apple Podcasts embed -->
       <div class="apple-embed-frame">
         <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1rem;">
-          <img src="Applepodcast.png" alt="Apple Podcasts" style="width:22px; height:22px; filter:brightness(0) invert(1); opacity:0.7;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.7;"><path d="M12 2a4 4 0 0 1 4 4v4a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4zm0 14.5A6.5 6.5 0 0 0 18.5 10H20a8 8 0 0 1-7 7.938V21h-2v-3.062A8 8 0 0 1 4 10h1.5A6.5 6.5 0 0 0 12 16.5z"/></svg>
           <span style="font-size:0.8rem; color:rgba(255,255,255,0.4); font-weight:600; letter-spacing:1px; text-transform:uppercase;">Also on Apple Podcasts</span>
         </div>
         <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;max-width:100%;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/us/podcast/the-wedding-police/id1875631808"></iframe>
@@ -418,12 +410,16 @@
       </a>
       <!-- ✅ NEW: Apple Podcasts button in CTA section -->
       <a href="https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" target="_blank" class="platform-btn apple">
-        <img src="Applepodcast.png" alt="Apple Podcasts">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a4 4 0 0 1 4 4v4a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4zm0 14.5A6.5 6.5 0 0 0 18.5 10H20a8 8 0 0 1-7 7.938V21h-2v-3.062A8 8 0 0 1 4 10h1.5A6.5 6.5 0 0 0 12 16.5z"/></svg>
         Apple Podcasts
       </a>
       <a href="https://www.facebook.com/profile.php?id=61586443233812" target="_blank" class="platform-btn facebook">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         Facebook
+      </a>
+      <a href="https://www.instagram.com/theweddingpolicepodcast/" target="_blank" class="platform-btn instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
       </a>
     </div>
   </div>
@@ -439,7 +435,10 @@
     </a>
     <!-- ✅ NEW: Apple Podcasts icon in footer -->
     <a href="https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" target="_blank" title="Apple Podcasts">
-      <img src="Applepodcast.png" alt="Apple Podcasts">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a4 4 0 0 1 4 4v4a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4zm0 14.5A6.5 6.5 0 0 0 18.5 10H20a8 8 0 0 1-7 7.938V21h-2v-3.062A8 8 0 0 1 4 10h1.5A6.5 6.5 0 0 0 12 16.5z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/theweddingpolicepodcast/" target="_blank" title="Instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
     </a>
     <a href="https://www.facebook.com/profile.php?id=61586443233812" target="_blank" title="Facebook">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
