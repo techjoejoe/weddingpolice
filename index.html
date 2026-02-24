@@ -22,29 +22,15 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Outfit', sans-serif;
-    background: var(--midnight);
-    color: #fff;
-    overflow-x: hidden;
-  }
+  body { font-family: 'Outfit', sans-serif; background: var(--midnight); color: #fff; overflow-x: hidden; }
 
   /* ============ DISCO BALL CURSOR TRAIL ============ */
   .sparkle {
-    position: fixed;
-    pointer-events: none;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--hot-pink);
-    z-index: 9999;
-    animation: sparkle-fade 1s ease-out forwards;
+    position: fixed; pointer-events: none; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--hot-pink); z-index: 9999; animation: sparkle-fade 1s ease-out forwards;
     box-shadow: 0 0 6px currentColor, 0 0 12px currentColor;
   }
-
   @keyframes sparkle-fade {
     0% { transform: scale(0.5); opacity: 1; }
     30% { transform: scale(1.2); opacity: 1; }
@@ -53,906 +39,220 @@
 
   /* ============ NAVIGATION ============ */
   nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    padding: 1.2rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    backdrop-filter: blur(20px);
-    background: rgba(13, 13, 26, 0.7);
-    border-bottom: 1px solid var(--glass-border);
-    transition: all 0.3s ease;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center;
+    backdrop-filter: blur(20px); background: rgba(13, 13, 26, 0.7);
+    border-bottom: 1px solid var(--glass-border); transition: all 0.3s ease;
   }
-
-  nav.scrolled {
-    padding: 0.8rem 2rem;
-    background: rgba(13, 13, 26, 0.95);
-  }
-
-  .nav-logo {
-    font-family: 'Pacifico', cursive;
-    font-size: 1.5rem;
-    color: var(--hot-pink);
-    text-decoration: none;
-    text-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    align-items: center;
-  }
-
-  .nav-links a {
-    color: var(--bright-silver);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
-    transition: color 0.3s;
-    position: relative;
-  }
-
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--hot-pink);
-    transition: width 0.3s;
-    box-shadow: 0 0 8px var(--hot-pink);
-  }
-
+  nav.scrolled { padding: 0.8rem 2rem; background: rgba(13, 13, 26, 0.95); }
+  .nav-logo { font-family: 'Pacifico', cursive; font-size: 1.5rem; color: var(--hot-pink); text-decoration: none; text-shadow: 0 0 20px rgba(255, 20, 147, 0.5); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a { color: var(--bright-silver); text-decoration: none; font-weight: 500; font-size: 0.95rem; letter-spacing: 0.5px; transition: color 0.3s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--hot-pink); transition: width 0.3s; box-shadow: 0 0 8px var(--hot-pink); }
   .nav-links a:hover { color: #fff; }
   .nav-links a:hover::after { width: 100%; }
 
   .nav-cta {
     background: linear-gradient(135deg, var(--hot-pink), #c70070);
-    color: #fff !important;
-    padding: 0.6rem 1.4rem;
-    border-radius: 50px;
-    font-weight: 600 !important;
-    transition: transform 0.3s, box-shadow 0.3s !important;
+    color: #fff !important; padding: 0.6rem 1.4rem; border-radius: 50px;
+    font-weight: 600 !important; transition: transform 0.3s, box-shadow 0.3s !important;
     box-shadow: 0 4px 20px rgba(255, 20, 147, 0.4);
   }
-
   .nav-cta::after { display: none !important; }
   .nav-cta:hover { transform: translateY(-2px) !important; box-shadow: 0 6px 30px rgba(255, 20, 147, 0.6) !important; }
 
-  .mobile-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    flex-direction: column;
-    gap: 5px;
+  /* ✅ NEW: Apple Podcasts nav button */
+  .nav-apple {
+    display: inline-flex !important; align-items: center; gap: 0.4rem;
+    background: linear-gradient(135deg, #872ec4, #6a1fa0);
+    color: #fff !important; padding: 0.6rem 1.2rem; border-radius: 50px;
+    font-weight: 600 !important; transition: transform 0.3s, box-shadow 0.3s !important;
+    box-shadow: 0 4px 20px rgba(135, 46, 196, 0.4);
   }
+  .nav-apple::after { display: none !important; }
+  .nav-apple:hover { transform: translateY(-2px) !important; box-shadow: 0 6px 30px rgba(135, 46, 196, 0.6) !important; }
+  .nav-apple img { width: 18px; height: 18px; object-fit: contain; filter: brightness(0) invert(1); vertical-align: middle; }
 
-  .mobile-toggle span {
-    display: block;
-    width: 25px;
-    height: 2px;
-    background: var(--neon-pink);
-    transition: all 0.3s;
-  }
+  .mobile-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+  .mobile-toggle span { display: block; width: 25px; height: 2px; background: var(--neon-pink); transition: all 0.3s; }
 
   /* ============ HERO ============ */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow-x: clip;
-    overflow-y: visible;
-    padding: 6rem 2rem 4rem;
-  }
+  .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow-x: clip; overflow-y: visible; padding: 6rem 2rem 4rem; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(255, 20, 147, 0.15) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(192, 192, 192, 0.1) 0%, transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 40%), var(--midnight); }
 
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 50%, rgba(255, 20, 147, 0.15) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(192, 192, 192, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 40%),
-      var(--midnight);
-  }
+  .disco-light { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3; animation: disco-pulse 4s ease-in-out infinite alternate; }
+  .disco-light:nth-child(1) { width: 400px; height: 400px; background: var(--hot-pink); top: -100px; left: -100px; animation-delay: 0s; }
+  .disco-light:nth-child(2) { width: 300px; height: 300px; background: var(--disco-gold); bottom: -50px; right: -50px; animation-delay: 1s; }
+  .disco-light:nth-child(3) { width: 250px; height: 250px; background: var(--silver); top: 30%; right: 10%; animation-delay: 2s; }
+  @keyframes disco-pulse { 0% { transform: scale(1); opacity: 0.2; } 100% { transform: scale(1.3); opacity: 0.4; } }
 
-  /* Animated disco lights */
-  .disco-light {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.3;
-    animation: disco-pulse 4s ease-in-out infinite alternate;
-  }
+  .disco-squares { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .disco-square { position: absolute; width: 8px; height: 8px; background: rgba(255, 255, 255, 0.1); animation: float-square 15s linear infinite; }
+  @keyframes float-square { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; } }
 
-  .disco-light:nth-child(1) {
-    width: 400px; height: 400px;
-    background: var(--hot-pink);
-    top: -100px; left: -100px;
-    animation-delay: 0s;
-  }
+  .hero-content { position: relative; z-index: 2; display: flex; align-items: center; gap: 4rem; max-width: 1200px; width: 100%; overflow: visible; }
+  .hero-image-wrapper { flex-shrink: 0; position: relative; }
+  .hero-image-wrapper::before { content: ''; position: absolute; inset: -4px; border-radius: 24px; background: linear-gradient(135deg, var(--hot-pink), var(--disco-gold), var(--silver), var(--hot-pink)); background-size: 400% 400%; animation: gradient-spin 4s ease infinite; z-index: -1; }
+  @keyframes gradient-spin { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+  .hero-image { width: 360px; height: 270px; border-radius: 20px; object-fit: cover; display: block; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
 
-  .disco-light:nth-child(2) {
-    width: 300px; height: 300px;
-    background: var(--disco-gold);
-    bottom: -50px; right: -50px;
-    animation-delay: 1s;
-  }
+  .badge-float { position: absolute; background: var(--glass-white); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 0.6rem 1rem; font-size: 0.85rem; font-weight: 600; animation: badge-bob 3s ease-in-out infinite; white-space: nowrap; }
+  .badge-float:nth-child(2) { top: -15px; right: -30px; animation-delay: 0s; }
+  .badge-float:nth-child(3) { bottom: 20px; left: -40px; animation-delay: 1.5s; }
+  @keyframes badge-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-  .disco-light:nth-child(3) {
-    width: 250px; height: 250px;
-    background: var(--silver);
-    top: 30%; right: 10%;
-    animation-delay: 2s;
-  }
+  .hero-text { flex: 1; min-width: 0; overflow: visible; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--glass-white); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.85rem; font-weight: 500; color: var(--neon-pink); margin-bottom: 1.5rem; animation: fade-in-up 0.8s ease-out 0.2s both; }
+  .hero-title { font-family: 'Pacifico', cursive; font-size: clamp(2.2rem, 4.5vw, 3.8rem); line-height: 1.2; margin-bottom: 0.3rem; white-space: nowrap; animation: fade-in-up 0.8s ease-out 0.4s both; color: var(--neon-pink); text-shadow: 0 0 40px rgba(255, 20, 147, 0.4), 0 4px 20px rgba(255, 20, 147, 0.2); }
+  .hero-subtitle { font-family: 'Playfair Display', serif; font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 400; font-style: italic; color: var(--soft-pink); margin-bottom: 1.5rem; animation: fade-in-up 0.8s ease-out 0.5s both; }
+  .hero-desc { font-size: 1.1rem; color: rgba(255, 255, 255, 0.7); line-height: 1.7; max-width: 500px; margin-bottom: 2rem; animation: fade-in-up 0.8s ease-out 0.6s both; }
+  .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; animation: fade-in-up 0.8s ease-out 0.8s both; }
+  @keyframes fade-in-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-  @keyframes disco-pulse {
-    0% { transform: scale(1); opacity: 0.2; }
-    100% { transform: scale(1.3); opacity: 0.4; }
-  }
-
-  /* Floating disco squares */
-  .disco-squares {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .disco-square {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    animation: float-square 15s linear infinite;
-  }
-
-  @keyframes float-square {
-    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 4rem;
-    max-width: 1200px;
-    width: 100%;
-    overflow: visible;
-  }
-
-  .hero-image-wrapper {
-    flex-shrink: 0;
-    position: relative;
-  }
-
-  .hero-image-wrapper::before {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    border-radius: 24px;
-    background: linear-gradient(135deg, var(--hot-pink), var(--disco-gold), var(--silver), var(--hot-pink));
-    background-size: 400% 400%;
-    animation: gradient-spin 4s ease infinite;
-    z-index: -1;
-  }
-
-  @keyframes gradient-spin {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  .hero-image {
-    width: 360px;
-    height: 270px;
-    border-radius: 20px;
-    object-fit: cover;
-    display: block;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  }
-
-  .badge-float {
-    position: absolute;
-    background: var(--glass-white);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 0.6rem 1rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    animation: badge-bob 3s ease-in-out infinite;
-    white-space: nowrap;
-  }
-
-  .badge-float:nth-child(2) {
-    top: -15px; right: -30px;
-    animation-delay: 0s;
-  }
-
-  .badge-float:nth-child(3) {
-    bottom: 20px; left: -40px;
-    animation-delay: 1.5s;
-  }
-
-  @keyframes badge-bob {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-
-  .hero-text {
-    flex: 1;
-    min-width: 0;
-    overflow: visible;
-  }
-
-  .hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--glass-white);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    padding: 0.5rem 1.2rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--neon-pink);
-    margin-bottom: 1.5rem;
-    animation: fade-in-up 0.8s ease-out 0.2s both;
-  }
-
-  .hero-title {
-    font-family: 'Pacifico', cursive;
-    font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-    line-height: 1.2;
-    margin-bottom: 0.3rem;
-    white-space: nowrap;
-    animation: fade-in-up 0.8s ease-out 0.4s both;
-    color: var(--neon-pink);
-    text-shadow: 0 0 40px rgba(255, 20, 147, 0.4), 0 4px 20px rgba(255, 20, 147, 0.2);
-  }
-
-  .hero-subtitle {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
-    font-weight: 400;
-    font-style: italic;
-    color: var(--soft-pink);
-    margin-bottom: 1.5rem;
-    animation: fade-in-up 0.8s ease-out 0.5s both;
-  }
-
-  .hero-desc {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.7;
-    max-width: 500px;
-    margin-bottom: 2rem;
-    animation: fade-in-up 0.8s ease-out 0.6s both;
-  }
-
-  .hero-buttons {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    animation: fade-in-up 0.8s ease-out 0.8s both;
-  }
-
-  @keyframes fade-in-up {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 1rem 2rem;
-    border-radius: 60px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: none;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, var(--hot-pink), #c70070);
-    color: #fff;
-    box-shadow: 0 4px 25px rgba(255, 20, 147, 0.5);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 35px rgba(255, 20, 147, 0.7);
-  }
-
-  .btn-outline {
-    background: transparent;
-    color: #fff;
-    border: 2px solid var(--glass-border);
-    backdrop-filter: blur(10px);
-  }
-
-  .btn-outline:hover {
-    border-color: var(--neon-pink);
-    background: rgba(255, 20, 147, 0.1);
-    transform: translateY(-3px);
-  }
-
-  .spotify-icon {
-    width: 22px;
-    height: 22px;
-  }
+  .btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 1rem 2rem; border-radius: 60px; font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; }
+  .btn-primary { background: linear-gradient(135deg, var(--hot-pink), #c70070); color: #fff; box-shadow: 0 4px 25px rgba(255, 20, 147, 0.5); }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 35px rgba(255, 20, 147, 0.7); }
+  .btn-outline { background: transparent; color: #fff; border: 2px solid var(--glass-border); backdrop-filter: blur(10px); }
+  .btn-outline:hover { border-color: var(--neon-pink); background: rgba(255, 20, 147, 0.1); transform: translateY(-3px); }
+  .spotify-icon { width: 22px; height: 22px; }
 
   /* ============ SECTION STYLES ============ */
-  section {
-    padding: 6rem 2rem;
-    position: relative;
-  }
-
-  .section-label {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--hot-pink);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .section-label::before {
-    content: '';
-    width: 30px;
-    height: 2px;
-    background: var(--hot-pink);
-    box-shadow: 0 0 8px var(--hot-pink);
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 900;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-
-  .section-subtitle {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.6);
-    max-width: 550px;
-    line-height: 1.6;
-  }
+  section { padding: 6rem 2rem; position: relative; }
+  .section-label { font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--hot-pink); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; }
+  .section-label::before { content: ''; width: 30px; height: 2px; background: var(--hot-pink); box-shadow: 0 0 8px var(--hot-pink); }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; margin-bottom: 1rem; line-height: 1.2; }
+  .section-subtitle { font-size: 1.1rem; color: rgba(255, 255, 255, 0.6); max-width: 550px; line-height: 1.6; }
 
   /* ============ ABOUT ============ */
-  .about {
-    background:
-      radial-gradient(ellipse at 80% 50%, rgba(255, 20, 147, 0.08) 0%, transparent 50%),
-      var(--midnight);
-  }
-
-  .about-grid {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .about-features {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-top: 2.5rem;
-  }
-
-  .feature-card {
-    background: var(--glass-white);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    padding: 1.5rem;
-    transition: all 0.3s ease;
-  }
-
-  .feature-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--hot-pink);
-    box-shadow: 0 8px 30px rgba(255, 20, 147, 0.15);
-  }
-
-  .feature-icon {
-    font-size: 1.8rem;
-    margin-bottom: 0.8rem;
-    display: block;
-  }
-
-  .feature-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    margin-bottom: 0.4rem;
-  }
-
-  .feature-card p {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.5);
-    line-height: 1.5;
-  }
-
-  .about-visual {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .badge-display {
-    width: 320px;
-    height: 380px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .badge-outer {
-    width: 260px;
-    height: 320px;
-    background: linear-gradient(145deg, rgba(255, 20, 147, 0.15), rgba(192, 192, 192, 0.1));
-    border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 2rem;
-    position: relative;
-    backdrop-filter: blur(20px);
-  }
-
-  .badge-star {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    animation: badge-bob 2s ease-in-out infinite;
-  }
-
-  .badge-outer h3 {
-    font-family: 'Pacifico', cursive;
-    font-size: 1.6rem;
-    color: var(--hot-pink);
-    margin-bottom: 0.5rem;
-  }
-
-  .badge-outer p {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
-    line-height: 1.5;
-  }
-
-  .orbit-ring {
-    position: absolute;
-    border: 1px dashed rgba(255, 20, 147, 0.2);
-    border-radius: 50%;
-    animation: orbit-spin 20s linear infinite;
-  }
-
+  .about { background: radial-gradient(ellipse at 80% 50%, rgba(255, 20, 147, 0.08) 0%, transparent 50%), var(--midnight); }
+  .about-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
+  .feature-card { background: var(--glass-white); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.5rem; transition: all 0.3s ease; }
+  .feature-card:hover { transform: translateY(-4px); border-color: var(--hot-pink); box-shadow: 0 8px 30px rgba(255, 20, 147, 0.15); }
+  .feature-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
+  .feature-card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 0.4rem; }
+  .feature-card p { font-size: 0.85rem; color: rgba(255, 255, 255, 0.5); line-height: 1.5; }
+  .about-visual { display: flex; justify-content: center; align-items: center; }
+  .badge-display { width: 320px; height: 380px; position: relative; display: flex; align-items: center; justify-content: center; }
+  .badge-outer { width: 260px; height: 320px; background: linear-gradient(145deg, rgba(255, 20, 147, 0.15), rgba(192, 192, 192, 0.1)); border: 1px solid var(--glass-border); border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; position: relative; backdrop-filter: blur(20px); }
+  .badge-star { font-size: 4rem; margin-bottom: 1rem; animation: badge-bob 2s ease-in-out infinite; }
+  .badge-outer h3 { font-family: 'Pacifico', cursive; font-size: 1.6rem; color: var(--hot-pink); margin-bottom: 0.5rem; }
+  .badge-outer p { font-size: 0.9rem; color: rgba(255, 255, 255, 0.6); line-height: 1.5; }
+  .orbit-ring { position: absolute; border: 1px dashed rgba(255, 20, 147, 0.2); border-radius: 50%; animation: orbit-spin 20s linear infinite; }
   .orbit-ring:nth-child(1) { width: 350px; height: 400px; }
   .orbit-ring:nth-child(2) { width: 320px; height: 370px; animation-direction: reverse; animation-duration: 25s; }
-
   @keyframes orbit-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-  .orbit-dot {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: var(--hot-pink);
-    border-radius: 50%;
-    box-shadow: 0 0 15px var(--hot-pink);
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+  .orbit-dot { position: absolute; width: 10px; height: 10px; background: var(--hot-pink); border-radius: 50%; box-shadow: 0 0 15px var(--hot-pink); top: 0; left: 50%; transform: translateX(-50%); }
 
   /* ============ EPISODES ============ */
-  .episodes {
-    background:
-      radial-gradient(ellipse at 20% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
-      var(--deep-plum);
-  }
+  .episodes { background: radial-gradient(ellipse at 20% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%), var(--deep-plum); }
+  .episodes-container { max-width: 1100px; margin: 0 auto; }
+  .spotify-embed-wrapper { position: relative; max-width: 800px; margin: 0 auto; }
+  .embed-glow { position: absolute; inset: -40px; border-radius: 36px; background: radial-gradient(ellipse at center, rgba(255, 20, 147, 0.14), transparent 70%); pointer-events: none; z-index: 0; animation: disco-pulse 4s ease-in-out infinite alternate; }
+  .embed-frame { position: relative; z-index: 1; background: linear-gradient(145deg, rgba(255, 20, 147, 0.06), rgba(13, 13, 26, 0.8)); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 1.4rem; transition: border-color 0.4s, box-shadow 0.4s; overflow: hidden; }
+  .embed-frame::before { content: ''; position: absolute; inset: 0; border-radius: 20px; padding: 1px; background: linear-gradient(135deg, var(--hot-pink), transparent 40%, transparent 60%, var(--disco-gold)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; opacity: 0.4; transition: opacity 0.4s; }
+  .embed-frame:hover { border-color: rgba(255, 20, 147, 0.3); box-shadow: 0 16px 60px rgba(255, 20, 147, 0.15); }
+  .embed-frame:hover::before { opacity: 0.7; }
+  .embed-frame iframe { display: block; border-radius: 12px; }
+  .embed-bottom-row { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .embed-hint { font-size: 0.95rem; color: rgba(255, 255, 255, 0.45); font-style: italic; }
+  .embed-badges { display: flex; gap: 1.5rem; justify-content: center; margin-top: 2rem; position: relative; z-index: 1; }
+  .embed-badge { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: rgba(255, 255, 255, 0.35); font-weight: 500; letter-spacing: 0.5px; }
+  .embed-badge span { font-size: 1rem; }
 
-  .episodes-container {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .episodes-header .section-subtitle {
-    max-width: 500px;
-  }
-
-  .spotify-embed-wrapper {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .embed-glow {
-    position: absolute;
-    inset: -40px;
-    border-radius: 36px;
-    background: radial-gradient(ellipse at center, rgba(255, 20, 147, 0.14), transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-    animation: disco-pulse 4s ease-in-out infinite alternate;
-  }
-
-  .embed-frame {
+  /* ✅ NEW: Apple Podcasts embed frame */
+  .apple-embed-frame {
     position: relative;
     z-index: 1;
-    background: linear-gradient(145deg, rgba(255, 20, 147, 0.06), rgba(13, 13, 26, 0.8));
+    background: linear-gradient(145deg, rgba(135, 46, 196, 0.08), rgba(13, 13, 26, 0.8));
     backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(135, 46, 196, 0.2);
     border-radius: 20px;
     padding: 1.4rem;
-    transition: border-color 0.4s, box-shadow 0.4s;
-    overflow: hidden;
-  }
-
-  .embed-frame::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
-    padding: 1px;
-    background: linear-gradient(135deg, var(--hot-pink), transparent 40%, transparent 60%, var(--disco-gold));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    opacity: 0.4;
-    transition: opacity 0.4s;
-  }
-
-  .embed-frame:hover {
-    border-color: rgba(255, 20, 147, 0.3);
-    box-shadow: 0 16px 60px rgba(255, 20, 147, 0.15);
-  }
-
-  .embed-frame:hover::before {
-    opacity: 0.7;
-  }
-
-  .embed-frame iframe {
-    display: block;
-    border-radius: 12px;
-  }
-
-  .embed-bottom-row {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
     margin-top: 1.5rem;
-    flex-wrap: wrap;
+    transition: border-color 0.4s, box-shadow 0.4s;
   }
-
-  .embed-hint {
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.45);
-    font-style: italic;
-  }
-
-  .embed-badges {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    margin-top: 2rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .embed-badge {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.35);
-    font-weight: 500;
-    letter-spacing: 0.5px;
-  }
-
-  .embed-badge span {
-    font-size: 1rem;
+  .apple-embed-frame:hover {
+    border-color: rgba(135, 46, 196, 0.4);
+    box-shadow: 0 16px 60px rgba(135, 46, 196, 0.12);
   }
 
   /* ============ CTA / LISTEN ============ */
-  .cta-section {
-    padding: 8rem 2rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    background: var(--midnight);
-  }
+  .cta-section { padding: 8rem 2rem; text-align: center; position: relative; overflow: hidden; background: var(--midnight); }
+  .cta-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 20, 147, 0.2), transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); animation: disco-pulse 3s ease-in-out infinite alternate; }
+  .cta-content { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
+  .cta-content .section-title { font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: 1rem; }
+  .cta-content .section-subtitle { max-width: 100%; margin: 0 auto 2.5rem; font-size: 1.2rem; }
+  .listen-platforms { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
 
-  .cta-glow {
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 20, 147, 0.2), transparent 70%);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: disco-pulse 3s ease-in-out infinite alternate;
-  }
+  .platform-btn { display: inline-flex; align-items: center; gap: 0.7rem; padding: 1rem 2rem; border-radius: 60px; text-decoration: none; color: #fff; font-weight: 600; font-size: 1rem; transition: all 0.3s ease; border: 1px solid var(--glass-border); background: var(--glass-white); backdrop-filter: blur(10px); }
+  .platform-btn:hover { transform: translateY(-3px); border-color: var(--hot-pink); box-shadow: 0 8px 30px rgba(255, 20, 147, 0.2); }
 
-  .cta-content {
-    position: relative;
-    z-index: 2;
-    max-width: 700px;
-    margin: 0 auto;
-  }
+  .platform-btn.spotify { background: linear-gradient(135deg, #1DB954, #1aa34a); border-color: transparent; box-shadow: 0 4px 20px rgba(29, 185, 84, 0.4); }
+  .platform-btn.spotify:hover { box-shadow: 0 8px 35px rgba(29, 185, 84, 0.6); }
 
-  .cta-content .section-title {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    margin-bottom: 1rem;
-  }
+  /* ✅ NEW: Apple Podcasts platform button */
+  .platform-btn.apple { background: linear-gradient(135deg, #872ec4, #6a1fa0); border-color: transparent; box-shadow: 0 4px 20px rgba(135, 46, 196, 0.4); }
+  .platform-btn.apple:hover { transform: translateY(-3px); box-shadow: 0 8px 35px rgba(135, 46, 196, 0.6); }
+  .platform-btn.apple img { width: 22px; height: 22px; object-fit: contain; filter: brightness(0) invert(1); }
 
-  .cta-content .section-subtitle {
-    max-width: 100%;
-    margin: 0 auto 2.5rem;
-    font-size: 1.2rem;
-  }
-
-  .listen-platforms {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .platform-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.7rem;
-    padding: 1rem 2rem;
-    border-radius: 60px;
-    text-decoration: none;
-    color: #fff;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    border: 1px solid var(--glass-border);
-    background: var(--glass-white);
-    backdrop-filter: blur(10px);
-  }
-
-  .platform-btn:hover {
-    transform: translateY(-3px);
-    border-color: var(--hot-pink);
-    box-shadow: 0 8px 30px rgba(255, 20, 147, 0.2);
-  }
-
-  .platform-btn.spotify {
-    background: linear-gradient(135deg, #1DB954, #1aa34a);
-    border-color: transparent;
-    box-shadow: 0 4px 20px rgba(29, 185, 84, 0.4);
-  }
-
-  .platform-btn.spotify:hover {
-    box-shadow: 0 8px 35px rgba(29, 185, 84, 0.6);
-  }
-
-  .platform-btn.facebook {
-    background: linear-gradient(135deg, #1877F2, #0d5bbd);
-    border-color: transparent;
-    box-shadow: 0 4px 20px rgba(24, 119, 242, 0.4);
-  }
-
-  .platform-btn.facebook:hover {
-    box-shadow: 0 8px 35px rgba(24, 119, 242, 0.6);
-  }
+  .platform-btn.facebook { background: linear-gradient(135deg, #1877F2, #0d5bbd); border-color: transparent; box-shadow: 0 4px 20px rgba(24, 119, 242, 0.4); }
+  .platform-btn.facebook:hover { box-shadow: 0 8px 35px rgba(24, 119, 242, 0.6); }
 
   /* ============ FOOTER ============ */
-  footer {
-    padding: 3rem 2rem;
-    text-align: center;
-    border-top: 1px solid var(--glass-border);
-    background: rgba(13, 13, 26, 0.9);
-  }
-
-  .footer-logo {
-    font-family: 'Pacifico', cursive;
-    font-size: 1.8rem;
-    color: var(--hot-pink);
-    text-shadow: 0 0 20px rgba(255, 20, 147, 0.4);
-    margin-bottom: 1rem;
-  }
-
-  .footer-tagline {
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .footer-socials {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .footer-socials a {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid var(--glass-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255, 255, 255, 0.6);
-    text-decoration: none;
-    transition: all 0.3s;
-  }
-
-  .footer-socials a:hover {
-    border-color: var(--hot-pink);
-    color: var(--hot-pink);
-    background: rgba(255, 20, 147, 0.1);
-    transform: translateY(-3px);
-  }
-
-  .footer-copy {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.25);
-  }
+  footer { padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(13, 13, 26, 0.9); }
+  .footer-logo { font-family: 'Pacifico', cursive; font-size: 1.8rem; color: var(--hot-pink); text-shadow: 0 0 20px rgba(255, 20, 147, 0.4); margin-bottom: 1rem; }
+  .footer-tagline { color: rgba(255, 255, 255, 0.4); font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .footer-socials { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
+  .footer-socials a { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: all 0.3s; }
+  .footer-socials a:hover { border-color: var(--hot-pink); color: var(--hot-pink); background: rgba(255, 20, 147, 0.1); transform: translateY(-3px); }
+  /* ✅ NEW: Apple icon styling in footer */
+  .footer-socials a img { width: 20px; height: 20px; object-fit: contain; filter: brightness(0) invert(0.6); transition: filter 0.3s; }
+  .footer-socials a:hover img { filter: brightness(0) saturate(100%) invert(17%) sepia(95%) saturate(4000%) hue-rotate(295deg) brightness(1.1); }
+  .footer-copy { font-size: 0.8rem; color: rgba(255, 255, 255, 0.25); }
 
   /* ============ MARQUEE ============ */
-  .marquee-strip {
-    overflow: hidden;
-    padding: 1.2rem 0;
-    border-top: 1px solid var(--glass-border);
-    border-bottom: 1px solid var(--glass-border);
-    background: rgba(255, 20, 147, 0.03);
-  }
-
-  .marquee-inner {
-    display: flex;
-    gap: 3rem;
-    animation: marquee-scroll 25s linear infinite;
-    width: max-content;
-  }
-
-  .marquee-item {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.25);
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  .marquee-item span.dot {
-    width: 6px;
-    height: 6px;
-    background: var(--hot-pink);
-    border-radius: 50%;
-    opacity: 0.5;
-    flex-shrink: 0;
-  }
-
-  @keyframes marquee-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  /* ============ HANDCUFF DIVIDER ============ */
-  .divider {
-    text-align: center;
-    padding: 2rem 0;
-    font-size: 1.5rem;
-    opacity: 0.3;
-    letter-spacing: 1rem;
-  }
+  .marquee-strip { overflow: hidden; padding: 1.2rem 0; border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); background: rgba(255, 20, 147, 0.03); }
+  .marquee-inner { display: flex; gap: 3rem; animation: marquee-scroll 25s linear infinite; width: max-content; }
+  .marquee-item { font-family: 'Playfair Display', serif; font-size: 1rem; font-style: italic; color: rgba(255, 255, 255, 0.25); white-space: nowrap; display: flex; align-items: center; gap: 1.5rem; }
+  .marquee-item span.dot { width: 6px; height: 6px; background: var(--hot-pink); border-radius: 50%; opacity: 0.5; flex-shrink: 0; }
+  @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
   /* ============ SCROLL REVEAL ============ */
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 900px) {
-    .hero-content {
-      flex-direction: column;
-      text-align: center;
-    }
-
+    .hero-content { flex-direction: column; text-align: center; }
     .hero-image { width: 320px; height: 240px; }
     .hero-desc { margin: 0 auto 2rem; }
     .hero-buttons { justify-content: center; }
     .badge-float:nth-child(2) { right: -10px; }
     .badge-float:nth-child(3) { left: -10px; }
-
-    .about-grid {
-      grid-template-columns: 1fr;
-      gap: 3rem;
-    }
-
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
     .about-visual { order: -1; }
     .badge-display { width: 260px; height: 320px; }
     .badge-outer { width: 220px; height: 270px; }
     .orbit-ring:nth-child(1) { width: 290px; height: 340px; }
     .orbit-ring:nth-child(2) { width: 260px; height: 310px; }
     .about-features { grid-template-columns: 1fr; }
-
-    .embed-bottom-row {
-      flex-direction: column;
-      text-align: center;
-    }
+    .embed-bottom-row { flex-direction: column; text-align: center; }
   }
 
   @media (max-width: 600px) {
     nav { padding: 1rem; }
-
-    .nav-links {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: rgba(13, 13, 26, 0.97);
-      backdrop-filter: blur(20px);
-      flex-direction: column;
-      padding: 2rem;
-      gap: 1.5rem;
-      border-bottom: 1px solid var(--glass-border);
-    }
-
+    .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(13, 13, 26, 0.97); backdrop-filter: blur(20px); flex-direction: column; padding: 2rem; gap: 1.5rem; border-bottom: 1px solid var(--glass-border); }
     .nav-links.open { display: flex; }
-
     .mobile-toggle { display: flex; }
-
     .hero { padding: 5rem 1.5rem 3rem; }
     .hero-image { width: 280px; height: 210px; }
     .hero-title { font-size: 2.2rem; white-space: normal; }
-
     .embed-frame { padding: 0.8rem; }
     .embed-badges { flex-direction: column; align-items: center; gap: 0.6rem; }
     .embed-bottom-row { flex-direction: column; text-align: center; }
-
     .listen-platforms { flex-direction: column; align-items: center; }
     .platform-btn { width: 100%; max-width: 300px; justify-content: center; }
-
     section { padding: 4rem 1.5rem; }
   }
 </style>
@@ -966,6 +266,8 @@
     <li><a href="#about">About</a></li>
     <li><a href="#episodes">Episodes</a></li>
     <li><a href="https://www.facebook.com/profile.php?id=61586443233812" target="_blank">Facebook</a></li>
+    <!-- ✅ NEW: Apple Podcasts in nav -->
+    <li><a href="https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" target="_blank" class="nav-apple"><img src="Applepodcast.png" alt="Apple Podcasts"> Apple</a></li>
     <li><a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" class="nav-cta">🎧 Listen Now</a></li>
   </ul>
   <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
@@ -979,9 +281,7 @@
   <div class="disco-light"></div>
   <div class="disco-light"></div>
   <div class="disco-light"></div>
-
   <div class="disco-squares" id="discoSquares"></div>
-
   <div class="hero-content">
     <div class="hero-image-wrapper">
       <img src="IMG_7503.jpeg" alt="The Wedding Police Podcast Cover" class="hero-image">
@@ -1042,26 +342,10 @@
         and the kind of wedding advice your friends are too polite to give you.
       </p>
       <div class="about-features">
-        <div class="feature-card">
-          <span class="feature-icon">🚔</span>
-          <h3>Wedding Crimes</h3>
-          <p>The most outrageous wedding fails, dissected with love.</p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">💒</span>
-          <h3>Real Stories</h3>
-          <p>True tales from brides, grooms, planners & guests.</p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">🎤</span>
-          <h3>Expert Guests</h3>
-          <p>Industry pros spilling the tea on what really happens.</p>
-        </div>
-        <div class="feature-card">
-          <span class="feature-icon">⚖️</span>
-          <h3>The Verdict</h3>
-          <p>Our final ruling on the hottest wedding debates.</p>
-        </div>
+        <div class="feature-card"><span class="feature-icon">🚔</span><h3>Wedding Crimes</h3><p>The most outrageous wedding fails, dissected with love.</p></div>
+        <div class="feature-card"><span class="feature-icon">💒</span><h3>Real Stories</h3><p>True tales from brides, grooms, planners & guests.</p></div>
+        <div class="feature-card"><span class="feature-icon">🎤</span><h3>Expert Guests</h3><p>Industry pros spilling the tea on what really happens.</p></div>
+        <div class="feature-card"><span class="feature-icon">⚖️</span><h3>The Verdict</h3><p>Our final ruling on the hottest wedding debates.</p></div>
       </div>
     </div>
     <div class="about-visual reveal">
@@ -1086,7 +370,6 @@
       <h2 class="section-title">Listen Now</h2>
       <p class="section-subtitle" style="margin:0.5rem auto 0;">Catch up on the latest from HQ — play any episode right here.</p>
     </div>
-
     <div class="spotify-embed-wrapper reveal">
       <div class="embed-glow"></div>
       <div class="embed-frame">
@@ -1096,6 +379,19 @@
         <p class="embed-hint">🎧 Browse episodes above, hit play, and let us do the patrolling.</p>
         <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" class="btn btn-primary" style="font-size:0.9rem; padding:0.75rem 1.6rem;">Open in Spotify →</a>
       </div>
+
+      <!-- ✅ NEW: Apple Podcasts embed -->
+      <div class="apple-embed-frame">
+        <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1rem;">
+          <img src="Applepodcast.png" alt="Apple Podcasts" style="width:22px; height:22px; filter:brightness(0) invert(1); opacity:0.7;">
+          <span style="font-size:0.8rem; color:rgba(255,255,255,0.4); font-weight:600; letter-spacing:1px; text-transform:uppercase;">Also on Apple Podcasts</span>
+        </div>
+        <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;max-width:100%;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/us/podcast/the-wedding-police/id1875631808"></iframe>
+        <div style="text-align:right; margin-top:1rem;">
+          <a href="https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" target="_blank" class="btn btn-primary" style="font-size:0.9rem; padding:0.75rem 1.6rem; background:linear-gradient(135deg,#872ec4,#6a1fa0); box-shadow:0 4px 20px rgba(135,46,196,0.4);">Open in Apple Podcasts →</a>
+        </div>
+      </div>
+
       <div class="embed-badges">
         <div class="embed-badge"><span>🚨</span> Wedding Crimes Investigated</div>
         <div class="embed-badge"><span>💍</span> Unfiltered Takes</div>
@@ -1120,6 +416,11 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
         Spotify
       </a>
+      <!-- ✅ NEW: Apple Podcasts button in CTA section -->
+      <a href="https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" target="_blank" class="platform-btn apple">
+        <img src="Applepodcast.png" alt="Apple Podcasts">
+        Apple Podcasts
+      </a>
       <a href="https://www.facebook.com/profile.php?id=61586443233812" target="_blank" class="platform-btn facebook">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         Facebook
@@ -1136,6 +437,10 @@
     <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" title="Spotify">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
     </a>
+    <!-- ✅ NEW: Apple Podcasts icon in footer -->
+    <a href="https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" target="_blank" title="Apple Podcasts">
+      <img src="Applepodcast.png" alt="Apple Podcasts">
+    </a>
     <a href="https://www.facebook.com/profile.php?id=61586443233812" target="_blank" title="Facebook">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
     </a>
@@ -1144,23 +449,14 @@
 </footer>
 
 <script>
-  // Mobile Nav Toggle
   const toggle = document.getElementById('mobileToggle');
   const navLinks = document.getElementById('navLinks');
   toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => navLinks.classList.remove('open')); });
 
-  // Close mobile nav when a link is clicked
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => navLinks.classList.remove('open'));
-  });
-
-  // Navbar scroll effect
   const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 50);
-  });
+  window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
 
-  // Disco squares
   const container = document.getElementById('discoSquares');
   for (let i = 0; i < 30; i++) {
     const sq = document.createElement('div');
@@ -1174,24 +470,18 @@
     container.appendChild(sq);
   }
 
-  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
   }, { threshold: 0.15 });
   reveals.forEach(el => observer.observe(el));
 
-  // Sparkle cursor effect (amplified)
   let lastSparkle = 0;
   document.addEventListener('mousemove', (e) => {
     const now = Date.now();
     if (now - lastSparkle < 30) return;
     lastSparkle = now;
-    const count = 2 + Math.floor(Math.random() * 3); // 2-4 sparkles per move
+    const count = 2 + Math.floor(Math.random() * 3);
     for (let i = 0; i < count; i++) {
       const sparkle = document.createElement('div');
       sparkle.className = 'sparkle';
