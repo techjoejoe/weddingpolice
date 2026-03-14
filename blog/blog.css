@@ -154,10 +154,27 @@ body { font-family: 'Outfit', sans-serif; background: var(--midnight); color: #f
 .blog-footer p { font-size: 0.8rem; color: rgba(255,255,255,0.25); }
 
 /* ============ RESPONSIVE ============ */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .blog-nav { padding: 0.8rem 1rem; }
-  .blog-nav-links { gap: 1rem; }
+  .blog-nav-links { gap: 0.8rem; }
+  .blog-nav-links a { font-size: 0.8rem; }
+  .blog-nav-links .nav-cta { padding: 0.4rem 1rem; font-size: 0.8rem; }
+  .blog-hero { padding: 4rem 1.2rem 2rem; }
+  .blog-hero h1 { font-size: 1.8rem; }
+  .blog-hero p { font-size: 0.95rem; }
   .blog-article { padding: 2rem 1.2rem 4rem; }
+  .blog-article h1 { font-size: 1.6rem; }
+  .blog-article h2 { font-size: 1.3rem; }
+  .blog-article h3 { font-size: 1.05rem; }
+  .blog-article p { font-size: 0.95rem; }
+  .blog-article li { font-size: 0.9rem; }
+  .blog-meta { font-size: 0.8rem; }
+  .podcast-cta { padding: 1.5rem 1.2rem; margin: 2rem 0; }
+  .podcast-cta h3 { font-size: 1.1rem; }
+  .podcast-cta .cta-buttons { flex-direction: column; align-items: center; }
+  .cta-btn { width: 100%; max-width: 250px; justify-content: center; }
   .related-grid { grid-template-columns: 1fr; }
-  .blog-grid { padding: 1.5rem 1.2rem 4rem; }
+  .blog-grid { padding: 1.5rem 1.2rem 4rem; grid-template-columns: 1fr; }
+  .blog-card { padding: 1.4rem; }
+  .blog-footer { padding: 2rem 1.2rem; }
 }

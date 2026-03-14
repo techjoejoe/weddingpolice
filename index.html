@@ -191,7 +191,7 @@
   .hero-image-wrapper { flex-shrink: 0; position: relative; }
   .hero-image-wrapper::before { content: ''; position: absolute; inset: -4px; border-radius: 24px; background: linear-gradient(135deg, var(--hot-pink), var(--disco-gold), var(--silver), var(--hot-pink)); background-size: 400% 400%; animation: gradient-spin 4s ease infinite; z-index: -1; }
   @keyframes gradient-spin { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-  .hero-image { width: 360px; height: 270px; border-radius: 20px; object-fit: cover; display: block; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
+  .hero-image { width: 480px; height: 360px; border-radius: 20px; object-fit: cover; display: block; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
 
   .badge-float { position: absolute; background: var(--glass-white); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 0.6rem 1rem; font-size: 0.85rem; font-weight: 600; animation: badge-bob 3s ease-in-out infinite; white-space: nowrap; }
   .badge-float:nth-child(2) { top: -15px; right: -30px; animation-delay: 0s; }
@@ -343,7 +343,7 @@
   /* ============ RESPONSIVE ============ */
   @media (max-width: 900px) {
     .hero-content { flex-direction: column; text-align: center; }
-    .hero-image { width: 320px; height: 240px; }
+    .hero-image { width: 420px; height: 315px; }
     .hero-desc { margin: 0 auto 2rem; }
     .hero-buttons { justify-content: center; }
     .badge-float:nth-child(2) { right: -10px; }
@@ -356,6 +356,7 @@
     .orbit-ring:nth-child(2) { width: 260px; height: 310px; }
     .about-features { grid-template-columns: 1fr; }
     .embed-bottom-row { flex-direction: column; text-align: center; }
+    .episode-list { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 600px) {
@@ -363,15 +364,34 @@
     .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(13, 13, 26, 0.97); backdrop-filter: blur(20px); flex-direction: column; padding: 2rem; gap: 1.5rem; border-bottom: 1px solid var(--glass-border); }
     .nav-links.open { display: flex; }
     .mobile-toggle { display: flex; }
-    .hero { padding: 5rem 1.5rem 3rem; }
-    .hero-image { width: 280px; height: 210px; }
-    .hero-title { font-size: 2.2rem; white-space: normal; }
+    .hero { padding: 5rem 1.2rem 3rem; min-height: auto; }
+    .hero-content { gap: 2rem; }
+    .hero-image-wrapper { width: 100%; }
+    .hero-image { width: 100%; height: auto; aspect-ratio: 4/3; max-width: 400px; }
+    .hero-image-wrapper::before { border-radius: 20px; }
+    .hero-title { font-size: 2rem; white-space: normal; }
+    .hero-subtitle { font-size: 1rem; }
+    .hero-desc { font-size: 1rem; }
+    .hero-buttons { flex-direction: column; align-items: center; }
+    .btn { width: 100%; max-width: 300px; justify-content: center; }
+    .badge-float { font-size: 0.75rem; padding: 0.5rem 0.8rem; }
+    .badge-float:nth-child(2) { right: 0; top: -10px; }
+    .badge-float:nth-child(3) { left: 0; bottom: 10px; }
+    section { padding: 3.5rem 1.2rem; }
+    .section-title { font-size: 1.6rem; }
+    .section-subtitle { font-size: 1rem; }
+    .about-features { grid-template-columns: 1fr; gap: 1rem; }
+    .feature-card { padding: 1.2rem; }
     .embed-frame { padding: 0.8rem; }
     .embed-badges { flex-direction: column; align-items: center; gap: 0.6rem; }
     .embed-bottom-row { flex-direction: column; text-align: center; }
+    .episode-list { grid-template-columns: 1fr; }
+    .faq h2 { font-size: 1.6rem; }
+    .faq-question { font-size: 0.95rem; padding: 1.2rem; }
+    .faq-answer p { padding: 0 1.2rem 1.2rem; font-size: 0.9rem; }
     .listen-platforms { flex-direction: column; align-items: center; }
     .platform-btn { width: 100%; max-width: 300px; justify-content: center; }
-    section { padding: 4rem 1.5rem; }
+    .cta-content .section-title { font-size: 1.8rem; }
   }
 </style>
 </head>
