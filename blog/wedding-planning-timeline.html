@@ -22,9 +22,16 @@
 <link rel="stylesheet" href="blog.css">
 </head>
 <body>
+
+<!-- Ambient Effects -->
+<div class="disco-light"></div>
+<div class="disco-light"></div>
+<div class="disco-light"></div>
+<div class="disco-squares" id="discoSquares"></div>
+
 <nav class="blog-nav"><a href="../" class="nav-logo">The Wedding Police</a><ul class="blog-nav-links"><li><a href="../">Home</a></li><li><a href="./">Blog</a></li><li><a href="../#episodes">Episodes</a></li><li><a href="../#episodes" class="nav-cta">🎧 Listen</a></li></ul></nav>
 
-<article class="blog-article">
+<article class="blog-article reveal">
   <div class="blog-breadcrumb"><a href="../">Home</a> / <a href="./">Blog</a> / Wedding Planning Timeline</div>
 
   <h1>The Ultimate Wedding Planning Timeline: 12-Month Checklist</h1>
@@ -115,7 +122,7 @@
 
   <blockquote>"The checklist keeps you sane. The love keeps you going. Don't confuse the two." — Penny, The Wedding Police</blockquote>
 
-  <div class="podcast-cta">
+  <div class="podcast-cta reveal">
     <h3>🎧 Listen to The Wedding Police Podcast</h3>
     <p>Planning a wedding? Let Penny &amp; Jim be your unofficial wedding planners. Real tips, real stories, zero sugar-coating.</p>
     <div class="cta-buttons">
@@ -124,12 +131,61 @@
     </div>
   </div>
 
-  <div class="related-posts"><h3>More Wedding Tips</h3><div class="related-grid">
+  <div class="related-posts reveal"><h3>More Wedding Tips</h3><div class="related-grid">
     <a href="wedding-budget-tips.html" class="related-card"><h4>Wedding Budget Tips</h4><p>How to plan your dream wedding for less.</p></a>
     <a href="diy-wedding-ideas.html" class="related-card"><h4>DIY Wedding Ideas</h4><p>Which DIY projects save money and which ones backfire.</p></a>
   </div></div>
 </article>
 
 <footer class="blog-footer"><div class="footer-logo">The Wedding Police</div><p>© 2025–2026 The Wedding Police Podcast. All rights reserved.</p></footer>
+
+<script>
+  // Disco squares
+  const container = document.getElementById('discoSquares');
+  for (let i = 0; i < 25; i++) {
+    const sq = document.createElement('div');
+    sq.className = 'disco-square';
+    sq.style.left = Math.random() * 100 + '%';
+    sq.style.animationDelay = Math.random() * 15 + 's';
+    sq.style.animationDuration = (10 + Math.random() * 15) + 's';
+    sq.style.width = sq.style.height = (4 + Math.random() * 8) + 'px';
+    const colors = ['rgba(255,20,147,0.12)', 'rgba(192,192,192,0.1)', 'rgba(255,215,0,0.08)', 'rgba(255,255,255,0.06)'];
+    sq.style.background = colors[Math.floor(Math.random() * colors.length)];
+    container.appendChild(sq);
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Sparkle cursor trail
+  let lastSparkle = 0;
+  document.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+    if (now - lastSparkle < 30) return;
+    lastSparkle = now;
+    const count = 2 + Math.floor(Math.random() * 3);
+    for (let i = 0; i < count; i++) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      const offsetX = (Math.random() - 0.5) * 30;
+      const offsetY = (Math.random() - 0.5) * 30;
+      sparkle.style.left = (e.clientX + offsetX) + 'px';
+      sparkle.style.top = (e.clientY + offsetY) + 'px';
+      const colors = ['#FF1493', '#FFD700', '#C0C0C0', '#FF69B4', '#fff'];
+      sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
+      const size = 3 + Math.random() * 8;
+      sparkle.style.width = size + 'px';
+      sparkle.style.height = size + 'px';
+      sparkle.style.animationDuration = (0.6 + Math.random() * 0.8) + 's';
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1400);
+    }
+  });
+</script>
+
 </body>
 </html>

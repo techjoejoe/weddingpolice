@@ -18,6 +18,13 @@
 </head>
 <body>
 
+<!-- Ambient Effects -->
+<div class="disco-light"></div>
+<div class="disco-light"></div>
+<div class="disco-light"></div>
+<div class="disco-squares" id="discoSquares"></div>
+
+
 <nav class="blog-nav">
   <a href="../" class="nav-logo">The Wedding Police</a>
   <ul class="blog-nav-links">
@@ -28,63 +35,63 @@
   </ul>
 </nav>
 
-<section class="blog-hero">
+<section class="blog-hero reveal">
   <h1>The Wedding Police Blog</h1>
   <p>Wedding planning tips, real stories, and unfiltered advice from your favorite wedding podcast hosts, Penny &amp; Jim.</p>
 </section>
 
 <div class="blog-grid">
 
-  <a href="wedding-guest-dress-code.html" class="blog-card">
+  <a href="wedding-guest-dress-code.html" class="blog-card reveal">
     <span class="card-tag">Wedding Etiquette</span>
     <h2>Wedding Guest Dress Code: What to Wear &amp; What to Avoid</h2>
     <p>The ultimate guide to wedding guest attire — decode every dress code from black-tie to casual and avoid the biggest fashion crimes.</p>
     <span class="read-more">Read More →</span>
   </a>
 
-  <a href="diy-wedding-ideas.html" class="blog-card">
+  <a href="diy-wedding-ideas.html" class="blog-card reveal">
     <span class="card-tag">DIY &amp; Planning</span>
     <h2>DIY Wedding Ideas That Actually Work (And Ones That Don't)</h2>
     <p>Which DIY wedding projects save money and which ones cause meltdowns? Penny &amp; Jim break down the real cost of doing it yourself.</p>
     <span class="read-more">Read More →</span>
   </a>
 
-  <a href="bridal-gown-shopping-guide.html" class="blog-card">
+  <a href="bridal-gown-shopping-guide.html" class="blog-card reveal">
     <span class="card-tag">Bridal Fashion</span>
     <h2>Bridal Gown Shopping: A First-Timer's Complete Guide</h2>
     <p>Everything you need to know before your first bridal appointment — from budget to body types to the emotions nobody warns you about.</p>
     <span class="read-more">Read More →</span>
   </a>
 
-  <a href="signature-wedding-cocktails.html" class="blog-card">
+  <a href="signature-wedding-cocktails.html" class="blog-card reveal">
     <span class="card-tag">Food &amp; Drink</span>
     <h2>The Best Signature Wedding Cocktails for Every Season</h2>
     <p>Ditch the basic bar. Here are crowd-pleasing signature cocktail ideas that match your wedding season, theme, and budget.</p>
     <span class="read-more">Read More →</span>
   </a>
 
-  <a href="wedding-day-disasters.html" class="blog-card">
+  <a href="wedding-day-disasters.html" class="blog-card reveal">
     <span class="card-tag">Real Stories</span>
     <h2>How to Survive Wedding Day Disasters: A Real-World Guide</h2>
     <p>Rain, wardrobe malfunctions, vendor no-shows — real couples share how they survived the worst and still had the best day.</p>
     <span class="read-more">Read More →</span>
   </a>
 
-  <a href="how-to-write-wedding-speech.html" class="blog-card">
+  <a href="how-to-write-wedding-speech.html" class="blog-card reveal">
     <span class="card-tag">Speeches &amp; Toasts</span>
     <h2>How to Write a Wedding Speech That Makes Everyone Laugh &amp; Cry</h2>
     <p>A step-by-step formula for writing the perfect best man, maid of honor, or father of the bride speech — with examples.</p>
     <span class="read-more">Read More →</span>
   </a>
 
-  <a href="wedding-planning-timeline.html" class="blog-card">
+  <a href="wedding-planning-timeline.html" class="blog-card reveal">
     <span class="card-tag">Planning Guide</span>
     <h2>The Ultimate Wedding Planning Timeline: 12-Month Checklist</h2>
     <p>A month-by-month wedding planning checklist so you never miss a deadline — from engagement to honeymoon.</p>
     <span class="read-more">Read More →</span>
   </a>
 
-  <a href="wedding-budget-tips.html" class="blog-card">
+  <a href="wedding-budget-tips.html" class="blog-card reveal">
     <span class="card-tag">Budget &amp; Finance</span>
     <h2>Wedding Budget Tips: How to Plan Your Dream Wedding for Less</h2>
     <p>Smart strategies to cut costs without cutting corners — real advice from couples who planned stunning weddings on a budget.</p>
@@ -97,6 +104,55 @@
   <div class="footer-logo">The Wedding Police</div>
   <p>© 2025–2026 The Wedding Police Podcast. All rights reserved.</p>
 </footer>
+
+
+<script>
+  // Disco squares
+  const container = document.getElementById('discoSquares');
+  for (let i = 0; i < 25; i++) {
+    const sq = document.createElement('div');
+    sq.className = 'disco-square';
+    sq.style.left = Math.random() * 100 + '%';
+    sq.style.animationDelay = Math.random() * 15 + 's';
+    sq.style.animationDuration = (10 + Math.random() * 15) + 's';
+    sq.style.width = sq.style.height = (4 + Math.random() * 8) + 'px';
+    const colors = ['rgba(255,20,147,0.12)', 'rgba(192,192,192,0.1)', 'rgba(255,215,0,0.08)', 'rgba(255,255,255,0.06)'];
+    sq.style.background = colors[Math.floor(Math.random() * colors.length)];
+    container.appendChild(sq);
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Sparkle cursor trail
+  let lastSparkle = 0;
+  document.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+    if (now - lastSparkle < 30) return;
+    lastSparkle = now;
+    const count = 2 + Math.floor(Math.random() * 3);
+    for (let i = 0; i < count; i++) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      const offsetX = (Math.random() - 0.5) * 30;
+      const offsetY = (Math.random() - 0.5) * 30;
+      sparkle.style.left = (e.clientX + offsetX) + 'px';
+      sparkle.style.top = (e.clientY + offsetY) + 'px';
+      const colors = ['#FF1493', '#FFD700', '#C0C0C0', '#FF69B4', '#fff'];
+      sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
+      const size = 3 + Math.random() * 8;
+      sparkle.style.width = size + 'px';
+      sparkle.style.height = size + 'px';
+      sparkle.style.animationDuration = (0.6 + Math.random() * 0.8) + 's';
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1400);
+    }
+  });
+</script>
 
 </body>
 </html>

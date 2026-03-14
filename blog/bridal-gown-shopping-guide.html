@@ -22,9 +22,16 @@
 <link rel="stylesheet" href="blog.css">
 </head>
 <body>
+
+<!-- Ambient Effects -->
+<div class="disco-light"></div>
+<div class="disco-light"></div>
+<div class="disco-light"></div>
+<div class="disco-squares" id="discoSquares"></div>
+
 <nav class="blog-nav"><a href="../" class="nav-logo">The Wedding Police</a><ul class="blog-nav-links"><li><a href="../">Home</a></li><li><a href="./">Blog</a></li><li><a href="../#episodes">Episodes</a></li><li><a href="../#episodes" class="nav-cta">🎧 Listen</a></li></ul></nav>
 
-<article class="blog-article">
+<article class="blog-article reveal">
   <div class="blog-breadcrumb"><a href="../">Home</a> / <a href="./">Blog</a> / Bridal Gown Shopping</div>
 
   <h1>Bridal Gown Shopping: A First-Timer's Complete Guide</h1>
@@ -85,7 +92,7 @@
 
   <blockquote>"The right dress isn't about the most expensive or the most dramatic. It's the one that makes you stand a little taller." — Penny, The Wedding Police</blockquote>
 
-  <div class="podcast-cta">
+  <div class="podcast-cta reveal">
     <h3>🎧 Hear the Full Episode: "Bridal Gown Shopping"</h3>
     <p>Penny &amp; Jim share bridal salon horror stories, budget secrets, and what they wish every bride knew before their first appointment.</p>
     <div class="cta-buttons">
@@ -94,12 +101,61 @@
     </div>
   </div>
 
-  <div class="related-posts"><h3>More Wedding Tips</h3><div class="related-grid">
+  <div class="related-posts reveal"><h3>More Wedding Tips</h3><div class="related-grid">
     <a href="wedding-guest-dress-code.html" class="related-card"><h4>Wedding Guest Dress Code</h4><p>The complete guide to what to wear as a wedding guest.</p></a>
     <a href="wedding-budget-tips.html" class="related-card"><h4>Wedding Budget Tips</h4><p>Smart strategies to plan your dream wedding for less.</p></a>
   </div></div>
 </article>
 
 <footer class="blog-footer"><div class="footer-logo">The Wedding Police</div><p>© 2025–2026 The Wedding Police Podcast. All rights reserved.</p></footer>
+
+<script>
+  // Disco squares
+  const container = document.getElementById('discoSquares');
+  for (let i = 0; i < 25; i++) {
+    const sq = document.createElement('div');
+    sq.className = 'disco-square';
+    sq.style.left = Math.random() * 100 + '%';
+    sq.style.animationDelay = Math.random() * 15 + 's';
+    sq.style.animationDuration = (10 + Math.random() * 15) + 's';
+    sq.style.width = sq.style.height = (4 + Math.random() * 8) + 'px';
+    const colors = ['rgba(255,20,147,0.12)', 'rgba(192,192,192,0.1)', 'rgba(255,215,0,0.08)', 'rgba(255,255,255,0.06)'];
+    sq.style.background = colors[Math.floor(Math.random() * colors.length)];
+    container.appendChild(sq);
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Sparkle cursor trail
+  let lastSparkle = 0;
+  document.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+    if (now - lastSparkle < 30) return;
+    lastSparkle = now;
+    const count = 2 + Math.floor(Math.random() * 3);
+    for (let i = 0; i < count; i++) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      const offsetX = (Math.random() - 0.5) * 30;
+      const offsetY = (Math.random() - 0.5) * 30;
+      sparkle.style.left = (e.clientX + offsetX) + 'px';
+      sparkle.style.top = (e.clientY + offsetY) + 'px';
+      const colors = ['#FF1493', '#FFD700', '#C0C0C0', '#FF69B4', '#fff'];
+      sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
+      const size = 3 + Math.random() * 8;
+      sparkle.style.width = size + 'px';
+      sparkle.style.height = size + 'px';
+      sparkle.style.animationDuration = (0.6 + Math.random() * 0.8) + 's';
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1400);
+    }
+  });
+</script>
+
 </body>
 </html>
