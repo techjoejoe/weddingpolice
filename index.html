@@ -393,6 +393,32 @@
     .platform-btn { width: 100%; max-width: 300px; justify-content: center; }
     .cta-content .section-title { font-size: 1.8rem; }
   }
+
+  /* ============ SPONSORS ============ */
+  .sponsors { background: radial-gradient(ellipse at 40% 60%, rgba(255, 215, 0, 0.06) 0%, transparent 50%), var(--midnight); text-align: center; }
+  .sponsors-container { max-width: 900px; margin: 0 auto; }
+  .sponsor-card { background: var(--glass-white); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 3rem 2.5rem; margin-top: 2rem; transition: border-color 0.4s, box-shadow 0.4s; position: relative; overflow: hidden; }
+  .sponsor-card::before { content: ''; position: absolute; inset: 0; border-radius: 24px; padding: 1px; background: linear-gradient(135deg, var(--disco-gold), transparent 40%, transparent 60%, var(--hot-pink)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; opacity: 0.3; transition: opacity 0.4s; }
+  .sponsor-card:hover { border-color: rgba(255, 215, 0, 0.3); box-shadow: 0 16px 60px rgba(255, 215, 0, 0.1); }
+  .sponsor-card:hover::before { opacity: 0.6; }
+  .sponsor-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.2); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--disco-gold); margin-bottom: 1.5rem; }
+  .sponsor-name { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; margin-bottom: 0.8rem; }
+  .sponsor-name a { color: #fff; text-decoration: none; transition: color 0.3s; }
+  .sponsor-name a:hover { color: var(--disco-gold); }
+  .sponsor-desc { font-size: 1rem; color: rgba(255, 255, 255, 0.55); line-height: 1.6; max-width: 550px; margin: 0 auto 2rem; }
+  .sponsor-books { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .sponsor-book { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--glass-border); border-radius: 14px; padding: 1.2rem 1.5rem; text-decoration: none; color: #fff; transition: all 0.3s; min-width: 180px; }
+  .sponsor-book:hover { border-color: var(--disco-gold); transform: translateY(-4px); box-shadow: 0 8px 25px rgba(255, 215, 0, 0.12); }
+  .sponsor-book .book-emoji { font-size: 2rem; display: block; margin-bottom: 0.6rem; }
+  .sponsor-book .book-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .sponsor-book .book-price { font-size: 0.85rem; color: var(--disco-gold); font-weight: 600; }
+  .sponsor-cta { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.9rem 2rem; border-radius: 60px; font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 600; text-decoration: none; color: var(--midnight); background: linear-gradient(135deg, var(--disco-gold), #e6be2e); box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3); transition: all 0.3s; }
+  .sponsor-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5); }
+  @media (max-width: 600px) {
+    .sponsor-card { padding: 2rem 1.5rem; }
+    .sponsor-books { flex-direction: column; align-items: center; }
+    .sponsor-book { width: 100%; max-width: 260px; }
+  }
 </style>
 </head>
 <body>
@@ -590,6 +616,40 @@
         <button class="faq-question">Is this a good podcast for engaged couples? <span class="faq-chevron">▼</span></button>
         <div class="faq-answer"><p>Absolutely! The Wedding Police is perfect for engaged couples who want real, honest wedding planning advice without the sugar-coating. Penny and Jim combine humor with practical wedding tips, covering everything from budgets and vendors to bridal gowns and the wildest reception stories.</p></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sponsors -->
+<section class="sponsors" id="sponsors">
+  <div class="sponsors-container">
+    <div class="reveal" style="margin-bottom: 1rem;">
+      <div class="section-label" style="justify-content:center;">Our Sponsors</div>
+      <h2 class="section-title">Proudly Supported By</h2>
+      <p class="section-subtitle" style="max-width:100%; margin:0.5rem auto 0;">Amazing brands that make The Wedding Police podcast possible.</p>
+    </div>
+    <div class="sponsor-card reveal">
+      <div class="sponsor-badge">⭐ Official Sponsor</div>
+      <h3 class="sponsor-name"><a href="https://willpollock.bigcartel.com/" target="_blank" rel="noopener noreferrer">Will Pollock Press</a></h3>
+      <p class="sponsor-desc">Books that make a difference. From heartwarming children's stories to creative cookbooks, Will Pollock Press creates books you'll actually want on your shelf.</p>
+      <div class="sponsor-books">
+        <a href="https://willpollock.bigcartel.com/product/leaving-triscuit-by-will-pollock" target="_blank" rel="noopener noreferrer" class="sponsor-book">
+          <span class="book-emoji">📖</span>
+          <span class="book-title">Leaving Triscuit</span>
+          <span class="book-price">$20.00</span>
+        </a>
+        <a href="https://willpollock.bigcartel.com/product/gentle-with-gertie-by-will-pollock" target="_blank" rel="noopener noreferrer" class="sponsor-book">
+          <span class="book-emoji">🐾</span>
+          <span class="book-title">Gentle with Gertie</span>
+          <span class="book-price">$15.00</span>
+        </a>
+        <a href="https://willpollock.bigcartel.com/product/pizza-for-good-by-will-pollock" target="_blank" rel="noopener noreferrer" class="sponsor-book">
+          <span class="book-emoji">🍕</span>
+          <span class="book-title">Pizza for Good</span>
+          <span class="book-price">$15.00</span>
+        </a>
+      </div>
+      <a href="https://willpollock.bigcartel.com/" target="_blank" rel="noopener noreferrer" class="sponsor-cta">Visit Will Pollock Press →</a>
     </div>
   </div>
 </section>
