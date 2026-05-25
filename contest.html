@@ -180,8 +180,9 @@
   }
   .prize-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(255,20,147,0.15); }
   .prize-card:hover::before { opacity: 0.7; }
+  .prize-card.teal-card { grid-column: 1 / -1; padding: 2.5rem 2rem; }
   .prize-card.teal-card::before { background: linear-gradient(135deg, var(--trivia-teal), transparent 40%, transparent 60%, var(--disco-gold)); }
-  .prize-card.teal-card:hover { box-shadow: 0 20px 50px rgba(0,206,209,0.15); }
+  .prize-card.teal-card:hover { box-shadow: 0 20px 50px rgba(0,206,209,0.2); }
   .prize-emoji { font-size: 3.5rem; margin-bottom: 1rem; display: block; }
   .prize-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; margin-bottom: 0.6rem; }
   .prize-card h3 a { color: var(--trivia-teal); text-decoration: none; transition: color 0.3s; }
@@ -192,6 +193,44 @@
     background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05));
     border: 1px solid rgba(255,215,0,0.3); border-radius: 50px;
     padding: 0.3rem 1rem; font-size: 0.8rem; font-weight: 700; color: var(--disco-gold); letter-spacing: 0.5px;
+  }
+  /* Trivia image */
+  .trivia-img-wrap {
+    position: relative; display: inline-block;
+    margin: 1.2rem auto 1.5rem; max-width: 580px; width: 100%;
+  }
+  .trivia-img-wrap::before {
+    content: ''; position: absolute; inset: -16px;
+    border-radius: 28px;
+    background: radial-gradient(ellipse at center, rgba(0,206,209,0.25), rgba(255,215,0,0.1) 50%, transparent 75%);
+    filter: blur(20px); z-index: 0;
+    animation: trivia-glow 3s ease-in-out infinite alternate;
+  }
+  @keyframes trivia-glow {
+    0% { opacity: 0.6; transform: scale(0.97); }
+    100% { opacity: 1; transform: scale(1.02); }
+  }
+  .trivia-img {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 580px;
+    border-radius: 20px;
+    display: block; margin: 0 auto;
+    box-shadow: 0 12px 50px rgba(0,206,209,0.2), 0 4px 20px rgba(0,0,0,0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .prize-card.teal-card:hover .trivia-img {
+    transform: scale(1.02);
+    box-shadow: 0 20px 60px rgba(0,206,209,0.3), 0 6px 30px rgba(0,0,0,0.5);
+  }
+  .trivia-features {
+    display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
+    margin: 1rem 0 0.5rem;
+  }
+  .trivia-feat {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: rgba(0,206,209,0.08); border: 1px solid rgba(0,206,209,0.2);
+    border-radius: 50px; padding: 0.35rem 0.9rem;
+    font-size: 0.82rem; font-weight: 600; color: var(--trivia-teal);
   }
 
   /* ============ FORM SECTION ============ */
@@ -398,9 +437,18 @@
         <span class="prize-value">✨ Featured Episode</span>
       </div>
       <div class="prize-card teal-card">
-        <span class="prize-emoji">🎉</span>
         <h3><a href="https://myweddingtrivia.com/" target="_blank" rel="noopener noreferrer">MyWeddingTrivia.com</a> Package</h3>
-        <p>Live interactive trivia your guests play right from their phones — no app needed, no player limits. Set up in 5 minutes. Perfect for receptions, bridal showers &amp; cocktail hours.</p>
+        <p>Live interactive trivia, the Shoe Game, Wedding Bets &amp; a Photobooth — your guests play right from their phones, no app needed, no player limits. Set up in 5 minutes!</p>
+        <div class="trivia-img-wrap">
+          <img src="myweddingtrivia.png" alt="MyWeddingTrivia.com — Trivia, Shoe Game, Wedding Bets and Photobooth on any phone" class="trivia-img" loading="lazy">
+        </div>
+        <div class="trivia-features">
+          <span class="trivia-feat">📱 No App Needed</span>
+          <span class="trivia-feat">🎯 Trivia &amp; Shoe Game</span>
+          <span class="trivia-feat">💸 Wedding Bets</span>
+          <span class="trivia-feat">📸 Photobooth</span>
+          <span class="trivia-feat">♾️ Unlimited Players</span>
+        </div>
         <span class="prize-value">🎊 Full Package Included</span>
       </div>
     </div>
