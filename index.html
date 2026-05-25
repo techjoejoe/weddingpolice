@@ -394,6 +394,67 @@
     .cta-content .section-title { font-size: 1.8rem; }
   }
 
+  /* ============ CONTEST PROMO ============ */
+  .contest-promo {
+    padding: 5rem 2rem;
+    background: radial-gradient(ellipse at 30% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 30%, rgba(255, 20, 147, 0.08) 0%, transparent 45%),
+                var(--midnight);
+    text-align: center;
+  }
+  .contest-promo-inner { max-width: 780px; margin: 0 auto; }
+  .contest-promo-card {
+    background: linear-gradient(145deg, rgba(255,215,0,0.07), rgba(255,20,147,0.05));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    border-radius: 28px; padding: 3.5rem 2.5rem;
+    position: relative; overflow: hidden;
+    transition: border-color 0.4s, box-shadow 0.4s;
+  }
+  .contest-promo-card::before {
+    content: ''; position: absolute; inset: 0; border-radius: 28px; padding: 1.5px;
+    background: linear-gradient(135deg, var(--disco-gold), transparent 35%, transparent 65%, var(--hot-pink));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events: none; opacity: 0.4; transition: opacity 0.4s;
+  }
+  .contest-promo-card:hover { border-color: rgba(255,215,0,0.45); box-shadow: 0 20px 60px rgba(255,215,0,0.1); }
+  .contest-promo-card:hover::before { opacity: 0.7; }
+  .contest-trophy { font-size: 4rem; display: block; margin-bottom: 1rem; animation: badge-bob 3s ease-in-out infinite; }
+  .contest-promo h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; margin-bottom: 0.8rem; }
+  .contest-promo h2 .gold { background: linear-gradient(135deg, var(--disco-gold), #ffb300); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .contest-promo p { font-size: 1.05rem; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 580px; margin: 0 auto 1.2rem; }
+  .contest-nudge {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.25);
+    border-radius: 12px; padding: 0.7rem 1.3rem;
+    font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.5;
+    margin-bottom: 2rem;
+  }
+  .contest-nudge strong { color: var(--disco-gold); }
+  .contest-prize-pills { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .contest-pill {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50px; padding: 0.4rem 1rem; font-size: 0.82rem; font-weight: 600;
+    color: rgba(255,255,255,0.7);
+  }
+  .contest-pill.gold-pill { border-color: rgba(255,215,0,0.3); color: var(--disco-gold); background: rgba(255,215,0,0.07); }
+  .contest-pill.pink-pill { border-color: rgba(255,20,147,0.3); color: var(--neon-pink); background: rgba(255,20,147,0.07); }
+  .btn-contest {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 1.1rem 2.4rem; border-radius: 60px;
+    background: linear-gradient(135deg, var(--disco-gold), #e6ac00);
+    color: #0d0d1a; font-family: 'Outfit', sans-serif; font-size: 1.05rem; font-weight: 800;
+    text-decoration: none; box-shadow: 0 6px 30px rgba(255,215,0,0.35);
+    transition: all 0.3s; letter-spacing: 0.3px;
+  }
+  .btn-contest:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(255,215,0,0.55); }
+  @media (max-width: 600px) {
+    .contest-promo-card { padding: 2.5rem 1.5rem; }
+    .contest-prize-pills { gap: 0.5rem; }
+  }
+
   /* ============ SPONSORS ============ */
   .sponsors { background: radial-gradient(ellipse at 40% 60%, rgba(255, 215, 0, 0.06) 0%, transparent 50%), var(--midnight); text-align: center; }
   .sponsors-container { max-width: 900px; margin: 0 auto; }
@@ -435,6 +496,7 @@
     <li><a href="#episodes">Episodes</a></li>
     <li><a href="https://www.facebook.com/profile.php?id=61586443233812" target="_blank" rel="noopener noreferrer">Facebook</a></li>
     <li><a href="https://www.instagram.com/theweddingpolicepodcast/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+    <li><a href="contest.html" style="color:var(--disco-gold);font-weight:700;">🏆 Win a Spot!</a></li>
     <li><a href="#episodes" class="nav-cta">🎧 Listen Now</a></li>
   </ul>
   <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
@@ -674,6 +736,29 @@
         </a>
       </div>
       <a href="https://myweddingtrivia.com/" target="_blank" rel="noopener noreferrer" class="sponsor-cta">Visit MyWeddingTrivia.com →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Contest Promo -->
+<section class="contest-promo" id="contest">
+  <div class="contest-promo-inner">
+    <div class="contest-promo-card reveal">
+      <span class="contest-trophy">🏆</span>
+      <h2>Win a Spot on<br><span class="gold">The Wedding Police!</span></h2>
+      <p>Want to share your wedding story with Penny &amp; Jim — live on air? Enter for your chance to appear on the podcast <em>and</em> win a complete <strong>MyWeddingTrivia.com</strong> package for your reception!</p>
+
+      <div class="contest-nudge">
+        🎧 <span><strong>Listener tip:</strong> Stay tuned — we'll announce the winner on an upcoming episode. You won't want to miss it!</span>
+      </div>
+
+      <div class="contest-prize-pills">
+        <span class="contest-pill pink-pill">🎙️ Podcast Appearance</span>
+        <span class="contest-pill gold-pill">🎉 MyWeddingTrivia.com Package</span>
+        <span class="contest-pill">📧 Winner Notified by Email</span>
+      </div>
+
+      <a href="contest.html" class="btn-contest">🏆 Enter to Win Now →</a>
     </div>
   </div>
 </section>

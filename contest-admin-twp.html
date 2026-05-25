@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contest Admin — The Wedding Police</title>
+<!-- No indexing for this admin page -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="police.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900&family=Outfit:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --hot-pink: #FF1493;
+    --neon-pink: #FF69B4;
+    --disco-gold: #FFD700;
+    --midnight: #0d0d1a;
+    --deep-plum: #1a0a1a;
+    --glass-white: rgba(255, 255, 255, 0.07);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --danger: #ff4757;
+    --success: #2ed573;
+    --trivia-teal: #00CED1;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; background: var(--midnight); color: #fff; min-height: 100vh; }
+
+  /* ===== PIN GATE ===== */
+  #pinGate {
+    position: fixed; inset: 0; z-index: 999;
+    background: var(--midnight);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    background: radial-gradient(ellipse at 30% 40%, rgba(255,20,147,0.15) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 60%, rgba(0,206,209,0.08) 0%, transparent 45%),
+                var(--midnight);
+  }
+  #pinGate .gate-card {
+    background: rgba(255,255,255,0.06); backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 28px;
+    padding: 3rem 2.5rem; width: 100%; max-width: 420px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  #pinGate .gate-card::before {
+    content: ''; position: absolute; inset: 0; border-radius: 28px; padding: 1.5px;
+    background: linear-gradient(135deg, var(--hot-pink), transparent 40%, transparent 60%, var(--disco-gold));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events: none; opacity: 0.5;
+  }
+  .gate-logo { font-family: 'Pacifico', cursive; font-size: 1.3rem; color: var(--hot-pink); margin-bottom: 1.5rem; }
+  .gate-lock { font-size: 3rem; margin-bottom: 0.8rem; }
+  #pinGate h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; margin-bottom: 0.5rem; }
+  #pinGate p { color: rgba(255,255,255,0.45); font-size: 0.9rem; margin-bottom: 1.8rem; }
+  #pinInput {
+    width: 100%; padding: 0.9rem 1.2rem; text-align: center;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px; color: #fff; font-family: 'Outfit', sans-serif;
+    font-size: 1.4rem; letter-spacing: 6px; outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    -webkit-text-security: disc;
+  }
+  #pinInput:focus { border-color: var(--hot-pink); box-shadow: 0 0 0 3px rgba(255,20,147,0.2); }
+  #pinInput.shake { animation: shake 0.4s ease; }
+  @keyframes shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-10px); } 40% { transform: translateX(10px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
+  #pinBtn {
+    width: 100%; margin-top: 1rem; padding: 0.9rem;
+    background: linear-gradient(135deg, var(--hot-pink), #c70070);
+    color: #fff; border: none; border-radius: 60px;
+    font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(255,20,147,0.35);
+  }
+  #pinBtn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,20,147,0.5); }
+  #pinError { color: var(--danger); font-size: 0.85rem; margin-top: 0.8rem; min-height: 1.2em; }
+
+  /* ===== MAIN ADMIN UI ===== */
+  #adminUI { display: none; }
+
+  /* Header */
+  .admin-header {
+    padding: 1.5rem 2rem;
+    background: rgba(13,13,26,0.9); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .admin-brand { font-family: 'Pacifico', cursive; font-size: 1.3rem; color: var(--hot-pink); }
+  .admin-badge {
+    background: rgba(255,20,147,0.1); border: 1px solid rgba(255,20,147,0.3);
+    border-radius: 50px; padding: 0.3rem 0.9rem; font-size: 0.75rem;
+    font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--neon-pink);
+  }
+  .header-right { display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.4rem; border-radius: 50px; font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; border: none; transition: all 0.3s; text-decoration: none; }
+  .btn-primary { background: linear-gradient(135deg, var(--hot-pink), #c70070); color: #fff; box-shadow: 0 4px 16px rgba(255,20,147,0.35); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,20,147,0.5); }
+  .btn-gold { background: linear-gradient(135deg, var(--disco-gold), #e6be2e); color: #0d0d1a; box-shadow: 0 4px 16px rgba(255,215,0,0.3); }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,215,0,0.5); }
+  .btn-danger { background: rgba(255,71,87,0.15); border: 1px solid rgba(255,71,87,0.3); color: var(--danger); }
+  .btn-danger:hover { background: rgba(255,71,87,0.25); transform: translateY(-2px); }
+  .btn-outline { background: transparent; border: 1px solid var(--glass-border); color: rgba(255,255,255,0.6); }
+  .btn-outline:hover { border-color: var(--neon-pink); color: var(--neon-pink); }
+
+  /* Stats bar */
+  .stats-bar {
+    padding: 2rem; display: flex; gap: 1.5rem; flex-wrap: wrap;
+    background: var(--deep-plum);
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .stat-card {
+    background: var(--glass-white); backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border); border-radius: 18px;
+    padding: 1.3rem 1.8rem; flex: 1; min-width: 160px;
+    transition: border-color 0.3s;
+  }
+  .stat-card:hover { border-color: rgba(255,20,147,0.3); }
+  .stat-value { font-size: 2.2rem; font-weight: 700; color: var(--hot-pink); font-family: 'Playfair Display', serif; }
+  .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.2rem; }
+
+  /* Search / filter bar */
+  .toolbar {
+    padding: 1.5rem 2rem;
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    background: var(--midnight);
+    border-bottom: 1px solid var(--glass-border);
+  }
+  #searchInput {
+    flex: 1; min-width: 200px; padding: 0.7rem 1.2rem;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
+    border-radius: 50px; color: #fff; font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem; outline: none; transition: border-color 0.3s;
+  }
+  #searchInput:focus { border-color: var(--hot-pink); }
+  #searchInput::placeholder { color: rgba(255,255,255,0.25); }
+  .results-count { font-size: 0.85rem; color: rgba(255,255,255,0.4); white-space: nowrap; }
+
+  /* Table */
+  .table-wrap {
+    overflow-x: auto;
+    padding: 2rem;
+  }
+  table {
+    width: 100%; border-collapse: collapse; min-width: 700px;
+  }
+  thead th {
+    padding: 0.9rem 1.2rem; text-align: left;
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: rgba(255,255,255,0.4);
+    border-bottom: 1px solid var(--glass-border);
+    cursor: pointer; user-select: none;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+  thead th:hover { color: var(--neon-pink); }
+  thead th .sort-icon { margin-left: 4px; opacity: 0.4; }
+  thead th.sorted .sort-icon { opacity: 1; color: var(--hot-pink); }
+
+  tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.2s;
+  }
+  tbody tr:hover { background: rgba(255,20,147,0.04); }
+  tbody td { padding: 1rem 1.2rem; font-size: 0.92rem; color: rgba(255,255,255,0.75); vertical-align: middle; }
+  tbody td.name { font-weight: 600; color: #fff; }
+  tbody td.email a { color: var(--trivia-teal); text-decoration: none; transition: color 0.2s; }
+  tbody td.email a:hover { color: #fff; }
+  tbody td.date { font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+  .row-num { color: rgba(255,255,255,0.25); font-size: 0.8rem; }
+
+  /* Row actions */
+  .row-actions { display: flex; gap: 0.4rem; }
+  .row-del {
+    padding: 0.3rem 0.7rem; border-radius: 50px; font-size: 0.75rem;
+    background: rgba(255,71,87,0.1); border: 1px solid rgba(255,71,87,0.2);
+    color: var(--danger); cursor: pointer; font-family: 'Outfit', sans-serif;
+    transition: all 0.2s; font-weight: 600;
+  }
+  .row-del:hover { background: rgba(255,71,87,0.25); }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center; padding: 5rem 2rem;
+    color: rgba(255,255,255,0.3);
+  }
+  .empty-state .empty-icon { font-size: 3.5rem; margin-bottom: 1rem; display: block; }
+  .empty-state h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem; color: rgba(255,255,255,0.4); }
+  .empty-state p { font-size: 0.9rem; }
+
+  /* Toast notification */
+  .toast {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 9999;
+    background: rgba(46,213,115,0.15); border: 1px solid rgba(46,213,115,0.3);
+    border-radius: 14px; padding: 0.9rem 1.4rem;
+    color: var(--success); font-size: 0.9rem; font-weight: 600;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    animation: slide-in 0.4s cubic-bezier(0.34,1.56,0.64,1), fade-out 0.4s ease 2.6s both;
+  }
+  .toast.danger { background: rgba(255,71,87,0.15); border-color: rgba(255,71,87,0.3); color: var(--danger); }
+  @keyframes slide-in { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+  @keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
+
+  /* Confirm modal */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+    display: none; align-items: center; justify-content: center; z-index: 500;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: #1a0d2e; border: 1px solid rgba(255,20,147,0.3);
+    border-radius: 20px; padding: 2.5rem 2rem; max-width: 380px; width: 90%;
+    text-align: center;
+  }
+  .modal-box h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.7rem; }
+  .modal-box p { color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 1.8rem; line-height: 1.5; }
+  .modal-actions { display: flex; gap: 0.8rem; justify-content: center; }
+
+  @media (max-width: 600px) {
+    .admin-header { padding: 1rem; }
+    .stats-bar { padding: 1rem; gap: 1rem; }
+    .toolbar { padding: 1rem; }
+    .table-wrap { padding: 0 1rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PIN GATE -->
+<div id="pinGate">
+  <div class="gate-card">
+    <div class="gate-logo">The Wedding Police</div>
+    <div class="gate-lock">🔐</div>
+    <h2>Admin Access</h2>
+    <p>Enter the admin PIN to view contest entries.</p>
+    <input type="password" id="pinInput" placeholder="••••" maxlength="10" inputmode="numeric" autocomplete="off">
+    <div id="pinError"></div>
+    <button id="pinBtn">Unlock →</button>
+  </div>
+</div>
+
+<!-- ADMIN UI -->
+<div id="adminUI">
+
+  <!-- Header -->
+  <header class="admin-header">
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <span class="admin-brand">The Wedding Police</span>
+      <span class="admin-badge">🔐 Admin</span>
+    </div>
+    <div class="header-right">
+      <span id="headerCount" style="font-size:0.85rem;color:rgba(255,255,255,0.4);"></span>
+      <button class="btn btn-gold" id="downloadCsvBtn">⬇️ Download CSV</button>
+      <button class="btn btn-danger" id="clearAllBtn">🗑 Clear All</button>
+      <button class="btn btn-outline" id="lockBtn">🔒 Lock</button>
+    </div>
+  </header>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-value" id="statTotal">0</div>
+      <div class="stat-label">Total Entries</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="statToday">0</div>
+      <div class="stat-label">Entered Today</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="statThisWeek">0</div>
+      <div class="stat-label">This Week</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="statNewest">—</div>
+      <div class="stat-label">Latest Entry</div>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <input type="text" id="searchInput" placeholder="🔍  Search by name or email…" autocomplete="off">
+    <span class="results-count" id="resultsCount"></span>
+    <select id="sortSelect" style="padding:0.65rem 1rem;background:rgba(255,255,255,0.05);border:1px solid var(--glass-border);border-radius:50px;color:#fff;font-family:'Outfit',sans-serif;font-size:0.85rem;outline:none;cursor:pointer;">
+      <option value="newest">Sort: Newest First</option>
+      <option value="oldest">Sort: Oldest First</option>
+      <option value="name">Sort: Name A–Z</option>
+      <option value="wedding">Sort: Wedding Date</option>
+    </select>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrap">
+    <table id="entriesTable">
+      <thead>
+        <tr>
+          <th class="row-num-header" style="width:40px;">#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Wedding Date</th>
+          <th>Submitted</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <span class="empty-icon">💌</span>
+      <h3>No entries yet</h3>
+      <p>Contest submissions will appear here once people start signing up.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Confirm Modal -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal-box">
+    <h3 id="modalTitle">Are you sure?</h3>
+    <p id="modalMsg">This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="btn btn-outline" id="modalCancel">Cancel</button>
+      <button class="btn btn-danger" id="modalConfirm">Yes, Delete</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ========= CONFIG =========
+  const ADMIN_PIN = 'twp2025';          // ← Change this PIN
+  const STORAGE_KEY = 'twp_contest_entries';
+
+  // ========= PIN GATE =========
+  const pinGate = document.getElementById('pinGate');
+  const adminUI = document.getElementById('adminUI');
+  const pinInput = document.getElementById('pinInput');
+  const pinBtn = document.getElementById('pinBtn');
+  const pinError = document.getElementById('pinError');
+
+  function unlock() {
+    if (pinInput.value === ADMIN_PIN) {
+      pinGate.style.display = 'none';
+      adminUI.style.display = 'block';
+      renderAll();
+    } else {
+      pinError.textContent = 'Incorrect PIN. Try again.';
+      pinInput.classList.add('shake');
+      pinInput.value = '';
+      setTimeout(() => pinInput.classList.remove('shake'), 500);
+    }
+  }
+
+  pinBtn.addEventListener('click', unlock);
+  pinInput.addEventListener('keydown', e => { if (e.key === 'Enter') unlock(); });
+
+  document.getElementById('lockBtn').addEventListener('click', () => {
+    adminUI.style.display = 'none';
+    pinGate.style.display = 'flex';
+    pinInput.value = ''; pinError.textContent = '';
+  });
+
+  // ========= DATA HELPERS =========
+  function getEntries() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  }
+  function saveEntries(entries) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+  }
+
+  function fmtDate(iso) {
+    if (!iso) return '—';
+    try { return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
+    catch { return iso; }
+  }
+  function fmtDateTime(iso) {
+    if (!iso) return '—';
+    try { return new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true }); }
+    catch { return iso; }
+  }
+
+  // ========= STATS =========
+  function updateStats(entries) {
+    const now = new Date();
+    const todayStr = now.toDateString();
+    const weekAgo = new Date(now - 7 * 24 * 60 * 60 * 1000);
+
+    document.getElementById('statTotal').textContent = entries.length;
+    document.getElementById('statToday').textContent = entries.filter(e => new Date(e.submittedAt).toDateString() === todayStr).length;
+    document.getElementById('statThisWeek').textContent = entries.filter(e => new Date(e.submittedAt) >= weekAgo).length;
+
+    if (entries.length > 0) {
+      const sorted = [...entries].sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+      document.getElementById('statNewest').textContent = fmtDate(sorted[0].submittedAt);
+    } else {
+      document.getElementById('statNewest').textContent = '—';
+    }
+    document.getElementById('headerCount').textContent = entries.length + ' entries';
+  }
+
+  // ========= RENDER TABLE =========
+  let currentSort = 'newest';
+  let currentSearch = '';
+
+  function getFilteredSorted() {
+    let entries = getEntries();
+    // Search
+    if (currentSearch) {
+      const q = currentSearch.toLowerCase();
+      entries = entries.filter(e =>
+        e.firstName.toLowerCase().includes(q) ||
+        e.lastName.toLowerCase().includes(q) ||
+        e.email.toLowerCase().includes(q)
+      );
+    }
+    // Sort
+    switch (currentSort) {
+      case 'newest': entries.sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt)); break;
+      case 'oldest': entries.sort((a, b) => new Date(a.submittedAt) - new Date(b.submittedAt)); break;
+      case 'name': entries.sort((a, b) => (a.lastName + a.firstName).localeCompare(b.lastName + b.firstName)); break;
+      case 'wedding': entries.sort((a, b) => (a.weddingDate || '').localeCompare(b.weddingDate || '')); break;
+    }
+    return entries;
+  }
+
+  function renderTable() {
+    const tbody = document.getElementById('tableBody');
+    const emptyState = document.getElementById('emptyState');
+    const resultsCount = document.getElementById('resultsCount');
+    const entries = getFilteredSorted();
+    const all = getEntries();
+
+    updateStats(all);
+
+    tbody.innerHTML = '';
+
+    if (entries.length === 0) {
+      document.getElementById('entriesTable').style.display = all.length === 0 ? 'none' : 'table';
+      emptyState.style.display = 'block';
+      if (all.length === 0) {
+        emptyState.querySelector('h3').textContent = 'No entries yet';
+        emptyState.querySelector('p').textContent = 'Contest submissions will appear here once people start signing up.';
+      } else {
+        emptyState.querySelector('h3').textContent = 'No results match your search';
+        emptyState.querySelector('p').textContent = 'Try a different name or email.';
+      }
+      resultsCount.textContent = '';
+      return;
+    }
+
+    document.getElementById('entriesTable').style.display = 'table';
+    emptyState.style.display = 'none';
+    resultsCount.textContent = entries.length + (currentSearch ? ' of ' + all.length : '') + ' entr' + (entries.length === 1 ? 'y' : 'ies');
+
+    entries.forEach((entry, i) => {
+      // Find original index in all entries for deletion
+      const allEntries = getEntries();
+      const origIdx = allEntries.findIndex(e =>
+        e.firstName === entry.firstName &&
+        e.lastName === entry.lastName &&
+        e.email === entry.email &&
+        e.submittedAt === entry.submittedAt
+      );
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="row-num" style="color:rgba(255,255,255,0.25);font-size:0.8rem;">${i + 1}</td>
+        <td class="name">${escHtml(entry.firstName)}</td>
+        <td class="name">${escHtml(entry.lastName)}</td>
+        <td class="email"><a href="mailto:${escHtml(entry.email)}">${escHtml(entry.email)}</a></td>
+        <td class="date">${entry.weddingDate ? fmtDate(entry.weddingDate + 'T12:00:00') : '—'}</td>
+        <td class="date">${fmtDateTime(entry.submittedAt)}</td>
+        <td><div class="row-actions"><button class="row-del" data-idx="${origIdx}">Delete</button></div></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    // Delete row buttons
+    tbody.querySelectorAll('.row-del').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.getAttribute('data-idx'));
+        openModal('Delete this entry?', 'This will permanently remove the entry for ' + getEntries()[idx]?.firstName + ' ' + getEntries()[idx]?.lastName + '.', () => {
+          const e = getEntries();
+          e.splice(idx, 1);
+          saveEntries(e);
+          renderTable();
+          showToast('Entry deleted.', 'danger');
+        });
+      });
+    });
+  }
+
+  function renderAll() { renderTable(); }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ========= SEARCH & SORT =========
+  document.getElementById('searchInput').addEventListener('input', e => {
+    currentSearch = e.target.value.trim();
+    renderTable();
+  });
+  document.getElementById('sortSelect').addEventListener('change', e => {
+    currentSort = e.target.value;
+    renderTable();
+  });
+
+  // ========= CSV DOWNLOAD =========
+  document.getElementById('downloadCsvBtn').addEventListener('click', () => {
+    const entries = getEntries();
+    if (entries.length === 0) { showToast('No entries to download.', 'danger'); return; }
+
+    const headers = ['#', 'First Name', 'Last Name', 'Email', 'Wedding Date', 'Submitted At'];
+    const rows = entries.map((e, i) => [
+      i + 1,
+      `"${(e.firstName || '').replace(/"/g, '""')}"`,
+      `"${(e.lastName || '').replace(/"/g, '""')}"`,
+      `"${(e.email || '').replace(/"/g, '""')}"`,
+      e.weddingDate || '',
+      e.submittedAt || ''
+    ]);
+
+    const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const ts = new Date().toISOString().slice(0, 10);
+    a.href = url;
+    a.download = `wedding-police-contest-entries-${ts}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('CSV downloaded! (' + entries.length + ' entries)');
+  });
+
+  // ========= CLEAR ALL =========
+  document.getElementById('clearAllBtn').addEventListener('click', () => {
+    const entries = getEntries();
+    if (entries.length === 0) { showToast('No entries to clear.', 'danger'); return; }
+    openModal('Clear ALL entries?', 'This will permanently delete all ' + entries.length + ' contest entries. This cannot be undone!', () => {
+      saveEntries([]);
+      renderTable();
+      showToast('All entries cleared.', 'danger');
+    });
+  });
+
+  // ========= MODAL =========
+  let modalCallback = null;
+  function openModal(title, msg, cb) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalMsg').textContent = msg;
+    modalCallback = cb;
+    document.getElementById('confirmModal').classList.add('open');
+  }
+  document.getElementById('modalCancel').addEventListener('click', () => {
+    document.getElementById('confirmModal').classList.remove('open');
+    modalCallback = null;
+  });
+  document.getElementById('modalConfirm').addEventListener('click', () => {
+    document.getElementById('confirmModal').classList.remove('open');
+    if (modalCallback) { modalCallback(); modalCallback = null; }
+  });
+
+  // ========= TOAST =========
+  function showToast(msg, type = 'success') {
+    const t = document.createElement('div');
+    t.className = 'toast' + (type === 'danger' ? ' danger' : '');
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 3200);
+  }
+</script>
+</body>
+</html>

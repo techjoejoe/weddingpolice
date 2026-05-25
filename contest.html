@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Win a Spot on The Wedding Police Podcast + MyWeddingTrivia.com Package!</title>
+<meta name="description" content="Enter to win a chance to appear on The Wedding Police podcast and receive a MyWeddingTrivia.com package! Fill out the form to be entered into the giveaway.">
+<link rel="canonical" href="https://theweddingpolice.com/contest">
+<link rel="icon" type="image/png" href="police.png">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Win a Spot on The Wedding Police Podcast!">
+<meta property="og:description" content="Enter for your chance to appear on The Wedding Police podcast and win a MyWeddingTrivia.com package!">
+<meta property="og:url" content="https://theweddingpolice.com/contest">
+<meta property="og:image" content="https://theweddingpolice.com/IMG_7503.jpeg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Outfit:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --hot-pink: #FF1493;
+    --neon-pink: #FF69B4;
+    --soft-pink: #FFB6C1;
+    --blush: #FFF0F5;
+    --silver: #C0C0C0;
+    --bright-silver: #E8E8E8;
+    --disco-gold: #FFD700;
+    --deep-plum: #1a0a1a;
+    --midnight: #0d0d1a;
+    --glass-white: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --trivia-teal: #00CED1;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; background: var(--midnight); color: #fff; overflow-x: hidden; min-height: 100vh; }
+
+  /* ============ SPARKLE CURSOR ============ */
+  .sparkle {
+    position: fixed; pointer-events: none; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--hot-pink); z-index: 9999; animation: sparkle-fade 1s ease-out forwards;
+    box-shadow: 0 0 6px currentColor, 0 0 12px currentColor;
+  }
+  @keyframes sparkle-fade {
+    0% { transform: scale(0.5); opacity: 1; }
+    30% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0) translateY(-15px); opacity: 0; }
+  }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center;
+    backdrop-filter: blur(20px); background: rgba(13, 13, 26, 0.7);
+    border-bottom: 1px solid var(--glass-border); transition: all 0.3s ease;
+  }
+  nav.scrolled { padding: 0.8rem 2rem; background: rgba(13, 13, 26, 0.95); }
+  .nav-logo { font-family: 'Pacifico', cursive; font-size: 1.5rem; color: var(--hot-pink); text-decoration: none; text-shadow: 0 0 20px rgba(255, 20, 147, 0.5); }
+  .nav-back { display: inline-flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+  .nav-back:hover { color: var(--neon-pink); }
+
+  /* ============ HERO BANNER ============ */
+  .contest-hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    padding: 7rem 2rem 4rem;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 40%, rgba(255, 20, 147, 0.2) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 20%, rgba(0, 206, 209, 0.12) 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 90%, rgba(255, 215, 0, 0.08) 0%, transparent 40%),
+      var(--midnight);
+  }
+  .disco-light {
+    position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.25;
+    animation: disco-pulse 4s ease-in-out infinite alternate;
+  }
+  .disco-light:nth-child(1) { width: 450px; height: 450px; background: var(--hot-pink); top: -120px; left: -120px; animation-delay: 0s; }
+  .disco-light:nth-child(2) { width: 350px; height: 350px; background: var(--trivia-teal); bottom: -80px; right: -80px; animation-delay: 1.5s; }
+  .disco-light:nth-child(3) { width: 280px; height: 280px; background: var(--disco-gold); top: 30%; right: 5%; animation-delay: 2.5s; }
+  @keyframes disco-pulse { 0% { transform: scale(1); opacity: 0.2; } 100% { transform: scale(1.3); opacity: 0.35; } }
+
+  /* Floating disco squares */
+  .disco-squares { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .disco-square { position: absolute; width: 8px; height: 8px; background: rgba(255,255,255,0.08); animation: float-square 15s linear infinite; }
+  @keyframes float-square { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; } }
+
+  .contest-hero-inner {
+    position: relative; z-index: 2;
+    max-width: 820px; width: 100%;
+    text-align: center;
+  }
+
+  /* Prize badges row */
+  .prize-badges {
+    display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
+    margin-bottom: 2rem; animation: fade-in-up 0.8s ease-out 0.2s both;
+  }
+  .prize-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--glass-white); backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border); border-radius: 50px;
+    padding: 0.5rem 1.2rem; font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.5px; white-space: nowrap;
+  }
+  .prize-badge.pink { border-color: rgba(255,20,147,0.4); color: var(--neon-pink); }
+  .prize-badge.teal { border-color: rgba(0,206,209,0.4); color: var(--trivia-teal); }
+  .prize-badge.gold { border-color: rgba(255,215,0,0.4); color: var(--disco-gold); }
+
+  .contest-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: linear-gradient(135deg, rgba(255,20,147,0.2), rgba(255,215,0,0.1));
+    border: 1px solid rgba(255,20,147,0.3);
+    padding: 0.5rem 1.4rem; border-radius: 50px;
+    font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--neon-pink); margin-bottom: 1.5rem;
+    animation: fade-in-up 0.8s ease-out 0.3s both;
+  }
+
+  .contest-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5.5vw, 4rem);
+    font-weight: 900; line-height: 1.15;
+    margin-bottom: 1rem;
+    animation: fade-in-up 0.8s ease-out 0.4s both;
+  }
+  .contest-title .highlight {
+    background: linear-gradient(135deg, var(--hot-pink), var(--disco-gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .contest-subtitle {
+    font-size: 1.15rem; color: rgba(255,255,255,0.65); line-height: 1.7;
+    max-width: 620px; margin: 0 auto 1.2rem;
+    animation: fade-in-up 0.8s ease-out 0.5s both;
+  }
+  .listener-nudge {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.25);
+    border-radius: 12px; padding: 0.8rem 1.4rem;
+    font-size: 0.95rem; color: rgba(255,255,255,0.75); line-height: 1.5;
+    margin-bottom: 2.5rem;
+    animation: fade-in-up 0.8s ease-out 0.6s both;
+  }
+  .listener-nudge strong { color: var(--disco-gold); }
+
+  @keyframes fade-in-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ============ PRIZES ============ */
+  .prizes-section {
+    padding: 5rem 2rem;
+    background: radial-gradient(ellipse at 80% 30%, rgba(0,206,209,0.07) 0%, transparent 50%), var(--deep-plum);
+  }
+  .prizes-container { max-width: 900px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--hot-pink); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; justify-content: center;
+  }
+  .section-label::before { content: ''; width: 30px; height: 2px; background: var(--hot-pink); box-shadow: 0 0 8px var(--hot-pink); }
+  .section-label::after { content: ''; width: 30px; height: 2px; background: var(--hot-pink); box-shadow: 0 0 8px var(--hot-pink); }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; text-align: center; margin-bottom: 2.5rem; }
+
+  .prizes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .prize-card {
+    background: var(--glass-white); backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border); border-radius: 24px;
+    padding: 2.5rem 2rem; text-align: center;
+    transition: all 0.35s ease; position: relative; overflow: hidden;
+  }
+  .prize-card::before {
+    content: ''; position: absolute; inset: 0; border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--hot-pink), transparent 40%, transparent 60%, var(--disco-gold));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events: none; opacity: 0.3; transition: opacity 0.4s;
+  }
+  .prize-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(255,20,147,0.15); }
+  .prize-card:hover::before { opacity: 0.7; }
+  .prize-card.teal-card::before { background: linear-gradient(135deg, var(--trivia-teal), transparent 40%, transparent 60%, var(--disco-gold)); }
+  .prize-card.teal-card:hover { box-shadow: 0 20px 50px rgba(0,206,209,0.15); }
+  .prize-emoji { font-size: 3.5rem; margin-bottom: 1rem; display: block; }
+  .prize-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; margin-bottom: 0.6rem; }
+  .prize-card h3 a { color: var(--trivia-teal); text-decoration: none; transition: color 0.3s; }
+  .prize-card h3 a:hover { color: #fff; }
+  .prize-card p { font-size: 0.95rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+  .prize-card .prize-value {
+    display: inline-block; margin-top: 1rem;
+    background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05));
+    border: 1px solid rgba(255,215,0,0.3); border-radius: 50px;
+    padding: 0.3rem 1rem; font-size: 0.8rem; font-weight: 700; color: var(--disco-gold); letter-spacing: 0.5px;
+  }
+
+  /* ============ FORM SECTION ============ */
+  .form-section {
+    padding: 5rem 2rem;
+    background: radial-gradient(ellipse at 20% 70%, rgba(255,20,147,0.08) 0%, transparent 50%), var(--midnight);
+  }
+  .form-container { max-width: 620px; margin: 0 auto; }
+
+  .form-card {
+    background: var(--glass-white); backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border); border-radius: 28px;
+    padding: 3rem 2.5rem; position: relative; overflow: hidden;
+  }
+  .form-card::before {
+    content: ''; position: absolute; inset: 0; border-radius: 28px; padding: 1.5px;
+    background: linear-gradient(135deg, var(--hot-pink), transparent 30%, transparent 70%, var(--trivia-teal));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events: none; opacity: 0.5;
+  }
+  .form-card-header { text-align: center; margin-bottom: 2.5rem; }
+  .form-card-header .trophy { font-size: 3rem; margin-bottom: 0.8rem; display: block; animation: badge-bob 3s ease-in-out infinite; }
+  @keyframes badge-bob { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-8px) rotate(3deg); } }
+  .form-card-header h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; margin-bottom: 0.5rem; }
+  .form-card-header p { color: rgba(255,255,255,0.55); font-size: 0.95rem; line-height: 1.6; }
+
+  .form-group { margin-bottom: 1.4rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.4rem; }
+  label {
+    display: block; font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.7);
+    margin-bottom: 0.5rem; letter-spacing: 0.5px;
+  }
+  label span.req { color: var(--hot-pink); margin-left: 2px; }
+  input[type="text"], input[type="email"], input[type="date"] {
+    width: 100%; padding: 0.9rem 1.2rem;
+    background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 14px;
+    color: #fff; font-family: 'Outfit', sans-serif; font-size: 1rem;
+    transition: all 0.3s ease; outline: none;
+    -webkit-appearance: none; appearance: none;
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1) opacity(0.4); cursor: pointer; }
+  input[type="text"]:focus, input[type="email"]:focus, input[type="date"]:focus {
+    border-color: var(--hot-pink); background: rgba(255,20,147,0.06);
+    box-shadow: 0 0 0 3px rgba(255,20,147,0.15);
+  }
+  input::placeholder { color: rgba(255,255,255,0.25); }
+
+  .consent-check {
+    display: flex; align-items: flex-start; gap: 0.8rem;
+    margin: 1.5rem 0;
+    font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.5;
+  }
+  .consent-check input[type="checkbox"] {
+    width: 18px; height: 18px; min-width: 18px; min-height: 18px;
+    accent-color: var(--hot-pink); cursor: pointer; margin-top: 2px;
+    border-radius: 4px;
+  }
+
+  .submit-btn {
+    width: 100%; padding: 1.1rem 2rem;
+    background: linear-gradient(135deg, var(--hot-pink), #c70070);
+    color: #fff; border: none; border-radius: 60px;
+    font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700;
+    cursor: pointer; transition: all 0.3s ease;
+    box-shadow: 0 6px 30px rgba(255,20,147,0.45);
+    letter-spacing: 0.5px; position: relative; overflow: hidden;
+  }
+  .submit-btn::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(255,20,147,0.6); }
+  .submit-btn:hover::after { opacity: 1; }
+  .submit-btn:active { transform: translateY(0); }
+  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  /* Success state */
+  .success-state { display: none; text-align: center; padding: 1rem 0; }
+  .success-state .checkmark { font-size: 4rem; margin-bottom: 1rem; display: block; animation: pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+  @keyframes pop-in { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .success-state h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; margin-bottom: 0.6rem; color: var(--neon-pink); }
+  .success-state p { color: rgba(255,255,255,0.6); font-size: 1rem; line-height: 1.6; }
+  .success-state .listen-cta {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    margin-top: 1.5rem; padding: 0.9rem 2rem; border-radius: 60px;
+    background: linear-gradient(135deg, #1DB954, #1aa34a);
+    color: #fff; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+    box-shadow: 0 4px 20px rgba(29,185,84,0.4); transition: all 0.3s;
+  }
+  .success-state .listen-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(29,185,84,0.6); }
+
+  /* Error message */
+  .field-error { color: #ff6b8a; font-size: 0.8rem; margin-top: 0.4rem; display: none; }
+  .field-error.visible { display: block; }
+  input.invalid { border-color: #ff6b8a !important; box-shadow: 0 0 0 3px rgba(255,107,138,0.15) !important; }
+
+  /* ============ HOW IT WORKS ============ */
+  .how-section {
+    padding: 5rem 2rem;
+    background: radial-gradient(ellipse at 60% 20%, rgba(255,215,0,0.05) 0%, transparent 50%), var(--deep-plum);
+    text-align: center;
+  }
+  .how-container { max-width: 900px; margin: 0 auto; }
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2.5rem; }
+  .step-card {
+    background: var(--glass-white); backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border); border-radius: 20px;
+    padding: 2rem 1.5rem; transition: all 0.3s;
+  }
+  .step-card:hover { transform: translateY(-4px); border-color: rgba(255,20,147,0.3); box-shadow: 0 10px 30px rgba(255,20,147,0.1); }
+  .step-number {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--hot-pink), #c70070);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 1.2rem; margin: 0 auto 1rem;
+    box-shadow: 0 4px 20px rgba(255,20,147,0.4);
+  }
+  .step-card h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .step-card p { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+  /* ============ FOOTER ============ */
+  footer {
+    padding: 3rem 2rem; text-align: center;
+    border-top: 1px solid var(--glass-border); background: rgba(13,13,26,0.9);
+  }
+  .footer-logo { font-family: 'Pacifico', cursive; font-size: 1.8rem; color: var(--hot-pink); text-shadow: 0 0 20px rgba(255,20,147,0.4); margin-bottom: 0.8rem; }
+  .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+  .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--neon-pink); }
+  .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.2); }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 700px) {
+    nav { padding: 1rem; }
+    .prizes-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .form-card { padding: 2rem 1.4rem; }
+    .contest-title { font-size: 2rem; }
+    .prize-badges { gap: 0.6rem; }
+    .prize-badge { font-size: 0.75rem; padding: 0.4rem 0.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav id="navbar">
+  <a href="/" class="nav-logo">The Wedding Police</a>
+  <a href="/" class="nav-back">← Back to Home</a>
+</nav>
+
+<!-- Hero -->
+<section class="contest-hero">
+  <div class="hero-bg"></div>
+  <div class="disco-light"></div>
+  <div class="disco-light"></div>
+  <div class="disco-light"></div>
+  <div class="disco-squares" id="discoSquares"></div>
+
+  <div class="contest-hero-inner">
+    <div class="prize-badges">
+      <span class="prize-badge pink">🚨 Limited Time Giveaway</span>
+      <span class="prize-badge gold">🎙️ Podcast Appearance</span>
+      <span class="prize-badge teal">🎉 MyWeddingTrivia Package</span>
+    </div>
+
+    <div class="contest-eyebrow">🏆 Enter to Win</div>
+
+    <h1 class="contest-title">
+      Win a Spot on<br>
+      <span class="highlight">The Wedding Police</span><br>
+      Podcast!
+    </h1>
+
+    <p class="contest-subtitle">
+      Share your wedding story with Penny &amp; Jim — live on air! One lucky couple will be invited onto the show <em>and</em> receive a complete <strong>MyWeddingTrivia.com</strong> package for their reception.
+    </p>
+
+    <div class="listener-nudge">
+      🎧 <span><strong>Already a listener?</strong> Keep tuning in — we'll announce the winner on an upcoming episode. You won't want to miss it!</span>
+    </div>
+
+    <a href="#enter" style="display:inline-flex;align-items:center;gap:0.6rem;padding:1.1rem 2.4rem;border-radius:60px;background:linear-gradient(135deg,var(--hot-pink),#c70070);color:#fff;font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:700;text-decoration:none;box-shadow:0 6px 30px rgba(255,20,147,0.45);transition:all 0.3s;">
+      Enter the Contest ↓
+    </a>
+  </div>
+</section>
+
+<!-- What You Win -->
+<section class="prizes-section">
+  <div class="prizes-container">
+    <div class="section-label">The Prizes</div>
+    <h2 class="section-title">Here's What You Could Win 🏆</h2>
+
+    <div class="prizes-grid">
+      <div class="prize-card">
+        <span class="prize-emoji">🎙️</span>
+        <h3>Podcast Appearance</h3>
+        <p>You and your partner (or soon-to-be partner!) get a spot on The Wedding Police podcast. Share your wedding story, your fails, your faves — all with Penny &amp; Jim on air.</p>
+        <span class="prize-value">✨ Featured Episode</span>
+      </div>
+      <div class="prize-card teal-card">
+        <span class="prize-emoji">🎉</span>
+        <h3><a href="https://myweddingtrivia.com/" target="_blank" rel="noopener noreferrer">MyWeddingTrivia.com</a> Package</h3>
+        <p>Live interactive trivia your guests play right from their phones — no app needed, no player limits. Set up in 5 minutes. Perfect for receptions, bridal showers &amp; cocktail hours.</p>
+        <span class="prize-value">🎊 Full Package Included</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-section">
+  <div class="how-container">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">Three Easy Steps</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Fill Out the Form</h3>
+        <p>Give us your name, wedding date, and email so we can reach you if you win. Takes less than a minute!</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Keep Listening 🎧</h3>
+        <p>Stay subscribed to The Wedding Police on Spotify or Apple Podcasts — we'll announce the winner on an upcoming episode!</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Win &amp; Celebrate</h3>
+        <p>If you're chosen, Penny &amp; Jim will reach out via email to schedule your podcast appearance and deliver your prizes!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Entry Form -->
+<section class="form-section" id="enter">
+  <div class="form-container">
+    <div style="text-align:center; margin-bottom:2.5rem;">
+      <div class="section-label" style="justify-content:center;">Enter Now</div>
+      <h2 class="section-title">Ready to Win?</h2>
+      <p style="color:rgba(255,255,255,0.5); font-size:0.95rem;">Fill out the form below — all fields required. One entry per person.</p>
+    </div>
+
+    <div class="form-card">
+      <div class="form-card-header">
+        <span class="trophy">🏆</span>
+        <h2>Contest Entry Form</h2>
+        <p>Enter for your chance to be on the show and win a MyWeddingTrivia.com package!</p>
+      </div>
+
+      <!-- Entry Form -->
+      <form id="contestForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name <span class="req">*</span></label>
+            <input type="text" id="firstName" name="firstName" placeholder="Jane" autocomplete="given-name" required>
+            <div class="field-error" id="firstNameError">Please enter your first name.</div>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name <span class="req">*</span></label>
+            <input type="text" id="lastName" name="lastName" placeholder="Smith" autocomplete="family-name" required>
+            <div class="field-error" id="lastNameError">Please enter your last name.</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="email" required>
+          <div class="field-error" id="emailError">Please enter a valid email address.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="weddingDate">Wedding Date <span class="req">*</span></label>
+          <input type="date" id="weddingDate" name="weddingDate" required>
+          <div class="field-error" id="weddingDateError">Please select your wedding date.</div>
+        </div>
+
+        <div class="consent-check">
+          <input type="checkbox" id="consent" name="consent" required>
+          <label for="consent" style="margin-bottom:0; font-weight:400; color:rgba(255,255,255,0.5);">
+            I agree to be contacted by The Wedding Police if I win. I understand my entry information will be used only to administer this contest. <span class="req">*</span>
+          </label>
+        </div>
+        <div class="field-error" id="consentError">You must agree to continue.</div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          🎙️ Enter the Contest!
+        </button>
+      </form>
+
+      <!-- Success -->
+      <div class="success-state" id="successState">
+        <span class="checkmark">🎉</span>
+        <h3>You're Entered!</h3>
+        <p>We've got your entry! Keep listening to The Wedding Police on Spotify and Apple Podcasts — we'll announce the winner on an upcoming episode. Fingers crossed! 🤞💍</p>
+        <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" rel="noopener noreferrer" class="listen-cta">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Listen on Spotify Now
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">The Wedding Police</div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl" target="_blank" rel="noopener noreferrer">Spotify</a>
+    <a href="https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
+    <a href="https://myweddingtrivia.com/" target="_blank" rel="noopener noreferrer">MyWeddingTrivia.com</a>
+  </div>
+  <p class="footer-copy">© 2025–2026 The Wedding Police Podcast. No purchase necessary. Open to US residents 18+. Sponsor: The Wedding Police Podcast.</p>
+</footer>
+
+<script>
+  // ---- NAV SCROLL ----
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
+
+  // ---- DISCO SQUARES ----
+  const container = document.getElementById('discoSquares');
+  for (let i = 0; i < 25; i++) {
+    const sq = document.createElement('div');
+    sq.className = 'disco-square';
+    sq.style.left = Math.random() * 100 + '%';
+    sq.style.animationDelay = Math.random() * 15 + 's';
+    sq.style.animationDuration = (10 + Math.random() * 15) + 's';
+    sq.style.width = sq.style.height = (4 + Math.random() * 8) + 'px';
+    const colors = ['rgba(255,20,147,0.15)', 'rgba(0,206,209,0.12)', 'rgba(255,215,0,0.1)', 'rgba(255,255,255,0.07)'];
+    sq.style.background = colors[Math.floor(Math.random() * colors.length)];
+    container.appendChild(sq);
+  }
+
+  // ---- SPARKLE CURSOR ----
+  let lastSparkle = 0;
+  document.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+    if (now - lastSparkle < 35) return;
+    lastSparkle = now;
+    for (let i = 0; i < 2; i++) {
+      const sp = document.createElement('div');
+      sp.className = 'sparkle';
+      sp.style.left = (e.clientX + (Math.random() - 0.5) * 28) + 'px';
+      sp.style.top = (e.clientY + (Math.random() - 0.5) * 28) + 'px';
+      const colors = ['#FF1493', '#FFD700', '#00CED1', '#FF69B4', '#fff'];
+      sp.style.background = colors[Math.floor(Math.random() * colors.length)];
+      const size = 3 + Math.random() * 7;
+      sp.style.width = size + 'px'; sp.style.height = size + 'px';
+      sp.style.animationDuration = (0.6 + Math.random() * 0.8) + 's';
+      document.body.appendChild(sp);
+      setTimeout(() => sp.remove(), 1400);
+    }
+  });
+
+  // ---- FORM SUBMISSION (localStorage) ----
+  const form = document.getElementById('contestForm');
+  const successState = document.getElementById('successState');
+  const submitBtn = document.getElementById('submitBtn');
+
+  function showError(id, inputId) {
+    document.getElementById(id).classList.add('visible');
+    if (inputId) document.getElementById(inputId).classList.add('invalid');
+  }
+  function clearError(id, inputId) {
+    document.getElementById(id).classList.remove('visible');
+    if (inputId) document.getElementById(inputId).classList.remove('invalid');
+  }
+
+  // Live validation clear
+  ['firstName', 'lastName', 'email', 'weddingDate'].forEach(fieldId => {
+    document.getElementById(fieldId).addEventListener('input', () => {
+      clearError(fieldId + 'Error', fieldId);
+    });
+  });
+  document.getElementById('consent').addEventListener('change', () => {
+    clearError('consentError', null);
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const weddingDate = document.getElementById('weddingDate').value;
+    const consent = document.getElementById('consent').checked;
+
+    // Validate
+    if (!firstName) { showError('firstNameError', 'firstName'); valid = false; } else { clearError('firstNameError', 'firstName'); }
+    if (!lastName) { showError('lastNameError', 'lastName'); valid = false; } else { clearError('lastNameError', 'lastName'); }
+    const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRx.test(email)) { showError('emailError', 'email'); valid = false; } else { clearError('emailError', 'email'); }
+    if (!weddingDate) { showError('weddingDateError', 'weddingDate'); valid = false; } else { clearError('weddingDateError', 'weddingDate'); }
+    if (!consent) { showError('consentError', null); valid = false; } else { clearError('consentError', null); }
+
+    if (!valid) return;
+
+    // Save to localStorage
+    const entry = {
+      firstName,
+      lastName,
+      email,
+      weddingDate,
+      submittedAt: new Date().toISOString()
+    };
+
+    const existing = JSON.parse(localStorage.getItem('twp_contest_entries') || '[]');
+    existing.push(entry);
+    localStorage.setItem('twp_contest_entries', JSON.stringify(existing));
+
+    // Show success
+    submitBtn.disabled = true;
+    form.style.display = 'none';
+    successState.style.display = 'block';
+
+    // Scroll to success
+    document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+</script>
+</body>
+</html>
