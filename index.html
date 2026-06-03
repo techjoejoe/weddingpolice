@@ -191,7 +191,7 @@
   .hero-image-wrapper { flex-shrink: 0; position: relative; }
   .hero-image-wrapper::before { content: ''; position: absolute; inset: -4px; border-radius: 24px; background: linear-gradient(135deg, var(--hot-pink), var(--disco-gold), var(--silver), var(--hot-pink)); background-size: 400% 400%; animation: gradient-spin 4s ease infinite; z-index: -1; }
   @keyframes gradient-spin { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-  .hero-image { width: 480px; height: 360px; border-radius: 20px; object-fit: cover; display: block; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
+  .hero-image { width: 600px; height: 450px; border-radius: 20px; object-fit: cover; display: block; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
 
   .badge-float { position: absolute; background: var(--glass-white); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 0.6rem 1rem; font-size: 0.85rem; font-weight: 600; animation: badge-bob 3s ease-in-out infinite; white-space: nowrap; }
   .badge-float:nth-child(2) { top: -15px; right: -30px; animation-delay: 0s; }
@@ -343,7 +343,7 @@
   /* ============ RESPONSIVE ============ */
   @media (max-width: 900px) {
     .hero-content { flex-direction: column; text-align: center; }
-    .hero-image { width: 420px; height: 315px; }
+    .hero-image { width: 500px; height: 375px; }
     .hero-desc { margin: 0 auto 2rem; }
     .hero-buttons { justify-content: center; }
     .badge-float:nth-child(2) { right: -10px; }
