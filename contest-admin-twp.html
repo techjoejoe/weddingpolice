@@ -55,17 +55,6 @@
   .gate-lock { font-size: 3rem; margin-bottom: 0.8rem; }
   #pinGate h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; margin-bottom: 0.5rem; }
   #pinGate p { color: rgba(255,255,255,0.45); font-size: 0.9rem; margin-bottom: 1.8rem; }
-  #pinInput {
-    width: 100%; padding: 0.9rem 1.2rem; text-align: center;
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 14px; color: #fff; font-family: 'Outfit', sans-serif;
-    font-size: 1.4rem; letter-spacing: 6px; outline: none;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    -webkit-text-security: disc;
-  }
-  #pinInput:focus { border-color: var(--hot-pink); box-shadow: 0 0 0 3px rgba(255,20,147,0.2); }
-  #pinInput.shake { animation: shake 0.4s ease; }
-  @keyframes shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-10px); } 40% { transform: translateX(10px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
   #pinBtn {
     width: 100%; margin-top: 1rem; padding: 0.9rem;
     background: linear-gradient(135deg, var(--hot-pink), #c70070);
@@ -75,6 +64,7 @@
     box-shadow: 0 4px 20px rgba(255,20,147,0.35);
   }
   #pinBtn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,20,147,0.5); }
+  #pinBtn:disabled { opacity: 0.6; cursor: wait; transform: none; }
   #pinError { color: var(--danger); font-size: 0.85rem; margin-top: 0.8rem; min-height: 1.2em; }
 
   /* ===== MAIN ADMIN UI ===== */
@@ -231,16 +221,15 @@
 </head>
 <body>
 
-<!-- PIN GATE -->
+<!-- SIGN-IN GATE -->
 <div id="pinGate">
   <div class="gate-card">
     <div class="gate-logo">The Wedding Police</div>
     <div class="gate-lock">🔐</div>
     <h2>Admin Access</h2>
-    <p>Enter the admin PIN to view contest entries.</p>
-    <input type="password" id="pinInput" placeholder="••••" maxlength="10" inputmode="numeric" autocomplete="off">
+    <p>Sign in with an approved Google account to view contest entries.</p>
+    <button id="pinBtn">Sign in with Google →</button>
     <div id="pinError"></div>
-    <button id="pinBtn">Unlock →</button>
   </div>
 </div>
 
@@ -257,7 +246,7 @@
       <span id="headerCount" style="font-size:0.85rem;color:rgba(255,255,255,0.4);"></span>
       <button class="btn btn-gold" id="downloadCsvBtn">⬇️ Download CSV</button>
       <button class="btn btn-danger" id="clearAllBtn">🗑 Clear All</button>
-      <button class="btn btn-outline" id="lockBtn">🔒 Lock</button>
+      <button class="btn btn-outline" id="lockBtn">🔒 Sign Out</button>
     </div>
   </header>
 
@@ -330,46 +319,67 @@
   </div>
 </div>
 
-<script>
-  // ========= CONFIG =========
-  const ADMIN_PIN = 'twp2025';          // ← Change this PIN
-  const STORAGE_KEY = 'twp_contest_entries';
+<script type="module">
+  import { db, auth, ENTRIES_COLLECTION } from './firebase-init.js';
+  import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+  import { collection, query, orderBy, onSnapshot, doc, deleteDoc, writeBatch } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
-  // ========= PIN GATE =========
+  // Who may read entries is enforced by Firestore security rules (firestore.rules),
+  // not by this page. A signed-in account that isn't on the list just gets "permission denied".
+
+  // ========= SIGN-IN GATE =========
   const pinGate = document.getElementById('pinGate');
   const adminUI = document.getElementById('adminUI');
-  const pinInput = document.getElementById('pinInput');
   const pinBtn = document.getElementById('pinBtn');
   const pinError = document.getElementById('pinError');
 
-  function unlock() {
-    if (pinInput.value === ADMIN_PIN) {
+  pinBtn.addEventListener('click', async () => {
+    pinError.textContent = '';
+    pinBtn.disabled = true;
+    try {
+      await signInWithPopup(auth, new GoogleAuthProvider());
+    } catch (err) {
+      if (err.code !== 'auth/popup-closed-by-user') pinError.textContent = 'Sign-in failed: ' + err.code;
+    } finally {
+      pinBtn.disabled = false;
+    }
+  });
+
+  document.getElementById('lockBtn').addEventListener('click', () => signOut(auth));
+
+  // ========= DATA HELPERS =========
+  let entriesCache = [];
+  let unsubscribe = null;
+
+  onAuthStateChanged(auth, user => {
+    if (unsubscribe) { unsubscribe(); unsubscribe = null; }
+    entriesCache = [];
+    if (!user) {
+      adminUI.style.display = 'none';
+      pinGate.style.display = 'flex';
+      return;
+    }
+    const q = query(collection(db, ENTRIES_COLLECTION), orderBy('submittedAt', 'desc'));
+    unsubscribe = onSnapshot(q, snap => {
+      entriesCache = snap.docs.map(d => {
+        const data = d.data();
+        const ts = data.submittedAt;
+        return { id: d.id, ...data, submittedAt: ts ? ts.toDate().toISOString() : new Date().toISOString() };
+      });
       pinGate.style.display = 'none';
       adminUI.style.display = 'block';
       renderAll();
-    } else {
-      pinError.textContent = 'Incorrect PIN. Try again.';
-      pinInput.classList.add('shake');
-      pinInput.value = '';
-      setTimeout(() => pinInput.classList.remove('shake'), 500);
-    }
-  }
-
-  pinBtn.addEventListener('click', unlock);
-  pinInput.addEventListener('keydown', e => { if (e.key === 'Enter') unlock(); });
-
-  document.getElementById('lockBtn').addEventListener('click', () => {
-    adminUI.style.display = 'none';
-    pinGate.style.display = 'flex';
-    pinInput.value = ''; pinError.textContent = '';
+    }, err => {
+      const denied = err.code === 'permission-denied';
+      pinError.textContent = denied
+        ? user.email + ' is not an approved admin account.'
+        : 'Could not load entries: ' + err.code;
+      signOut(auth);
+    });
   });
 
-  // ========= DATA HELPERS =========
   function getEntries() {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  }
-  function saveEntries(entries) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+    return [...entriesCache];
   }
 
   function fmtDate(iso) {
@@ -457,15 +467,6 @@
     resultsCount.textContent = entries.length + (currentSearch ? ' of ' + all.length : '') + ' entr' + (entries.length === 1 ? 'y' : 'ies');
 
     entries.forEach((entry, i) => {
-      // Find original index in all entries for deletion
-      const allEntries = getEntries();
-      const origIdx = allEntries.findIndex(e =>
-        e.firstName === entry.firstName &&
-        e.lastName === entry.lastName &&
-        e.email === entry.email &&
-        e.submittedAt === entry.submittedAt
-      );
-
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td class="row-num" style="color:rgba(255,255,255,0.25);font-size:0.8rem;">${i + 1}</td>
@@ -474,7 +475,7 @@
         <td class="email"><a href="mailto:${escHtml(entry.email)}">${escHtml(entry.email)}</a></td>
         <td class="date">${entry.weddingDate ? fmtDate(entry.weddingDate + 'T12:00:00') : '—'}</td>
         <td class="date">${fmtDateTime(entry.submittedAt)}</td>
-        <td><div class="row-actions"><button class="row-del" data-idx="${origIdx}">Delete</button></div></td>
+        <td><div class="row-actions"><button class="row-del" data-id="${escHtml(entry.id)}">Delete</button></div></td>
       `;
       tbody.appendChild(tr);
     });
@@ -482,13 +483,15 @@
     // Delete row buttons
     tbody.querySelectorAll('.row-del').forEach(btn => {
       btn.addEventListener('click', () => {
-        const idx = parseInt(btn.getAttribute('data-idx'));
-        openModal('Delete this entry?', 'This will permanently remove the entry for ' + getEntries()[idx]?.firstName + ' ' + getEntries()[idx]?.lastName + '.', () => {
-          const e = getEntries();
-          e.splice(idx, 1);
-          saveEntries(e);
-          renderTable();
-          showToast('Entry deleted.', 'danger');
+        const id = btn.getAttribute('data-id');
+        const entry = entriesCache.find(e => e.id === id);
+        openModal('Delete this entry?', 'This will permanently remove the entry for ' + entry?.firstName + ' ' + entry?.lastName + '.', async () => {
+          try {
+            await deleteDoc(doc(db, ENTRIES_COLLECTION, id));
+            showToast('Entry deleted.', 'danger');
+          } catch (err) {
+            showToast('Delete failed: ' + err.code, 'danger');
+          }
         });
       });
     });
@@ -541,10 +544,18 @@
   document.getElementById('clearAllBtn').addEventListener('click', () => {
     const entries = getEntries();
     if (entries.length === 0) { showToast('No entries to clear.', 'danger'); return; }
-    openModal('Clear ALL entries?', 'This will permanently delete all ' + entries.length + ' contest entries. This cannot be undone!', () => {
-      saveEntries([]);
-      renderTable();
-      showToast('All entries cleared.', 'danger');
+    openModal('Clear ALL entries?', 'This will permanently delete all ' + entries.length + ' contest entries. This cannot be undone!', async () => {
+      try {
+        // Firestore batches are capped at 500 writes
+        for (let i = 0; i < entries.length; i += 500) {
+          const batch = writeBatch(db);
+          entries.slice(i, i + 500).forEach(e => batch.delete(doc(db, ENTRIES_COLLECTION, e.id)));
+          await batch.commit();
+        }
+        showToast('All entries cleared.', 'danger');
+      } catch (err) {
+        showToast('Clear failed: ' + err.code, 'danger');
+      }
     });
   });
 

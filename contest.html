@@ -542,6 +542,7 @@
         <button type="submit" class="submit-btn" id="submitBtn">
           🎙️ Enter the Contest!
         </button>
+        <div class="field-error" id="submitError">Something went wrong sending your entry. Please check your connection and try again.</div>
       </form>
 
       <!-- Success -->
@@ -570,7 +571,10 @@
   <p class="footer-copy">© 2025–2026 The Wedding Police Podcast. No purchase necessary. Open to US residents 18+. Sponsor: The Wedding Police Podcast.</p>
 </footer>
 
-<script>
+<script type="module">
+  import { db, ENTRIES_COLLECTION } from './firebase-init.js';
+  import { collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
   // ---- NAV SCROLL ----
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
@@ -610,7 +614,7 @@
     }
   });
 
-  // ---- FORM SUBMISSION (localStorage) ----
+  // ---- FORM SUBMISSION (Firestore) ----
   const form = document.getElementById('contestForm');
   const successState = document.getElementById('successState');
   const submitBtn = document.getElementById('submitBtn');
@@ -634,7 +638,7 @@
     clearError('consentError', null);
   });
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     let valid = true;
 
@@ -654,21 +658,35 @@
 
     if (!valid) return;
 
-    // Save to localStorage
-    const entry = {
-      firstName,
-      lastName,
-      email,
-      weddingDate,
-      submittedAt: new Date().toISOString()
-    };
-
-    const existing = JSON.parse(localStorage.getItem('twp_contest_entries') || '[]');
-    existing.push(entry);
-    localStorage.setItem('twp_contest_entries', JSON.stringify(existing));
+    // Save to Firestore
+    const btnLabel = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    clearError('submitError', null);
+    try {
+      // Firestore retries silently when it can't reach the server, so give up after 15s
+      const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 15000));
+      await Promise.race([
+        addDoc(collection(db, ENTRIES_COLLECTION), {
+          firstName,
+          lastName,
+          email,
+          weddingDate,
+          consent: true,
+          submittedAt: serverTimestamp()
+        }),
+        timeout
+      ]);
+    } catch (err) {
+      console.error('Contest entry failed', err);
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = btnLabel;
+      showError('submitError', null);
+      return;
+    }
+    if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'contest_entry' });
 
     // Show success
-    submitBtn.disabled = true;
     form.style.display = 'none';
     successState.style.display = 'block';
 
