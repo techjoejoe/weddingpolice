@@ -484,6 +484,7 @@ def render_episode(e, newer, older):
       <a href="{SPOTIFY_SHOW}" target="_blank" rel="noopener noreferrer" class="cta-btn spotify" data-ep="{ep_key}" data-ev="follow_click" data-platform="spotify">🎵 Follow on Spotify</a>
       <a href="{APPLE_SHOW}" target="_blank" rel="noopener noreferrer" class="cta-btn apple" data-ep="{ep_key}" data-ev="follow_click" data-platform="apple">🎙 Follow on Apple</a>
     </div>
+    <p class="ep-rate"><span aria-hidden="true">⭐⭐⭐⭐⭐</span> Enjoying it? A quick rating on <a href="{APPLE_SHOW}" target="_blank" rel="noopener noreferrer" data-ep="{ep_key}" data-ev="rate_click" data-platform="apple">Apple Podcasts</a> or <a href="{SPOTIFY_SHOW}" target="_blank" rel="noopener noreferrer" data-ep="{ep_key}" data-ev="rate_click" data-platform="spotify">Spotify</a> helps new couples find the show.</p>
   </div>
 </article>
 
@@ -566,6 +567,23 @@ def update_home(eps):
         </div>
       </div>
       ''')
+    e = eps[0]
+    total = f"{e['seconds'] // 60}:{e['seconds'] % 60:02d}"
+    replace_block(os.path.join(ROOT, 'index.html'), '<!-- HERO-LATEST:START -->', '<!-- HERO-LATEST:END -->', f'''
+        <div class="hero-latest" data-ep="{esc(e['short'] + ' ' + e['title'])}">
+          <img class="hl-art" src="{art_src(e, 'episodes/')}" width="600" height="600" alt="">
+          <div class="hl-info">
+            <span class="hl-meta">Latest episode · {e['short']} · {e['mins']} min</span>
+            <a class="hl-title" href="episodes/{e['slug']}.html">{esc(e['title'])}</a>
+            <div class="hl-seekrow">
+              <input class="hl-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek within {esc(e['title'])}">
+              <span class="hl-time">0:00 / {total}</span>
+            </div>
+          </div>
+          <button class="hl-play" type="button" aria-label="Play the latest episode: {esc(e['title'])}"><span class="hl-icon-play">▶</span><span class="hl-icon-pause">❚❚</span></button>
+          <audio preload="none" src="{esc(e['audio'])}"></audio>
+        </div>
+        ''')
     parts = ',\n'.join('    ' + json.dumps({'@type': 'PodcastEpisode', 'name': e['title'], 'url': e['url'],
                                              'datePublished': e['iso_date']}, ensure_ascii=False) for e in latest)
     replace_block(os.path.join(ROOT, 'index.html'), '"hasPart": [', '\n  ]', '\n' + parts)

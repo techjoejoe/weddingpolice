@@ -29,6 +29,9 @@
 
 /* Follow box */
 .ep-follow { text-align: center; }
+.ep-follow .ep-rate { margin: 1.4rem 0 0; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); }
+.ep-follow .ep-rate span { display: block; letter-spacing: 3px; margin-bottom: 0.3rem; }
+.ep-follow .ep-rate a { color: var(--neon-pink); }
 
 /* ============ EPISODE CARDS (index page) ============ */
 .ep-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.4rem; }

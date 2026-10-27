@@ -258,28 +258,43 @@
   .embed-frame:hover { border-color: rgba(255, 20, 147, 0.3); box-shadow: 0 16px 60px rgba(255, 20, 147, 0.15); }
   .embed-frame:hover::before { opacity: 0.7; }
   .embed-frame iframe { display: block; border-radius: 12px; }
-  .embed-bottom-row { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
-  .embed-hint { font-size: 0.95rem; color: rgba(255, 255, 255, 0.45); font-style: italic; }
   .embed-badges { display: flex; gap: 1.5rem; justify-content: center; margin-top: 2rem; position: relative; z-index: 1; }
   .embed-badge { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: rgba(255, 255, 255, 0.35); font-weight: 500; letter-spacing: 0.5px; }
   .embed-badge span { font-size: 1rem; }
 
-  /* ✅ NEW: Apple Podcasts embed frame */
-  .apple-embed-frame {
-    position: relative;
-    z-index: 1;
-    background: linear-gradient(145deg, rgba(135, 46, 196, 0.08), rgba(13, 13, 26, 0.8));
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(135, 46, 196, 0.2);
-    border-radius: 20px;
-    padding: 1.4rem;
-    margin-top: 1.5rem;
-    transition: border-color 0.4s, box-shadow 0.4s;
-  }
-  .apple-embed-frame:hover {
-    border-color: rgba(135, 46, 196, 0.4);
-    box-shadow: 0 16px 60px rgba(135, 46, 196, 0.12);
-  }
+  /* One player, two apps */
+  .player-switch { position: relative; z-index: 1; display: flex; justify-content: center; gap: 0.4rem; margin: 0 auto 1rem; padding: 0.3rem; width: fit-content; background: var(--glass-white); border: 1px solid var(--glass-border); border-radius: 50px; }
+  .player-switch button { font: inherit; font-size: 0.9rem; font-weight: 600; color: rgba(255, 255, 255, 0.7); background: none; border: 0; border-radius: 50px; padding: 0.55rem 1.3rem; cursor: pointer; transition: background 0.3s, color 0.3s; }
+  .player-switch button[aria-selected="true"] { color: #fff; background: linear-gradient(135deg, var(--hot-pink), #c70070); }
+  .player-switch button[data-player="apple"][aria-selected="true"] { background: linear-gradient(135deg, #872ec4, #6a1fa0); }
+  .player-follow { position: relative; z-index: 1; text-align: center; margin-top: 1.5rem; }
+  .player-follow .btn { font-size: 0.95rem; padding: 0.8rem 1.8rem; }
+  .player-follow .btn.apple { background: linear-gradient(135deg, #872ec4, #6a1fa0); box-shadow: 0 4px 20px rgba(135, 46, 196, 0.4); }
+
+  /* Latest episode player in the hero */
+  .hero-latest { display: flex; align-items: center; gap: 0.9rem; max-width: 500px; margin-bottom: 1.6rem; padding: 0.7rem 0.8rem 0.7rem 0.7rem; background: var(--glass-white); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 18px; animation: fade-in-up 0.8s ease-out 0.55s both; text-align: left; }
+  .hl-art { width: 64px; height: 64px; border-radius: 12px; object-fit: cover; flex-shrink: 0; }
+  .hl-info { flex: 1; min-width: 0; }
+  .hl-meta { display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--disco-gold); }
+  .hl-title { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; color: #fff; font-weight: 600; line-height: 1.3; text-decoration: none; }
+  .hl-title:hover { color: var(--neon-pink); }
+  .hl-seekrow { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.2rem; }
+  .hl-seek { flex: 1; min-width: 0; accent-color: var(--hot-pink); height: 4px; cursor: pointer; }
+  .hl-time { font-size: 0.72rem; color: rgba(255, 255, 255, 0.6); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .hl-play { width: 52px; height: 52px; flex-shrink: 0; border: 0; border-radius: 50%; cursor: pointer; color: #fff; font-size: 1.1rem; background: linear-gradient(135deg, var(--hot-pink), #c70070); box-shadow: 0 4px 20px rgba(255, 20, 147, 0.5); transition: transform 0.2s; }
+  .hl-play:hover { transform: scale(1.06); }
+  .hl-play:focus-visible, .player-switch button:focus-visible { outline: 2px solid var(--disco-gold); outline-offset: 2px; }
+  .hl-icon-pause, .hero-latest.playing .hl-icon-play { display: none; }
+  .hero-latest.playing .hl-icon-pause { display: inline; font-size: 0.8rem; letter-spacing: -2px; }
+
+  /* Rating prompt */
+  .rate-box { margin: 2.5rem auto 0; max-width: 520px; padding: 1.5rem; border-radius: 20px; background: rgba(255, 215, 0, 0.06); border: 1px solid rgba(255, 215, 0, 0.25); }
+  .rate-stars { color: var(--disco-gold); font-size: 1.5rem; letter-spacing: 4px; text-shadow: 0 0 12px rgba(255, 215, 0, 0.5); }
+  .rate-ask { color: rgba(255, 255, 255, 0.8); margin: 0.5rem 0 1rem; }
+  .rate-links { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; }
+  .rate-links a { color: var(--disco-gold); font-weight: 600; text-decoration: none; padding: 0.5rem 1.1rem; border: 1px solid rgba(255, 215, 0, 0.4); border-radius: 50px; transition: background 0.3s; }
+  .rate-links a:hover { background: rgba(255, 215, 0, 0.12); }
+  .rate-how { font-size: 0.8rem; color: rgba(255, 255, 255, 0.55); margin-top: 1rem; }
 
   /* ============ CTA / LISTEN ============ */
   .cta-section { padding: 8rem 2rem; text-align: center; position: relative; overflow: hidden; background: var(--midnight); }
@@ -373,6 +388,8 @@
     .hero-image { width: 500px; height: 375px; }
     .hero-desc { margin: 0 auto 2rem; }
     .hero-buttons { justify-content: center; }
+    .hero-text { width: 100%; }
+    .hero-latest { margin-left: auto; margin-right: auto; }
     .badge-float:nth-child(2) { right: -10px; }
     .badge-float:nth-child(3) { left: -10px; }
     .about-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -382,7 +399,6 @@
     .orbit-ring:nth-child(1) { width: 290px; height: 340px; }
     .orbit-ring:nth-child(2) { width: 260px; height: 310px; }
     .about-features { grid-template-columns: 1fr; }
-    .embed-bottom-row { flex-direction: column; text-align: center; }
     }
 
   @media (max-width: 600px) {
@@ -407,7 +423,6 @@
     .feature-card { padding: 1.2rem; }
     .embed-frame { padding: 0.8rem; }
     .embed-badges { flex-direction: column; align-items: center; gap: 0.6rem; }
-    .embed-bottom-row { flex-direction: column; text-align: center; }
       .faq h2 { font-size: 1.6rem; }
     .faq-question { font-size: 0.95rem; padding: 1.2rem; }
     .faq-answer p { padding: 0 1.2rem 1.2rem; font-size: 0.9rem; }
@@ -545,19 +560,34 @@
       <div class="hero-eyebrow">🔊 The #1 Wedding Podcast for Engaged Couples</div>
       <h1 class="hero-title">The Wedding Police <span class="hero-title-tag">Podcast</span></h1>
       <p class="hero-subtitle">A wedding podcast hosted by Penny &amp; Jim.</p>
+      <!-- HERO-LATEST:START -->
+        <div class="hero-latest" data-ep="Ep 39 Katie&#x27;s Wedding Update">
+          <img class="hl-art" src="episodes/img/katies-wedding-update.jpg" width="600" height="600" alt="">
+          <div class="hl-info">
+            <span class="hl-meta">Latest episode · Ep 39 · 15 min</span>
+            <a class="hl-title" href="episodes/katies-wedding-update.html">Katie&#x27;s Wedding Update</a>
+            <div class="hl-seekrow">
+              <input class="hl-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek within Katie&#x27;s Wedding Update">
+              <span class="hl-time">0:00 / 14:56</span>
+            </div>
+          </div>
+          <button class="hl-play" type="button" aria-label="Play the latest episode: Katie&#x27;s Wedding Update"><span class="hl-icon-play">▶</span><span class="hl-icon-pause">❚❚</span></button>
+          <audio preload="none" src="https://anchor.fm/s/10dadcee8/podcast/play/127896745/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2026-9-22%2Fb1d5d1dd-3eba-b9ac-bde4-1a40166944b6.mp3"></audio>
+        </div>
+        <!-- HERO-LATEST:END -->
       <p class="hero-desc">
         The best wedding podcast for real wedding stories, hilarious wedding fails, 
         and honest wedding planning tips. From bridal gown shopping to wedding speeches — 
         we've got the advice your friends are too polite to give. 💎
       </p>
       <div class="hero-buttons">
-        <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-ev="follow_click" data-platform="spotify">
           <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-          Listen on Spotify
+          Follow on Spotify
         </a>
-        <a href="https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" target="_blank" rel="noopener noreferrer" class="btn btn-apple">
+        <a href="https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" target="_blank" rel="noopener noreferrer" class="btn btn-apple" data-ev="follow_click" data-platform="apple">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a4 4 0 0 1 4 4v4a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4zm0 14.5A6.5 6.5 0 0 0 18.5 10H20a8 8 0 0 1-7 7.938V21h-2v-3.062A8 8 0 0 1 4 10h1.5A6.5 6.5 0 0 0 12 16.5z"/></svg>
-          Listen on Apple
+          Follow on Apple
         </a>
         <a href="#about" class="btn btn-outline">Learn More</a>
       </div>
@@ -644,28 +674,23 @@
         </div>
       </div>
       <!-- LATEST-EPISODES:END -->
-    <div class="spotify-embed-wrapper reveal">
+    <div class="spotify-embed-wrapper">
       <div class="embed-glow"></div>
+      <div class="player-switch" role="tablist" aria-label="Choose your podcast app">
+        <button type="button" role="tab" id="tabSpotify" aria-controls="playerSpotify" aria-selected="true" data-player="spotify">Spotify</button>
+        <button type="button" role="tab" id="tabApple" aria-controls="playerApple" aria-selected="false" data-player="apple">Apple Podcasts</button>
+      </div>
       <div class="embed-frame">
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/00XbQ3oSRLm3CeETc8bwdl?utm_source=generator&theme=0" width="100%" height="452" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="The Wedding Police podcast on Spotify"></iframe>
-      </div>
-      <div class="embed-bottom-row">
-        <p class="embed-hint">🎧 Browse episodes above, hit play, and enjoy the best wedding podcast on Spotify.</p>
-        <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size:0.9rem; padding:0.75rem 1.6rem;">Open in Spotify →</a>
-      </div>
-
-      <!-- Apple Podcasts embed -->
-      <div class="apple-embed-frame">
-        <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1rem;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.7;"><path d="M12 2a4 4 0 0 1 4 4v4a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4zm0 14.5A6.5 6.5 0 0 0 18.5 10H20a8 8 0 0 1-7 7.938V21h-2v-3.062A8 8 0 0 1 4 10h1.5A6.5 6.5 0 0 0 12 16.5z"/></svg>
-          <span style="font-size:0.8rem; color:rgba(255,255,255,0.4); font-weight:600; letter-spacing:1px; text-transform:uppercase;">Also on Apple Podcasts</span>
+        <div id="playerSpotify" role="tabpanel" aria-labelledby="tabSpotify">
+          <iframe src="https://open.spotify.com/embed/show/00XbQ3oSRLm3CeETc8bwdl?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="The Wedding Police podcast on Spotify"></iframe>
         </div>
-        <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;max-width:100%;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" title="The Wedding Police podcast on Apple Podcasts"></iframe>
-        <div style="text-align:right; margin-top:1rem;">
-          <a href="https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size:0.9rem; padding:0.75rem 1.6rem; background:linear-gradient(135deg,#872ec4,#6a1fa0); box-shadow:0 4px 20px rgba(135,46,196,0.4);">Open in Apple Podcasts →</a>
+        <div id="playerApple" role="tabpanel" aria-labelledby="tabApple" hidden>
+          <iframe data-src="https://embed.podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="450" style="width:100%;max-width:100%;overflow:hidden;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" title="The Wedding Police podcast on Apple Podcasts"></iframe>
         </div>
       </div>
-
+      <div class="player-follow">
+        <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="playerFollow" data-ev="follow_click" data-platform="spotify">Follow on Spotify →</a>
+      </div>
 
       <div class="embed-badges">
         <div class="embed-badge"><span>🚨</span> Real Wedding Fails & Stories</div>
@@ -817,21 +842,20 @@
 <section class="cta-section" id="listen">
   <div class="cta-glow"></div>
   <div class="cta-content reveal">
-    <div class="section-label" style="justify-content: center;">Subscribe to the Best Wedding Podcast</div>
+    <div class="section-label" style="justify-content: center;">Follow the Podcast</div>
     <h2 class="section-title">Ready to Join<br>the Squad?</h2>
     <p class="section-subtitle">
-      Follow The Wedding Police wedding podcast on your favorite platform. 
-      New episodes with wedding stories, planning tips, and unfiltered advice from Penny &amp; Jim.
+      Hit Follow on your favorite app and every new episode lands in your feed automatically.
+      New wedding stories, planning tips, and unfiltered advice from Penny &amp; Jim every week.
     </p>
     <div class="listen-platforms">
-      <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" rel="noopener noreferrer" class="platform-btn spotify">
+      <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl?si=3c8f1c12da294a24" target="_blank" rel="noopener noreferrer" class="platform-btn spotify" data-ev="follow_click" data-platform="spotify">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        Spotify
+        Follow on Spotify
       </a>
-      <!-- ✅ NEW: Apple Podcasts button in CTA section -->
-      <a href="https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" target="_blank" rel="noopener noreferrer" class="platform-btn apple">
+      <a href="https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" target="_blank" rel="noopener noreferrer" class="platform-btn apple" data-ev="follow_click" data-platform="apple">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a4 4 0 0 1 4 4v4a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4zm0 14.5A6.5 6.5 0 0 0 18.5 10H20a8 8 0 0 1-7 7.938V21h-2v-3.062A8 8 0 0 1 4 10h1.5A6.5 6.5 0 0 0 12 16.5z"/></svg>
-        Apple Podcasts
+        Follow on Apple
       </a>
       <a href="https://www.facebook.com/profile.php?id=61586443233812" target="_blank" rel="noopener noreferrer" class="platform-btn facebook">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -841,6 +865,15 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         Instagram
       </a>
+    </div>
+    <div class="rate-box">
+      <div class="rate-stars" aria-hidden="true">★★★★★</div>
+      <p class="rate-ask"><strong>Enjoying the show?</strong> A quick 5-star rating helps new couples find Penny &amp; Jim.</p>
+      <div class="rate-links">
+        <a href="https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808" target="_blank" rel="noopener noreferrer" data-ev="rate_click" data-platform="apple">Rate on Apple Podcasts</a>
+        <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl" target="_blank" rel="noopener noreferrer" data-ev="rate_click" data-platform="spotify">Rate on Spotify</a>
+      </div>
+      <p class="rate-how">Apple: scroll to Ratings &amp; Reviews and tap a star. Spotify: open the show in the app and tap the ★ rating.</p>
     </div>
   </div>
 </section>
@@ -881,6 +914,75 @@
   const navLinks = document.getElementById('navLinks');
   toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
   navLinks.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => navLinks.classList.remove('open')); });
+
+  // Google Analytics events for follow / rate / listen clicks
+  const track = (name, params) => { if (typeof gtag === 'function') gtag('event', name, params); };
+  document.querySelectorAll('[data-ev]').forEach(el => {
+    el.addEventListener('click', () => track(el.dataset.ev, { platform: el.dataset.platform, location: 'homepage' }));
+  });
+
+  // Latest-episode player in the hero
+  const latest = document.querySelector('.hero-latest');
+  if (latest) {
+    const audio = latest.querySelector('audio');
+    const playBtn = latest.querySelector('.hl-play');
+    const seek = latest.querySelector('.hl-seek');
+    const time = latest.querySelector('.hl-time');
+    const playLabel = playBtn.getAttribute('aria-label');
+    const fmt = t => Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0');
+    let counted = false;
+    playBtn.addEventListener('click', () => { audio.paused ? audio.play() : audio.pause(); });
+    audio.addEventListener('play', () => {
+      latest.classList.add('playing');
+      playBtn.setAttribute('aria-label', 'Pause');
+      if (!counted) { counted = true; track('episode_play', { episode: latest.dataset.ep, platform: 'website', location: 'hero' }); }
+    });
+    audio.addEventListener('pause', () => { latest.classList.remove('playing'); playBtn.setAttribute('aria-label', playLabel); });
+    audio.addEventListener('timeupdate', () => {
+      if (!audio.duration) return;
+      seek.value = Math.round(audio.currentTime / audio.duration * 1000);
+      time.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
+    });
+    seek.addEventListener('input', () => {
+      if (audio.duration) audio.currentTime = seek.value / 1000 * audio.duration;
+      else { audio.addEventListener('loadedmetadata', () => { audio.currentTime = seek.value / 1000 * audio.duration; }, { once: true }); audio.play(); }
+    });
+  }
+
+  // Spotify / Apple switch: one player at a time, remembering the visitor's choice
+  const tabs = document.querySelectorAll('.player-switch [role="tab"]');
+  const follow = document.getElementById('playerFollow');
+  const FOLLOW = {
+    spotify: { href: 'https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl', text: 'Follow on Spotify →', cls: 'btn btn-primary' },
+    apple: { href: 'https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808', text: 'Follow on Apple Podcasts →', cls: 'btn btn-primary apple' }
+  };
+  const showPlayer = (name, remember) => {
+    tabs.forEach(tab => {
+      const on = tab.dataset.player === name;
+      tab.setAttribute('aria-selected', on);
+      tab.tabIndex = on ? 0 : -1;
+      const panel = document.getElementById(tab.getAttribute('aria-controls'));
+      panel.hidden = !on;
+      const frame = panel.querySelector('iframe[data-src]');
+      if (on && frame) { frame.src = frame.dataset.src; frame.removeAttribute('data-src'); }
+    });
+    Object.assign(follow, { href: FOLLOW[name].href, textContent: FOLLOW[name].text, className: FOLLOW[name].cls });
+    follow.dataset.platform = name;
+    if (remember) { try { localStorage.setItem('twpPlayer', name); } catch (e) {} }
+  };
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => showPlayer(tab.dataset.player, true));
+    tab.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      const other = [...tabs].find(t => t !== tab);
+      showPlayer(other.dataset.player, true);
+      other.focus();
+    });
+  });
+  let saved = null;
+  try { saved = localStorage.getItem('twpPlayer'); } catch (e) {}
+  const isApple = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  if (tabs.length) showPlayer(saved || (isApple ? 'apple' : 'spotify'), false);
 
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
