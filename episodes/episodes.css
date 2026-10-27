@@ -55,7 +55,7 @@
   background: var(--glass-white); border: 1px solid var(--glass-border); outline: none;
 }
 .ep-search input:focus { border-color: var(--hot-pink); }
-.ep-search input::placeholder { color: rgba(255, 255, 255, 0.5); }
+.ep-search input::placeholder { color: rgba(255, 255, 255, 0.6); }
 .ep-count { font-size: 0.9rem; color: rgba(255, 255, 255, 0.6); }
 
 @media (max-width: 768px) {

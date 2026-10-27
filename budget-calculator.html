@@ -86,7 +86,7 @@
   .calc-panel { background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2.5rem; }
 
   /* Input Panel */
-  .input-label { font-size: 0.85rem; color: rgba(255,255,255,0.5); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem; }
+  .input-label { font-size: 0.85rem; color: rgba(255,255,255,0.6); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem; }
   .budget-input-wrap { position: relative; margin-bottom: 1.5rem; }
   .budget-input { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border); border-radius: 14px; padding: 1.2rem 1.5rem; font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #fff; text-align: center; outline: none; transition: border-color 0.3s, box-shadow 0.3s; }
   .budget-input:focus { border-color: var(--disco-gold); box-shadow: 0 0 20px rgba(255,215,0,0.15); }
@@ -98,7 +98,7 @@
 
   .quote { display: flex; align-items: flex-start; gap: 0.8rem; padding: 1.2rem 1.4rem; background: rgba(255,215,0,0.06); border-radius: 14px; border: 1px solid rgba(255,215,0,0.15); }
   .quote-icon { font-size: 1.2rem; flex-shrink: 0; }
-  .quote p { font-size: 0.9rem; color: rgba(255,255,255,0.5); line-height: 1.5; font-style: italic; }
+  .quote p { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.5; font-style: italic; }
   .quote .highlight { color: var(--disco-gold); font-style: normal; font-weight: 600; }
 
   /* Breakdown Panel */
@@ -115,7 +115,7 @@
 
   /* CTA */
   .tool-cta { text-align: center; padding: 2rem 2rem 5rem; position: relative; z-index: 1; }
-  .tool-cta .hint { font-size: 0.9rem; color: rgba(255,255,255,0.35); margin-bottom: 1rem; }
+  .tool-cta .hint { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 1rem; }
   .tool-cta .hint span { margin-right: 0.4rem; }
   .cta-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 1rem 2.2rem; border-radius: 60px; font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 600; text-decoration: none; color: #fff; border: 1px solid var(--glass-border); background: var(--glass-white); backdrop-filter: blur(10px); transition: all 0.3s; }
   .cta-btn:hover { border-color: var(--hot-pink); background: rgba(255,20,147,0.1); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255,20,147,0.2); }
@@ -133,7 +133,7 @@
   .guide a:hover { text-decoration: underline; }
   .split-table { width: 100%; border-collapse: collapse; margin: 0.5rem 0 1.5rem; font-size: 0.98rem; }
   .split-table th, .split-table td { padding: 0.7rem 0.9rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); }
-  .split-table th { font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.45); font-weight: 600; }
+  .split-table th { font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.6); font-weight: 600; }
   .split-table td { color: rgba(255,255,255,0.75); }
   .split-table td:not(:first-child), .split-table th:not(:first-child) { text-align: right; white-space: nowrap; }
   .faq details { background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); border-radius: 14px; margin-bottom: 0.7rem; }
@@ -146,11 +146,9 @@
   /* Footer */
   footer { padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(13,13,26,0.9); position: relative; z-index: 1; }
   .footer-logo { font-family: 'Pacifico', cursive; font-size: 1.8rem; color: var(--hot-pink); text-shadow: 0 0 20px rgba(255,20,147,0.4); margin-bottom: 1rem; }
-  .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.25); }
+  .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
 
   /* Reveal */
-  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* Responsive */
   @media (max-width: 800px) {
@@ -170,6 +168,14 @@
     .guide { padding: 0 1.2rem; }
     .split-table th, .split-table td { padding: 0.6rem 0.4rem; }
   }
+
+  /* Keep reading pages still: no pulsing glows */
+  .disco-light { animation: none !important; }
+
+/* Respect the "reduce motion" setting on phones and computers */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
 </style>
 </head>
 <body>
@@ -390,34 +396,6 @@
     document.getElementById('navLinks').classList.toggle('open');
   });
 
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
-
-  // Sparkle cursor
-  let lastSparkle = 0;
-  document.addEventListener('mousemove', (e) => {
-    const now = Date.now();
-    if (now - lastSparkle < 30) return;
-    lastSparkle = now;
-    const count = 2 + Math.floor(Math.random() * 3);
-    for (let i = 0; i < count; i++) {
-      const s = document.createElement('div');
-      s.className = 'sparkle';
-      s.style.left = (e.clientX + (Math.random() - 0.5) * 30) + 'px';
-      s.style.top = (e.clientY + (Math.random() - 0.5) * 30) + 'px';
-      const colors = ['#FF1493', '#FFD700', '#C0C0C0', '#FF69B4', '#fff'];
-      s.style.background = colors[Math.floor(Math.random() * colors.length)];
-      const size = 3 + Math.random() * 8;
-      s.style.width = size + 'px'; s.style.height = size + 'px';
-      s.style.animationDuration = (0.6 + Math.random() * 0.8) + 's';
-      document.body.appendChild(s);
-      setTimeout(() => s.remove(), 1400);
-    }
-  });
 </script>
 
 </body>

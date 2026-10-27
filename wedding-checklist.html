@@ -76,7 +76,7 @@
   .section-label::before { content: ''; width: 30px; height: 2px; background: var(--hot-pink); box-shadow: 0 0 8px var(--hot-pink); }
   .hero-left h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 900; line-height: 1.15; margin-bottom: 1.2rem; }
   .hero-left h1 .accent { color: var(--disco-gold); font-style: italic; }
-  .hero-left .subtitle { font-size: 1rem; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 2rem; max-width: 420px; }
+  .hero-left .subtitle { font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 2rem; max-width: 420px; }
   .hero-left .subtitle a { color: var(--hot-pink); text-decoration: none; }
   .hero-left .subtitle a:hover { text-decoration: underline; }
 
@@ -102,8 +102,8 @@
   .cl-icon { font-size: 1.2rem; }
   .cl-period { font-weight: 600; font-size: 1rem; }
   .cl-header-right { display: flex; align-items: center; gap: 0.8rem; }
-  .cl-counter { font-size: 0.85rem; color: rgba(255,255,255,0.4); font-weight: 600; background: rgba(255,255,255,0.06); padding: 0.25rem 0.7rem; border-radius: 50px; }
-  .cl-chevron { font-size: 0.8rem; color: rgba(255,255,255,0.4); transition: transform 0.3s; }
+  .cl-counter { font-size: 0.85rem; color: rgba(255,255,255,0.6); font-weight: 600; background: rgba(255,255,255,0.06); padding: 0.25rem 0.7rem; border-radius: 50px; }
+  .cl-chevron { font-size: 0.8rem; color: rgba(255,255,255,0.6); transition: transform 0.3s; }
   .cl-section.open .cl-chevron { transform: rotate(180deg); }
 
   .cl-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
@@ -117,7 +117,7 @@
   .cl-checkbox { width: 22px; height: 22px; border-radius: 6px; border: 2px solid rgba(255,255,255,0.2); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
   .cl-task.checked .cl-checkbox { background: var(--hot-pink); border-color: var(--hot-pink); }
   .cl-task.checked .cl-checkbox::after { content: '✓'; color: #fff; font-size: 0.75rem; font-weight: 700; }
-  .cl-task.checked .cl-task-text { text-decoration: line-through; color: rgba(255,255,255,0.3); }
+  .cl-task.checked .cl-task-text { text-decoration: line-through; color: rgba(255,255,255,0.6); }
   .cl-task-text { font-size: 0.93rem; color: rgba(255,255,255,0.7); transition: all 0.3s; }
 
   /* Guide */
@@ -142,10 +142,8 @@
   /* Footer */
   footer { padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(13,13,26,0.9); position: relative; z-index: 1; margin-top: 4rem; }
   .footer-logo { font-family: 'Pacifico', cursive; font-size: 1.8rem; color: var(--hot-pink); text-shadow: 0 0 20px rgba(255,20,147,0.4); margin-bottom: 1rem; }
-  .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.25); }
+  .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
 
-  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 800px) {
     .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -162,6 +160,14 @@
     .cl-tasks { padding: 0 1rem 1rem; }
     .guide { padding: 0 1.2rem; }
   }
+
+  /* Keep reading pages still: no pulsing glows */
+  .disco-light { animation: none !important; }
+
+/* Respect the "reduce motion" setting on phones and computers */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
 </style>
 </head>
 <body>
@@ -457,34 +463,6 @@
     document.getElementById('navLinks').classList.toggle('open');
   });
 
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
-
-  // Sparkle cursor
-  let lastSparkle = 0;
-  document.addEventListener('mousemove', (e) => {
-    const now = Date.now();
-    if (now - lastSparkle < 30) return;
-    lastSparkle = now;
-    const count = 2 + Math.floor(Math.random() * 3);
-    for (let i = 0; i < count; i++) {
-      const s = document.createElement('div');
-      s.className = 'sparkle';
-      s.style.left = (e.clientX + (Math.random() - 0.5) * 30) + 'px';
-      s.style.top = (e.clientY + (Math.random() - 0.5) * 30) + 'px';
-      const colors = ['#FF1493', '#FFD700', '#C0C0C0', '#FF69B4', '#fff'];
-      s.style.background = colors[Math.floor(Math.random() * colors.length)];
-      const size = 3 + Math.random() * 8;
-      s.style.width = size + 'px'; s.style.height = size + 'px';
-      s.style.animationDuration = (0.6 + Math.random() * 0.8) + 's';
-      document.body.appendChild(s);
-      setTimeout(() => s.remove(), 1400);
-    }
-  });
 </script>
 
 </body>

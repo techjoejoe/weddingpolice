@@ -54,7 +54,7 @@
   .gate-logo { font-family: 'Pacifico', cursive; font-size: 1.3rem; color: var(--hot-pink); margin-bottom: 1.5rem; }
   .gate-lock { font-size: 3rem; margin-bottom: 0.8rem; }
   #pinGate h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; margin-bottom: 0.5rem; }
-  #pinGate p { color: rgba(255,255,255,0.45); font-size: 0.9rem; margin-bottom: 1.8rem; }
+  #pinGate p { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 1.8rem; }
   #pinBtn {
     width: 100%; margin-top: 1rem; padding: 0.9rem;
     background: linear-gradient(135deg, var(--hot-pink), #c70070);
@@ -111,7 +111,7 @@
   }
   .stat-card:hover { border-color: rgba(255,20,147,0.3); }
   .stat-value { font-size: 2.2rem; font-weight: 700; color: var(--hot-pink); font-family: 'Playfair Display', serif; }
-  .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.2rem; }
+  .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.2rem; }
 
   /* Search / filter bar */
   .toolbar {
@@ -127,8 +127,8 @@
     font-size: 0.9rem; outline: none; transition: border-color 0.3s;
   }
   #searchInput:focus { border-color: var(--hot-pink); }
-  #searchInput::placeholder { color: rgba(255,255,255,0.25); }
-  .results-count { font-size: 0.85rem; color: rgba(255,255,255,0.4); white-space: nowrap; }
+  #searchInput::placeholder { color: rgba(255,255,255,0.6); }
+  .results-count { font-size: 0.85rem; color: rgba(255,255,255,0.6); white-space: nowrap; }
 
   /* Table */
   .table-wrap {
@@ -141,7 +141,7 @@
   thead th {
     padding: 0.9rem 1.2rem; text-align: left;
     font-size: 0.78rem; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase; color: rgba(255,255,255,0.4);
+    text-transform: uppercase; color: rgba(255,255,255,0.6);
     border-bottom: 1px solid var(--glass-border);
     cursor: pointer; user-select: none;
     white-space: nowrap;
@@ -160,8 +160,8 @@
   tbody td.name { font-weight: 600; color: #fff; }
   tbody td.email a { color: var(--trivia-teal); text-decoration: none; transition: color 0.2s; }
   tbody td.email a:hover { color: #fff; }
-  tbody td.date { font-size: 0.85rem; color: rgba(255,255,255,0.5); }
-  .row-num { color: rgba(255,255,255,0.25); font-size: 0.8rem; }
+  tbody td.date { font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+  .row-num { color: rgba(255,255,255,0.6); font-size: 0.8rem; }
 
   /* Row actions */
   .row-actions { display: flex; gap: 0.4rem; }
@@ -176,10 +176,10 @@
   /* Empty state */
   .empty-state {
     text-align: center; padding: 5rem 2rem;
-    color: rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.6);
   }
   .empty-state .empty-icon { font-size: 3.5rem; margin-bottom: 1rem; display: block; }
-  .empty-state h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem; color: rgba(255,255,255,0.4); }
+  .empty-state h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem; color: rgba(255,255,255,0.6); }
   .empty-state p { font-size: 0.9rem; }
 
   /* Toast notification */
@@ -208,7 +208,7 @@
     text-align: center;
   }
   .modal-box h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.7rem; }
-  .modal-box p { color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 1.8rem; line-height: 1.5; }
+  .modal-box p { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 1.8rem; line-height: 1.5; }
   .modal-actions { display: flex; gap: 0.8rem; justify-content: center; }
 
   @media (max-width: 600px) {
@@ -243,7 +243,7 @@
       <span class="admin-badge">🔐 Admin</span>
     </div>
     <div class="header-right">
-      <span id="headerCount" style="font-size:0.85rem;color:rgba(255,255,255,0.4);"></span>
+      <span id="headerCount" style="font-size:0.85rem;color:rgba(255,255,255,0.6);"></span>
       <button class="btn btn-gold" id="downloadCsvBtn">⬇️ Download CSV</button>
       <button class="btn btn-danger" id="clearAllBtn">🗑 Clear All</button>
       <button class="btn btn-outline" id="lockBtn">🔒 Sign Out</button>
@@ -469,7 +469,7 @@
     entries.forEach((entry, i) => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td class="row-num" style="color:rgba(255,255,255,0.25);font-size:0.8rem;">${i + 1}</td>
+        <td class="row-num" style="color:rgba(255,255,255,0.6);font-size:0.8rem;">${i + 1}</td>
         <td class="name">${escHtml(entry.firstName)}</td>
         <td class="name">${escHtml(entry.lastName)}</td>
         <td class="email"><a href="mailto:${escHtml(entry.email)}">${escHtml(entry.email)}</a></td>

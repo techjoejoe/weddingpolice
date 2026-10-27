@@ -10,6 +10,7 @@
   gtag('config', 'G-2VL6QGTLXF');
 </script>
 <meta charset="UTF-8">
+<script>document.documentElement.classList.add('js');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Wedding Police Podcast | Wedding Stories, Tips &amp; Advice</title>
 <meta name="description" content="The Wedding Police is a wedding podcast with Penny and Jim: real wedding stories, fails, bridal tips and honest planning advice. Free on Spotify &amp; Apple.">
@@ -235,7 +236,7 @@
   .feature-card:hover { transform: translateY(-4px); border-color: var(--hot-pink); box-shadow: 0 8px 30px rgba(255, 20, 147, 0.15); }
   .feature-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
   .feature-card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 0.4rem; }
-  .feature-card p { font-size: 0.85rem; color: rgba(255, 255, 255, 0.5); line-height: 1.5; }
+  .feature-card p { font-size: 0.85rem; color: rgba(255, 255, 255, 0.6); line-height: 1.5; }
   .about-visual { display: flex; justify-content: center; align-items: center; }
   .badge-display { width: 320px; height: 380px; position: relative; display: flex; align-items: center; justify-content: center; }
   .badge-outer { width: 260px; height: 320px; background: linear-gradient(145deg, rgba(255, 20, 147, 0.15), rgba(192, 192, 192, 0.1)); border: 1px solid var(--glass-border); border-radius: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem; position: relative; backdrop-filter: blur(20px); }
@@ -259,7 +260,7 @@
   .embed-frame:hover::before { opacity: 0.7; }
   .embed-frame iframe { display: block; border-radius: 12px; }
   .embed-badges { display: flex; gap: 1.5rem; justify-content: center; margin-top: 2rem; position: relative; z-index: 1; }
-  .embed-badge { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: rgba(255, 255, 255, 0.35); font-weight: 500; letter-spacing: 0.5px; }
+  .embed-badge { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: rgba(255, 255, 255, 0.6); font-weight: 500; letter-spacing: 0.5px; }
   .embed-badge span { font-size: 1rem; }
 
   /* One player, two apps */
@@ -323,11 +324,11 @@
   /* ============ FOOTER ============ */
   footer { padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(13, 13, 26, 0.9); }
   .footer-logo { font-family: 'Pacifico', cursive; font-size: 1.8rem; color: var(--hot-pink); text-shadow: 0 0 20px rgba(255, 20, 147, 0.4); margin-bottom: 1rem; }
-  .footer-tagline { color: rgba(255, 255, 255, 0.4); font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .footer-tagline { color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; margin-bottom: 1.5rem; }
   .footer-socials { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
   .footer-socials a { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: all 0.3s; }
   .footer-socials a:hover { border-color: var(--hot-pink); color: var(--hot-pink); background: rgba(255, 20, 147, 0.1); transform: translateY(-3px); }
-  .footer-copy { font-size: 0.8rem; color: rgba(255, 255, 255, 0.25); }
+  .footer-copy { font-size: 0.8rem; color: rgba(255, 255, 255, 0.6); }
   .hero-title-tag { display: block; font-family: 'Outfit', sans-serif; font-size: 0.3em; font-weight: 700; letter-spacing: 0.45em; text-transform: uppercase; color: var(--disco-gold); text-shadow: none; margin-top: 0.3rem; }
   .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem 1.6rem; margin-bottom: 1.5rem; }
   .footer-links a { color: rgba(255, 255, 255, 0.55); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
@@ -336,13 +337,13 @@
   /* ============ MARQUEE ============ */
   .marquee-strip { overflow: hidden; padding: 1.2rem 0; border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); background: rgba(255, 20, 147, 0.03); }
   .marquee-inner { display: flex; gap: 3rem; animation: marquee-scroll 25s linear infinite; width: max-content; }
-  .marquee-item { font-family: 'Playfair Display', serif; font-size: 1rem; font-style: italic; color: rgba(255, 255, 255, 0.25); white-space: nowrap; display: flex; align-items: center; gap: 1.5rem; }
+  .marquee-item { font-family: 'Playfair Display', serif; font-size: 1rem; font-style: italic; color: rgba(255, 255, 255, 0.6); white-space: nowrap; display: flex; align-items: center; gap: 1.5rem; }
   .marquee-item span.dot { width: 6px; height: 6px; background: var(--hot-pink); border-radius: 50%; opacity: 0.5; flex-shrink: 0; }
   @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
   /* ============ SCROLL REVEAL ============ */
-  .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .js .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+  .js .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* ============ FAQ ============ */
   .faq { background: radial-gradient(ellipse at 60% 30%, rgba(255, 20, 147, 0.06) 0%, transparent 50%), var(--midnight); }
@@ -517,6 +518,11 @@
     .sponsor-books { flex-direction: column; align-items: center; }
     .sponsor-book { width: 100%; max-width: 260px; }
   }
+
+/* Respect the "reduce motion" setting on phones and computers */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
 </style>
 </head>
 <body>
@@ -1017,7 +1023,9 @@
   });
 
   let lastSparkle = 0;
-  document.addEventListener('mousemove', (e) => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelector('.hero').addEventListener('mousemove', (e) => {
+    if (reduceMotion) return;
     const now = Date.now();
     if (now - lastSparkle < 30) return;
     lastSparkle = now;

@@ -287,12 +287,12 @@
     border-color: var(--hot-pink); background: rgba(255,20,147,0.06);
     box-shadow: 0 0 0 3px rgba(255,20,147,0.15);
   }
-  input::placeholder { color: rgba(255,255,255,0.25); }
+  input::placeholder { color: rgba(255,255,255,0.6); }
 
   .consent-check {
     display: flex; align-items: flex-start; gap: 0.8rem;
     margin: 1.5rem 0;
-    font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.5;
+    font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.5;
   }
   .consent-check input[type="checkbox"] {
     width: 18px; height: 18px; min-width: 18px; min-height: 18px;
@@ -361,7 +361,7 @@
     box-shadow: 0 4px 20px rgba(255,20,147,0.4);
   }
   .step-card h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
-  .step-card p { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+  .step-card p { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
 
   /* ============ FOOTER ============ */
   footer {
@@ -370,9 +370,9 @@
   }
   .footer-logo { font-family: 'Pacifico', cursive; font-size: 1.8rem; color: var(--hot-pink); text-shadow: 0 0 20px rgba(255,20,147,0.4); margin-bottom: 0.8rem; }
   .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-  .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+  .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
   .footer-links a:hover { color: var(--neon-pink); }
-  .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.2); }
+  .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 700px) {
@@ -385,6 +385,14 @@
     .prize-badges { gap: 0.6rem; }
     .prize-badge { font-size: 0.75rem; padding: 0.4rem 0.9rem; }
   }
+
+  /* Keep reading pages still: no pulsing glows */
+  .disco-light { animation: none !important; }
+
+/* Respect the "reduce motion" setting on phones and computers */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
 </style>
 </head>
 <body>
@@ -401,7 +409,6 @@
   <div class="disco-light"></div>
   <div class="disco-light"></div>
   <div class="disco-light"></div>
-  <div class="disco-squares" id="discoSquares"></div>
 
   <div class="contest-hero-inner">
     <div class="prize-badges">
@@ -495,7 +502,7 @@
     <div style="text-align:center; margin-bottom:2.5rem;">
       <div class="section-label" style="justify-content:center;">Enter Now</div>
       <h2 class="section-title">Ready to Win?</h2>
-      <p style="color:rgba(255,255,255,0.5); font-size:0.95rem;">Fill out the form below — all fields required. One entry per person.</p>
+      <p style="color:rgba(255,255,255,0.6); font-size:0.95rem;">Fill out the form below — all fields required. One entry per person.</p>
     </div>
 
     <div class="form-card">
@@ -534,7 +541,7 @@
 
         <div class="consent-check">
           <input type="checkbox" id="consent" name="consent" required>
-          <label for="consent" style="margin-bottom:0; font-weight:400; color:rgba(255,255,255,0.5);">
+          <label for="consent" style="margin-bottom:0; font-weight:400; color:rgba(255,255,255,0.6);">
             I agree to be contacted by The Wedding Police if I win. I understand my entry information will be used only to administer this contest. <span class="req">*</span>
           </label>
         </div>
@@ -579,41 +586,6 @@
   // ---- NAV SCROLL ----
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
-
-  // ---- DISCO SQUARES ----
-  const container = document.getElementById('discoSquares');
-  for (let i = 0; i < 25; i++) {
-    const sq = document.createElement('div');
-    sq.className = 'disco-square';
-    sq.style.left = Math.random() * 100 + '%';
-    sq.style.animationDelay = Math.random() * 15 + 's';
-    sq.style.animationDuration = (10 + Math.random() * 15) + 's';
-    sq.style.width = sq.style.height = (4 + Math.random() * 8) + 'px';
-    const colors = ['rgba(255,20,147,0.15)', 'rgba(0,206,209,0.12)', 'rgba(255,215,0,0.1)', 'rgba(255,255,255,0.07)'];
-    sq.style.background = colors[Math.floor(Math.random() * colors.length)];
-    container.appendChild(sq);
-  }
-
-  // ---- SPARKLE CURSOR ----
-  let lastSparkle = 0;
-  document.addEventListener('mousemove', (e) => {
-    const now = Date.now();
-    if (now - lastSparkle < 35) return;
-    lastSparkle = now;
-    for (let i = 0; i < 2; i++) {
-      const sp = document.createElement('div');
-      sp.className = 'sparkle';
-      sp.style.left = (e.clientX + (Math.random() - 0.5) * 28) + 'px';
-      sp.style.top = (e.clientY + (Math.random() - 0.5) * 28) + 'px';
-      const colors = ['#FF1493', '#FFD700', '#00CED1', '#FF69B4', '#fff'];
-      sp.style.background = colors[Math.floor(Math.random() * colors.length)];
-      const size = 3 + Math.random() * 7;
-      sp.style.width = size + 'px'; sp.style.height = size + 'px';
-      sp.style.animationDuration = (0.6 + Math.random() * 0.8) + 's';
-      document.body.appendChild(sp);
-      setTimeout(() => sp.remove(), 1400);
-    }
-  });
 
   // ---- FORM SUBMISSION (Firestore) ----
   const form = document.getElementById('contestForm');
