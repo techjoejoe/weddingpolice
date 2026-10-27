@@ -50,10 +50,7 @@
     { "@type": "Person", "name": "Penny" },
     { "@type": "Person", "name": "Jim" }
   ],
-  "webFeed": [
-    "https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl",
-    "https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808"
-  ],
+  "webFeed": "https://anchor.fm/s/10dadcee8/podcast/rss",
   "sameAs": [
     "https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl",
     "https://podcasts.apple.com/us/podcast/the-wedding-police/id1875631808",
@@ -61,12 +58,12 @@
     "https://www.facebook.com/profile.php?id=61586443233812"
   ],
   "hasPart": [
-    { "@type": "PodcastEpisode", "name": "Only the Bride Wears White", "partOfSeries": { "@type": "PodcastSeries", "name": "The Wedding Police" } },
-    { "@type": "PodcastEpisode", "name": "The Dark Side of DIY", "partOfSeries": { "@type": "PodcastSeries", "name": "The Wedding Police" } },
-    { "@type": "PodcastEpisode", "name": "Bridal Gown Shopping", "partOfSeries": { "@type": "PodcastSeries", "name": "The Wedding Police" } },
-    { "@type": "PodcastEpisode", "name": "Signature Cocktails", "partOfSeries": { "@type": "PodcastSeries", "name": "The Wedding Police" } },
-    { "@type": "PodcastEpisode", "name": "Messy Weddings", "partOfSeries": { "@type": "PodcastSeries", "name": "The Wedding Police" } },
-    { "@type": "PodcastEpisode", "name": "Wedding Speeches and Toasts", "partOfSeries": { "@type": "PodcastSeries", "name": "The Wedding Police" } }
+    {"@type": "PodcastEpisode", "name": "Katie's Wedding Update", "url": "https://theweddingpolice.com/episodes/katies-wedding-update.html", "datePublished": "2026-10-23"},
+    {"@type": "PodcastEpisode", "name": "Janet's Planet! Astrology at the Altar", "url": "https://theweddingpolice.com/episodes/janets-planet-astrology-at-the-altar.html", "datePublished": "2026-10-18"},
+    {"@type": "PodcastEpisode", "name": "Rehearsal Dinner: Veils, Tales and Cocktails", "url": "https://theweddingpolice.com/episodes/rehearsal-dinner-veils-tales-and-cocktails.html", "datePublished": "2026-10-12"},
+    {"@type": "PodcastEpisode", "name": "Wedding Guest Plus One or None?", "url": "https://theweddingpolice.com/episodes/wedding-guest-plus-one-or-none.html", "datePublished": "2026-09-30"},
+    {"@type": "PodcastEpisode", "name": "Keeping Up with Katie", "url": "https://theweddingpolice.com/episodes/keeping-up-with-katie.html", "datePublished": "2026-09-24"},
+    {"@type": "PodcastEpisode", "name": "Gown Gossip with Dave Gaffke!", "url": "https://theweddingpolice.com/episodes/gown-gossip-with-dave-gaffke.html", "datePublished": "2026-09-16"}
   ]
 }
 </script>
@@ -346,11 +343,23 @@
   .faq-answer p { padding: 0 1.6rem 1.4rem; color: rgba(255, 255, 255, 0.6); line-height: 1.7; font-size: 0.95rem; }
 
   /* ============ EPISODE LIST ============ */
-  .episode-list { list-style: none; margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-  .episode-list li { background: var(--glass-white); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1rem 1.2rem; display: flex; align-items: center; gap: 0.8rem; font-size: 0.95rem; color: rgba(255, 255, 255, 0.7); transition: border-color 0.3s, transform 0.3s; }
-  .episode-list li:hover { border-color: rgba(255, 20, 147, 0.3); transform: translateY(-2px); }
-  .episode-list .ep-icon { font-size: 1.1rem; flex-shrink: 0; }
-  @media (max-width: 600px) { .episode-list { grid-template-columns: 1fr; } }
+  .latest-eps { margin-bottom: 3rem; }
+  .latest-eps-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+  .latest-eps-head h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; }
+  .latest-eps-head a { color: var(--neon-pink); font-weight: 600; text-decoration: none; }
+  .latest-eps-head a:hover { text-decoration: underline; }
+  .ep-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .ep-card { display: flex; align-items: center; text-decoration: none; color: #fff; background: var(--glass-white); border: 1px solid var(--glass-border); border-radius: 14px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
+  .ep-card:hover { border-color: var(--hot-pink); transform: translateY(-3px); }
+  .ep-card img { width: 112px; height: auto; aspect-ratio: 1; object-fit: cover; display: block; flex-shrink: 0; }
+  .ep-card-body { padding: 0.8rem 1.1rem; }
+  .ep-card-meta { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px; color: var(--disco-gold); }
+  .ep-card h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; line-height: 1.3; margin-top: 0.3rem; }
+  @media (max-width: 700px) {
+    .ep-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+    .ep-card img { width: 92px; }
+    .ep-card-body { padding: 0.7rem 0.9rem; }
+  }
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 1240px) {
@@ -374,8 +383,7 @@
     .orbit-ring:nth-child(2) { width: 260px; height: 310px; }
     .about-features { grid-template-columns: 1fr; }
     .embed-bottom-row { flex-direction: column; text-align: center; }
-    .episode-list { grid-template-columns: 1fr; }
-  }
+    }
 
   @media (max-width: 600px) {
     nav { padding: 1rem; }
@@ -400,8 +408,7 @@
     .embed-frame { padding: 0.8rem; }
     .embed-badges { flex-direction: column; align-items: center; gap: 0.6rem; }
     .embed-bottom-row { flex-direction: column; text-align: center; }
-    .episode-list { grid-template-columns: 1fr; }
-    .faq h2 { font-size: 1.6rem; }
+      .faq h2 { font-size: 1.6rem; }
     .faq-question { font-size: 0.95rem; padding: 1.2rem; }
     .faq-answer p { padding: 0 1.2rem 1.2rem; font-size: 0.9rem; }
     .listen-platforms { flex-direction: column; align-items: center; }
@@ -508,7 +515,7 @@
     <li><a href="blog/">Blog</a></li>
     <li><a href="budget-calculator.html">Budget Calc</a></li>
     <li><a href="wedding-checklist.html">Checklist</a></li>
-    <li><a href="#episodes">Episodes</a></li>
+    <li><a href="episodes/">Episodes</a></li>
     <li><a href="https://www.facebook.com/profile.php?id=61586443233812" target="_blank" rel="noopener noreferrer">Facebook</a></li>
     <li><a href="https://www.instagram.com/theweddingpolicepodcast/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
     <li><a href="contest.html" style="color:var(--disco-gold);font-weight:700;">🏆 Win a Spot!</a></li>
@@ -621,6 +628,22 @@
       <h2 class="section-title">Listen to The Wedding Police Podcast</h2>
       <p class="section-subtitle" style="margin:0.5rem auto 0;">Stream every episode free on Spotify and Apple Podcasts. Hit play and let Penny & Jim do the patrolling.</p>
     </div>
+    <!-- LATEST-EPISODES:START -->
+      <div class="latest-eps">
+        <div class="latest-eps-head">
+          <h3>Latest Episodes</h3>
+          <a href="episodes/">See all 39 episodes →</a>
+        </div>
+        <div class="ep-grid">
+        <a class="ep-card" href="episodes/katies-wedding-update.html"><img src="episodes/img/katies-wedding-update.jpg" width="600" height="600" loading="lazy" alt="Katie&#x27;s Wedding Update episode artwork"><div class="ep-card-body"><span class="ep-card-meta">Ep 39 · Oct 23, 2026 · 15 min</span><h3>Katie&#x27;s Wedding Update</h3></div></a>
+        <a class="ep-card" href="episodes/janets-planet-astrology-at-the-altar.html"><img src="episodes/img/janets-planet-astrology-at-the-altar.jpg" width="600" height="600" loading="lazy" alt="Janet&#x27;s Planet! Astrology at the Altar episode artwork"><div class="ep-card-body"><span class="ep-card-meta">Ep 38 · Oct 18, 2026 · 20 min</span><h3>Janet&#x27;s Planet! Astrology at the Altar</h3></div></a>
+        <a class="ep-card" href="episodes/rehearsal-dinner-veils-tales-and-cocktails.html"><img src="episodes/img/rehearsal-dinner-veils-tales-and-cocktails.jpg" width="600" height="600" loading="lazy" alt="Rehearsal Dinner: Veils, Tales and Cocktails episode artwork"><div class="ep-card-body"><span class="ep-card-meta">Ep 37 · Oct 12, 2026 · 21 min</span><h3>Rehearsal Dinner: Veils, Tales and Cocktails</h3></div></a>
+        <a class="ep-card" href="episodes/wedding-guest-plus-one-or-none.html"><img src="episodes/img/wedding-guest-plus-one-or-none.jpg" width="600" height="600" loading="lazy" alt="Wedding Guest Plus One or None? episode artwork"><div class="ep-card-body"><span class="ep-card-meta">Ep 36 · Sep 30, 2026 · 12 min</span><h3>Wedding Guest Plus One or None?</h3></div></a>
+        <a class="ep-card" href="episodes/keeping-up-with-katie.html"><img src="episodes/img/keeping-up-with-katie.jpg" width="600" height="600" loading="lazy" alt="Keeping Up with Katie episode artwork"><div class="ep-card-body"><span class="ep-card-meta">Ep 35 · Sep 24, 2026 · 22 min</span><h3>Keeping Up with Katie</h3></div></a>
+        <a class="ep-card" href="episodes/gown-gossip-with-dave-gaffke.html"><img src="episodes/img/gown-gossip-with-dave-gaffke.jpg" width="600" height="600" loading="lazy" alt="Gown Gossip with Dave Gaffke! episode artwork"><div class="ep-card-body"><span class="ep-card-meta">Ep 34 · Sep 16, 2026 · 22 min</span><h3>Gown Gossip with Dave Gaffke!</h3></div></a>
+        </div>
+      </div>
+      <!-- LATEST-EPISODES:END -->
     <div class="spotify-embed-wrapper reveal">
       <div class="embed-glow"></div>
       <div class="embed-frame">
@@ -643,18 +666,6 @@
         </div>
       </div>
 
-      <!-- Crawlable Episode List -->
-      <div style="margin-top:2rem;">
-        <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; margin-bottom:0.5rem; color:rgba(255,255,255,0.8);">Recent Episodes</h3>
-        <ul class="episode-list">
-          <li><span class="ep-icon">🎙️</span> Only the Bride Wears White</li>
-          <li><span class="ep-icon">🎙️</span> The Dark Side of DIY</li>
-          <li><span class="ep-icon">🎙️</span> Bridal Gown Shopping</li>
-          <li><span class="ep-icon">🎙️</span> Signature Cocktails</li>
-          <li><span class="ep-icon">🎙️</span> Messy Weddings</li>
-          <li><span class="ep-icon">🎙️</span> Wedding Speeches and Toasts</li>
-        </ul>
-      </div>
 
       <div class="embed-badges">
         <div class="embed-badge"><span>🚨</span> Real Wedding Fails & Stories</div>
@@ -855,6 +866,7 @@
     </a>
   </div>
   <div class="footer-links">
+    <a href="episodes/">All Episodes</a>
     <a href="blog/">Wedding Blog</a>
     <a href="wedding-checklist.html">Wedding Checklist</a>
     <a href="budget-calculator.html">Budget Calculator</a>

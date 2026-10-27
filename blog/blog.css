@@ -116,6 +116,7 @@ body { font-family: 'Outfit', sans-serif; background: var(--midnight); color: #f
   transition: transform 0.3s, box-shadow 0.3s;
 }
 .cta-btn.spotify { background: linear-gradient(135deg, #1DB954, #1aa34a); box-shadow: 0 4px 15px rgba(29,185,84,0.4); }
+.cta-btn.play { background: linear-gradient(135deg, var(--hot-pink), #c70070); box-shadow: 0 4px 15px rgba(255,20,147,0.4); }
 .cta-btn.apple { background: linear-gradient(135deg, #872ec4, #6a1fa0); box-shadow: 0 4px 15px rgba(135,46,196,0.4); }
 .cta-btn:hover { transform: translateY(-2px); }
 
@@ -159,6 +160,8 @@ body { font-family: 'Outfit', sans-serif; background: var(--midnight); color: #f
   .blog-nav-links { gap: 0.8rem; }
   .blog-nav-links a { font-size: 0.8rem; }
   .blog-nav-links .nav-cta { padding: 0.4rem 1rem; font-size: 0.8rem; }
+  .blog-nav .nav-logo { font-size: 1.15rem; white-space: nowrap; }
+  .blog-nav-links .nav-cta { white-space: nowrap; }
   .blog-hero { padding: 4rem 1.2rem 2rem; }
   .blog-hero h1 { font-size: 1.8rem; }
   .blog-hero p { font-size: 0.95rem; }
@@ -177,4 +180,18 @@ body { font-family: 'Outfit', sans-serif; background: var(--midnight); color: #f
   .blog-grid { padding: 1.5rem 1.2rem 4rem; grid-template-columns: 1fr; }
   .blog-card { padding: 1.4rem; }
   .blog-footer { padding: 2rem 1.2rem; }
+}
+
+/* Phones: the logo already links home, so drop the Home link to keep the bar on one line */
+@media (max-width: 480px) {
+  .blog-nav { gap: 0.6rem; }
+  .blog-nav-links { gap: 0.7rem; }
+  .blog-nav-links li:first-child { display: none; }
+}
+@media (max-width: 360px) {
+  .blog-nav { padding: 0.8rem 0.6rem; }
+  .blog-nav .nav-logo { font-size: 1rem; }
+  .blog-nav-links { gap: 0.45rem; }
+  .blog-nav-links a { font-size: 0.75rem; }
+  .blog-nav-links .nav-cta { padding: 0.35rem 0.7rem; font-size: 0.75rem; }
 }
