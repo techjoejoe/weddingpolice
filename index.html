@@ -139,8 +139,8 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Outfit', sans-serif; background: var(--midnight); color: #fff; overflow-x: hidden; }
+  html { scroll-behavior: smooth; overflow-x: hidden; overflow-x: clip; }
+  body { font-family: 'Outfit', sans-serif; background: var(--midnight); color: #fff; overflow-x: hidden; overflow-x: clip; }
 
   /* ============ DISCO BALL CURSOR TRAIL ============ */
   .sparkle {
@@ -353,6 +353,12 @@
   @media (max-width: 600px) { .episode-list { grid-template-columns: 1fr; } }
 
   /* ============ RESPONSIVE ============ */
+  @media (max-width: 1240px) {
+    .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(13, 13, 26, 0.97); backdrop-filter: blur(20px); flex-direction: column; padding: 2rem; gap: 1.5rem; border-bottom: 1px solid var(--glass-border); }
+    .nav-links.open { display: flex; }
+    .mobile-toggle { display: flex; }
+  }
+
   @media (max-width: 900px) {
     .hero-content { flex-direction: column; text-align: center; }
     .hero-image { width: 500px; height: 375px; }
@@ -373,9 +379,6 @@
 
   @media (max-width: 600px) {
     nav { padding: 1rem; }
-    .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(13, 13, 26, 0.97); backdrop-filter: blur(20px); flex-direction: column; padding: 2rem; gap: 1.5rem; border-bottom: 1px solid var(--glass-border); }
-    .nav-links.open { display: flex; }
-    .mobile-toggle { display: flex; }
     .hero { padding: 5rem 1.2rem 3rem; min-height: auto; }
     .hero-content { gap: 2rem; }
     .hero-image-wrapper { width: 100%; }
