@@ -5,12 +5,12 @@ import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.12.2/firebas
 import { getAuth } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 
 const firebaseConfig = {
-  apiKey: 'PASTE_API_KEY',
+  apiKey: 'AIzaSyCD0jDQUSwBp-8T5CoUslYGxOlN1HecHAg',
   authDomain: 'theweddingpolice.firebaseapp.com',
   projectId: 'theweddingpolice',
-  storageBucket: 'theweddingpolice.appspot.com',
-  messagingSenderId: 'PASTE_SENDER_ID',
-  appId: 'PASTE_APP_ID'
+  storageBucket: 'theweddingpolice.firebasestorage.app',
+  messagingSenderId: '1089837881895',
+  appId: '1:1089837881895:web:9c221701551e41e8424c02'
 };
 
 export const app = initializeApp(firebaseConfig);
