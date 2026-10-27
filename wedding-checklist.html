@@ -25,6 +25,9 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"12-Month Wedding Planning Checklist","description":"Free interactive wedding planning checklist with auto-save. Track every task across 8 time periods from 12 months out to wedding week.","url":"https://theweddingpolice.com/wedding-checklist.html","applicationCategory":"LifestyleApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":[{"@type":"Person","name":"Penny"},{"@type":"Person","name":"Jim"}],"publisher":{"@type":"Organization","name":"The Wedding Police Podcast"}}
 </script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "When should you start planning a wedding?", "acceptedAnswer": {"@type": "Answer", "text": "Twelve to eighteen months before the date is ideal, especially for popular Saturday dates in peak season when venues and photographers book up first. You can plan a great wedding in six months or less, but you'll need to be flexible on date and venue."}}, {"@type": "Question", "name": "What should you book first for a wedding?", "acceptedAnswer": {"@type": "Answer", "text": "Set your budget and a rough guest count first, then book the venue. The venue locks in your date and capacity, and almost every other vendor depends on both. Photographers and popular bands or DJs come next, since the best ones book a year or more out."}}, {"@type": "Question", "name": "When should wedding invitations go out?", "acceptedAnswer": {"@type": "Answer", "text": "Most etiquette guides say six to eight weeks before the wedding, or eight to twelve weeks for a destination wedding. This checklist has them going out a little earlier, around the four-month mark, which gives traveling guests more notice. Either works as long as your RSVP deadline lands three to four weeks before the wedding."}}, {"@type": "Question", "name": "When should you send save-the-dates?", "acceptedAnswer": {"@type": "Answer", "text": "Six to eight months before the wedding is standard, and closer to a year for destination weddings or holiday weekends. Only send them to people you're certain will get an invitation."}}, {"@type": "Question", "name": "Does this checklist save my progress?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Your checked tasks are saved in this browser on this device, so you can come back any time. If you switch devices or clear your browser data, the list starts fresh."}}, {"@type": "Question", "name": "Is the wedding checklist free?", "acceptedAnswer": {"@type": "Answer", "text": "Completely free, no sign-up required. It's built by The Wedding Police podcast to go along with the planning advice Penny and Jim share on the show."}}]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Outfit:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
 <style>
@@ -117,6 +120,25 @@
   .cl-task.checked .cl-task-text { text-decoration: line-through; color: rgba(255,255,255,0.3); }
   .cl-task-text { font-size: 0.93rem; color: rgba(255,255,255,0.7); transition: all 0.3s; }
 
+  /* Guide */
+  .guide { max-width: 780px; margin: 2rem auto 0; padding: 0 2rem; position: relative; z-index: 1; }
+  .guide h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; line-height: 1.25; margin: 3rem 0 1rem; }
+  .guide h2 .accent { color: var(--disco-gold); font-style: italic; }
+  .guide h3 { font-size: 1.1rem; font-weight: 600; margin: 1.6rem 0 0.6rem; }
+  .guide p, .guide li { color: rgba(255,255,255,0.72); line-height: 1.75; font-size: 1.02rem; }
+  .guide p { margin-bottom: 1.1rem; }
+  .guide ul { margin: 0 0 1.2rem 1.3rem; }
+  .guide li { margin-bottom: 0.5rem; }
+  .guide strong { color: #fff; }
+  .guide a { color: var(--hot-pink); text-decoration: none; }
+  .guide a:hover { text-decoration: underline; }
+  .faq details { background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); border-radius: 14px; margin-bottom: 0.7rem; }
+  .faq summary { padding: 1rem 1.3rem; cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; color: var(--hot-pink); font-size: 1.3rem; line-height: 1; }
+  .faq details[open] summary::after { content: '−'; }
+  .faq details p { padding: 0 1.3rem 1.1rem; margin: 0; }
+
   /* Footer */
   footer { padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(13,13,26,0.9); position: relative; z-index: 1; margin-top: 4rem; }
   .footer-logo { font-family: 'Pacifico', cursive; font-size: 1.8rem; color: var(--hot-pink); text-shadow: 0 0 20px rgba(255,20,147,0.4); margin-bottom: 1rem; }
@@ -138,6 +160,7 @@
     .tool-hero { padding: 5.5rem 1.2rem 2rem; }
     .cl-header { padding: 0.9rem 1rem; }
     .cl-tasks { padding: 0 1rem 1rem; }
+    .guide { padding: 0 1.2rem; }
   }
 </style>
 </head>
@@ -186,6 +209,67 @@
     </div>
   </div>
 </section>
+
+<article class="guide">
+  <h2>How to Use This <span class="accent">Wedding Planning Checklist</span></h2>
+  <p>Wedding planning isn't one giant task. It's about 40 small ones that have to happen in the right order. Book the photographer before the venue and you might lose your date. Order invitations before you've confirmed the guest list and you'll be reprinting. This checklist puts every task in the order that saves you the most stress and money.</p>
+  <ul>
+    <li><strong>Click a time period</strong> to open it, then tap each task as you finish it.</li>
+    <li><strong>Your progress saves automatically</strong> in this browser, so you can close the page and pick up where you left off.</li>
+    <li><strong>Start with your current time period.</strong> If your wedding is eight months away, open "8 Months Before" and then circle back to anything earlier you haven't done yet.</li>
+  </ul>
+  <p>Want the reasoning behind each step? Our <a href="blog/wedding-planning-timeline.html">month-by-month wedding planning timeline</a> explains what to book when, and why. And before you book anything, plug your number into the <a href="budget-calculator.html">wedding budget calculator</a> so every decision on this list has a price tag attached.</p>
+
+  <h2>Engaged for Less Than a Year? <span class="accent">Compress It.</span></h2>
+  <p>Twelve months is the comfortable version, but plenty of couples plan beautiful weddings in less. The trick is doing the early tasks all at once instead of spreading them out.</p>
+  <h3>9 months out</h3>
+  <p>Combine the 12- and 10-month lists into your first month: set the budget, draft the guest list, then book your venue, photographer and officiant in the same few weeks. Send save-the-dates as soon as the venue is locked in.</p>
+  <h3>6 months out</h3>
+  <p>Book venue, photographer and music in your first two weeks. Be flexible on the date: Fridays, Sundays and off-season months have the most availability. Buy an off-the-rack or sample dress so you're not waiting on a months-long order. Skip save-the-dates and send invitations early instead.</p>
+  <h3>3 months out</h3>
+  <p>Look for all-inclusive venues that bundle catering, rentals and a coordinator. Fewer vendors means fewer decisions. Keep the guest list tight, send digital invitations, and lean on friends for day-of tasks.</p>
+
+  <h2>The Tasks Couples <span class="accent">Forget Most</span></h2>
+  <p>These are the ones that sneak up on people, usually in the final few weeks:</p>
+  <ul>
+    <li><strong>Vendor meals.</strong> Your photographer, DJ and coordinator are working through dinner. Tell your caterer how many vendor meals to plan.</li>
+    <li><strong>Marriage license timing.</strong> Some states have waiting periods, and most licenses expire after a set number of days. Check your county clerk's rules so you don't apply too early or too late.</li>
+    <li><strong>Tip envelopes.</strong> Prep labeled envelopes the week before and hand them to a trusted friend to distribute.</li>
+    <li><strong>A rain plan.</strong> Any outdoor moment, from the ceremony to photos to cocktail hour, needs a backup spot.</li>
+    <li><strong>Final payment due dates.</strong> Many vendors want the balance one to two weeks before the wedding. Put every deadline in your calendar.</li>
+    <li><strong>Returns after the wedding.</strong> Rented suits, décor and borrowed items need to go back. Assign someone who isn't leaving on a honeymoon.</li>
+    <li><strong>Thank-you notes.</strong> Track gifts as they arrive so you're not reconstructing the list from memory later.</li>
+  </ul>
+  <p>Things will still go sideways. That's what weddings do. Our guide to <a href="blog/wedding-day-disasters.html">surviving wedding day disasters</a> covers the most common ones and how real couples handled them.</p>
+
+  <section class="faq">
+    <h2>Wedding Checklist <span class="accent">FAQ</span></h2>
+    <details>
+      <summary>When should you start planning a wedding?</summary>
+      <p>Twelve to eighteen months before the date is ideal, especially for popular Saturday dates in peak season when venues and photographers book up first. You can plan a great wedding in six months or less, but you'll need to be flexible on date and venue.</p>
+    </details>
+    <details>
+      <summary>What should you book first for a wedding?</summary>
+      <p>Set your budget and a rough guest count first, then book the venue. The venue locks in your date and capacity, and almost every other vendor depends on both. Photographers and popular bands or DJs come next, since the best ones book a year or more out.</p>
+    </details>
+    <details>
+      <summary>When should wedding invitations go out?</summary>
+      <p>Most etiquette guides say six to eight weeks before the wedding, or eight to twelve weeks for a destination wedding. This checklist has them going out a little earlier, around the four-month mark, which gives traveling guests more notice. Either works as long as your RSVP deadline lands three to four weeks before the wedding.</p>
+    </details>
+    <details>
+      <summary>When should you send save-the-dates?</summary>
+      <p>Six to eight months before the wedding is standard, and closer to a year for destination weddings or holiday weekends. Only send them to people you're certain will get an invitation.</p>
+    </details>
+    <details>
+      <summary>Does this checklist save my progress?</summary>
+      <p>Yes. Your checked tasks are saved in this browser on this device, so you can come back any time. If you switch devices or clear your browser data, the list starts fresh.</p>
+    </details>
+    <details>
+      <summary>Is the wedding checklist free?</summary>
+      <p>Completely free, no sign-up required. It's built by The Wedding Police podcast to go along with the planning advice Penny and Jim share on the show.</p>
+    </details>
+  </section>
+</article>
 
 <footer>
   <div class="footer-logo">The Wedding Police</div>

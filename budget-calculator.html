@@ -25,6 +25,9 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Wedding Budget Calculator","description":"Free interactive wedding budget calculator that provides a recommended spending breakdown based on your total budget.","url":"https://theweddingpolice.com/budget-calculator.html","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":[{"@type":"Person","name":"Penny"},{"@type":"Person","name":"Jim"}],"publisher":{"@type":"Organization","name":"The Wedding Police Podcast"}}
 </script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a realistic wedding budget?", "acceptedAnswer": {"@type": "Answer", "text": "Recent national surveys put the average U.S. wedding somewhere in the low-to-mid $30,000s, but the range is huge. Location and guest count matter more than anything else. A realistic budget is the amount you can pay without going into debt, then shape the wedding around that number rather than the other way around."}}, {"@type": "Question", "name": "What percentage of a wedding budget goes to the venue?", "acceptedAnswer": {"@type": "Answer", "text": "Venue and catering together usually take 40% to 50% of the total budget. This calculator uses 45%. If you choose an all-inclusive venue that also covers rentals, linens and a coordinator, you can often trim other categories to compensate."}}, {"@type": "Question", "name": "How much should I set aside as a wedding budget buffer?", "acceptedAnswer": {"@type": "Answer", "text": "Plan for 5% to 10% of your total. This calculator holds back 9% for miscellaneous costs and surprises, because almost every couple ends up needing it for tips, service charges and last-minute additions."}}, {"@type": "Question", "name": "Does the wedding budget include the engagement ring?", "acceptedAnswer": {"@type": "Answer", "text": "Usually not. Most couples budget the engagement ring separately, since it's bought long before wedding planning starts. The rings category in this calculator is for wedding bands."}}, {"@type": "Question", "name": "Who pays for the wedding?", "acceptedAnswer": {"@type": "Answer", "text": "There's no single rule anymore. Many couples pay for most of it themselves, and families often contribute. Whatever your situation, have the money conversation early and get each contribution confirmed before you start booking vendors."}}, {"@type": "Question", "name": "Is this wedding budget calculator free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, it's completely free with no sign-up. Your numbers stay in your browser and aren't saved or shared."}}]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Outfit:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
 <style>
@@ -117,6 +120,29 @@
   .cta-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 1rem 2.2rem; border-radius: 60px; font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 600; text-decoration: none; color: #fff; border: 1px solid var(--glass-border); background: var(--glass-white); backdrop-filter: blur(10px); transition: all 0.3s; }
   .cta-btn:hover { border-color: var(--hot-pink); background: rgba(255,20,147,0.1); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255,20,147,0.2); }
 
+  /* Guide */
+  .guide { max-width: 780px; margin: 0 auto 2rem; padding: 0 2rem; position: relative; z-index: 1; }
+  .guide h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; line-height: 1.25; margin: 3rem 0 1rem; }
+  .guide h2 .accent { color: var(--disco-gold); font-style: italic; }
+  .guide p, .guide li { color: rgba(255,255,255,0.72); line-height: 1.75; font-size: 1.02rem; }
+  .guide p { margin-bottom: 1.1rem; }
+  .guide ul { margin: 0 0 1.2rem 1.3rem; }
+  .guide li { margin-bottom: 0.5rem; }
+  .guide strong { color: #fff; }
+  .guide a { color: var(--disco-gold); text-decoration: none; }
+  .guide a:hover { text-decoration: underline; }
+  .split-table { width: 100%; border-collapse: collapse; margin: 0.5rem 0 1.5rem; font-size: 0.98rem; }
+  .split-table th, .split-table td { padding: 0.7rem 0.9rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .split-table th { font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.45); font-weight: 600; }
+  .split-table td { color: rgba(255,255,255,0.75); }
+  .split-table td:not(:first-child), .split-table th:not(:first-child) { text-align: right; white-space: nowrap; }
+  .faq details { background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); border-radius: 14px; margin-bottom: 0.7rem; }
+  .faq summary { padding: 1rem 1.3rem; cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; color: var(--disco-gold); font-size: 1.3rem; line-height: 1; }
+  .faq details[open] summary::after { content: '−'; }
+  .faq details p { padding: 0 1.3rem 1.1rem; margin: 0; }
+
   /* Footer */
   footer { padding: 3rem 2rem; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(13,13,26,0.9); position: relative; z-index: 1; }
   .footer-logo { font-family: 'Pacifico', cursive; font-size: 1.8rem; color: var(--hot-pink); text-shadow: 0 0 20px rgba(255,20,147,0.4); margin-bottom: 1rem; }
@@ -141,6 +167,8 @@
     .calc-panel { padding: 1.5rem; }
     .preset-buttons { gap: 0.4rem; }
     .preset-btn { padding: 0.45rem 0.9rem; font-size: 0.8rem; }
+    .guide { padding: 0 1.2rem; }
+    .split-table th, .split-table td { padding: 0.6rem 0.4rem; }
   }
 </style>
 </head>
@@ -196,6 +224,81 @@
   </div>
 </div>
 
+<article class="guide">
+  <h2>How This Calculator <span class="accent">Splits Your Budget</span></h2>
+  <p>The calculator uses a standard wedding budget breakdown based on where couples' money typically goes. Here's the full split, with what it looks like on a $30,000 wedding:</p>
+  <table class="split-table">
+    <thead><tr><th>Category</th><th>Share</th><th>On $30,000</th></tr></thead>
+    <tbody>
+      <tr><td>Venue &amp; catering</td><td>45%</td><td>$13,500</td></tr>
+      <tr><td>Photography &amp; video</td><td>12%</td><td>$3,600</td></tr>
+      <tr><td>Music &amp; entertainment</td><td>8%</td><td>$2,400</td></tr>
+      <tr><td>Flowers &amp; décor</td><td>8%</td><td>$2,400</td></tr>
+      <tr><td>Wedding attire</td><td>7%</td><td>$2,100</td></tr>
+      <tr><td>Invitations &amp; paper</td><td>3%</td><td>$900</td></tr>
+      <tr><td>Hair &amp; makeup</td><td>3%</td><td>$900</td></tr>
+      <tr><td>Wedding bands</td><td>3%</td><td>$900</td></tr>
+      <tr><td>Transportation</td><td>2%</td><td>$600</td></tr>
+      <tr><td>Miscellaneous / buffer</td><td>9%</td><td>$2,700</td></tr>
+    </tbody>
+  </table>
+  <p>Treat these numbers as a starting point, not a rule. The split is there so you can see the trade-offs before you sign a single contract.</p>
+
+  <h2>Adjust the Split to <span class="accent">Your Priorities</span></h2>
+  <p>The couples who stay on budget pick two or three things they care about most, spend there, and get ruthless about the rest. A few common swaps:</p>
+  <ul>
+    <li><strong>Love food and a packed dance floor?</strong> Move money from flowers and paper into catering and a live band.</li>
+    <li><strong>Photos are everything?</strong> Push photography toward 15% and skip the videographer, or hire one for the ceremony only.</li>
+    <li><strong>Outdoor or naturally beautiful venue?</strong> You'll need far less décor. Shift that money to wherever you're feeling the squeeze.</li>
+  </ul>
+  <p>Our <a href="blog/wedding-budget-tips.html">wedding budget tips</a> go deeper on where to save, and the <a href="blog/diy-wedding-ideas.html">DIY wedding guide</a> covers which projects actually save money (and which just cause meltdowns).</p>
+
+  <h2>Your Guest Count <span class="accent">Drives Everything</span></h2>
+  <p>Nearly half your budget scales with the number of people you invite. Here's a quick gut-check: take your venue and catering amount and divide it by your guest count. On a $30,000 budget, that's $13,500. With 100 guests, you have about $135 per person for food, drinks, venue and rentals. With 150 guests, it drops to $90.</p>
+  <p>If that per-person number looks low for the venues you're touring, you have two options: raise the budget or trim the list. Cutting 20 guests usually frees up more money than any other single decision.</p>
+
+  <h2>Hidden Costs That <span class="accent">Blow Up Budgets</span></h2>
+  <p>This is what the 9% buffer is for. These costs rarely show up in the first quote:</p>
+  <ul>
+    <li><strong>Service charges and tax.</strong> Catering quotes often add a service charge of 20% or more, plus sales tax on top.</li>
+    <li><strong>Gratuities.</strong> Plan to tip your coordinator, catering staff, hair and makeup team, drivers and musicians.</li>
+    <li><strong>Vendor meals.</strong> Your photographer, DJ and coordinator need dinner too.</li>
+    <li><strong>Alterations.</strong> Dress and suit tailoring is almost never included in the price tag.</li>
+    <li><strong>Postage.</strong> Heavy or oddly shaped invitations cost extra to mail, times every guest.</li>
+    <li><strong>Overtime.</strong> If the party runs long, vendors bill by the hour.</li>
+    <li><strong>Small stuff that adds up.</strong> Marriage license, welcome bags, cake-cutting fees and day-of emergency supplies.</li>
+  </ul>
+  <p>Once you have your numbers, use our free <a href="wedding-checklist.html">12-month wedding planning checklist</a> to book everything in the right order.</p>
+
+  <section class="faq">
+    <h2>Wedding Budget <span class="accent">FAQ</span></h2>
+    <details>
+      <summary>What is a realistic wedding budget?</summary>
+      <p>Recent national surveys put the average U.S. wedding somewhere in the low-to-mid $30,000s, but the range is huge. Location and guest count matter more than anything else. A realistic budget is the amount you can pay without going into debt, then shape the wedding around that number rather than the other way around.</p>
+    </details>
+    <details>
+      <summary>What percentage of a wedding budget goes to the venue?</summary>
+      <p>Venue and catering together usually take 40% to 50% of the total budget. This calculator uses 45%. If you choose an all-inclusive venue that also covers rentals, linens and a coordinator, you can often trim other categories to compensate.</p>
+    </details>
+    <details>
+      <summary>How much should I set aside as a wedding budget buffer?</summary>
+      <p>Plan for 5% to 10% of your total. This calculator holds back 9% for miscellaneous costs and surprises, because almost every couple ends up needing it for tips, service charges and last-minute additions.</p>
+    </details>
+    <details>
+      <summary>Does the wedding budget include the engagement ring?</summary>
+      <p>Usually not. Most couples budget the engagement ring separately, since it's bought long before wedding planning starts. The rings category in this calculator is for wedding bands.</p>
+    </details>
+    <details>
+      <summary>Who pays for the wedding?</summary>
+      <p>There's no single rule anymore. Many couples pay for most of it themselves, and families often contribute. Whatever your situation, have the money conversation early and get each contribution confirmed before you start booking vendors.</p>
+    </details>
+    <details>
+      <summary>Is this wedding budget calculator free?</summary>
+      <p>Yes, it's completely free with no sign-up. Your numbers stay in your browser and aren't saved or shared.</p>
+    </details>
+  </section>
+</article>
+
 <div class="tool-cta reveal">
   <p class="hint"><span>🎧</span> Hear Penny &amp; Jim's budgeting deep-dive</p>
   <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl" target="_blank" rel="noopener noreferrer" class="cta-btn">Listen to The Wedding Police →</a>
@@ -215,7 +318,7 @@
     { name: 'Wedding Attire', pct: 0.07, icon: '👗', color: '#38bdf8' },
     { name: 'Invitations & Paper', pct: 0.03, icon: '💌', color: '#fb923c' },
     { name: 'Hair & Makeup', pct: 0.03, icon: '💄', color: '#f87171' },
-    { name: 'Rings', pct: 0.03, icon: '💍', color: '#fbbf24' },
+    { name: 'Wedding Bands', pct: 0.03, icon: '💍', color: '#fbbf24' },
     { name: 'Transportation', pct: 0.02, icon: '🚗', color: '#60a5fa' },
     { name: 'Miscellaneous / Buffer', pct: 0.09, icon: '🎁', color: '#818cf8' }
   ];
