@@ -26,6 +26,13 @@
           }
         ]
       }
+    ],
+    "redirects": [
+      {
+        "regex": "^/(?P<path>.*)$",
+        "destination": "https://theweddingpolice.com/:path",
+        "type": 301
+      }
     ]
   },
   "firestore": {
