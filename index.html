@@ -378,7 +378,7 @@
   }
 
   /* ============ RESPONSIVE ============ */
-  @media (max-width: 1240px) {
+  @media (max-width: 900px) {
     .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(13, 13, 26, 0.97); backdrop-filter: blur(20px); flex-direction: column; padding: 2rem; gap: 1.5rem; border-bottom: 1px solid var(--glass-border); }
     .nav-links.open { display: flex; }
     .mobile-toggle { display: flex; }
@@ -496,27 +496,55 @@
   /* ============ SPONSORS ============ */
   .sponsors { background: radial-gradient(ellipse at 40% 60%, rgba(255, 215, 0, 0.06) 0%, transparent 50%), var(--midnight); text-align: center; }
   .sponsors-container { max-width: 900px; margin: 0 auto; }
-  .sponsor-card { background: var(--glass-white); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 3rem 2.5rem; margin-top: 2rem; transition: border-color 0.4s, box-shadow 0.4s; position: relative; overflow: hidden; }
-  .sponsor-card::before { content: ''; position: absolute; inset: 0; border-radius: 24px; padding: 1px; background: linear-gradient(135deg, var(--disco-gold), transparent 40%, transparent 60%, var(--hot-pink)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; opacity: 0.3; transition: opacity 0.4s; }
-  .sponsor-card:hover { border-color: rgba(255, 215, 0, 0.3); box-shadow: 0 16px 60px rgba(255, 215, 0, 0.1); }
-  .sponsor-card:hover::before { opacity: 0.6; }
-  .sponsor-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.2); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--disco-gold); margin-bottom: 1.5rem; }
-  .sponsor-name { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; margin-bottom: 0.8rem; }
-  .sponsor-name a { color: #fff; text-decoration: none; transition: color 0.3s; }
-  .sponsor-name a:hover { color: var(--disco-gold); }
-  .sponsor-desc { font-size: 1rem; color: rgba(255, 255, 255, 0.55); line-height: 1.6; max-width: 550px; margin: 0 auto 2rem; }
-  .sponsor-books { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
-  .sponsor-book { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--glass-border); border-radius: 14px; padding: 1.2rem 1.5rem; text-decoration: none; color: #fff; transition: all 0.3s; min-width: 180px; }
-  .sponsor-book:hover { border-color: var(--disco-gold); transform: translateY(-4px); box-shadow: 0 8px 25px rgba(255, 215, 0, 0.12); }
-  .sponsor-book .book-emoji { font-size: 2rem; display: block; margin-bottom: 0.6rem; }
-  .sponsor-book .book-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; }
-  .sponsor-book .book-price { font-size: 0.85rem; color: var(--disco-gold); font-weight: 600; }
-  .sponsor-cta { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.9rem 2rem; border-radius: 60px; font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 600; text-decoration: none; color: var(--midnight); background: linear-gradient(135deg, var(--disco-gold), #e6be2e); box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3); transition: all 0.3s; }
-  .sponsor-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5); }
+  .sponsors { padding-top: 4rem; padding-bottom: 4rem; }
+  .sponsors-title { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .sponsor-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0 1.5rem; }
+  .sponsor-tile { display: block; text-align: left; text-decoration: none; color: #fff; background: var(--glass-white); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.2rem 1.3rem; transition: border-color 0.3s, transform 0.3s; }
+  .sponsor-tile:hover { border-color: var(--disco-gold); transform: translateY(-3px); }
+  .sponsor-tile strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.3rem; }
+  .sponsor-tile span { font-size: 0.85rem; color: rgba(255, 255, 255, 0.65); line-height: 1.5; }
+  .sponsor-become { color: var(--disco-gold); font-weight: 600; text-decoration: none; font-size: 0.95rem; }
+  .sponsor-become:hover { text-decoration: underline; }
+
+  /* ============ TOPICS ============ */
+  .topics { background: radial-gradient(ellipse at 70% 20%, rgba(255, 20, 147, 0.07) 0%, transparent 55%), var(--midnight); text-align: center; }
+  .topics-container, .tools-container { max-width: 1100px; margin: 0 auto; }
+  .topic-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; text-align: left; }
+  .topic-card { background: var(--glass-white); border: 1px solid var(--glass-border); border-radius: 18px; padding: 1.4rem 1.3rem; }
+  .topic-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 0.9rem; }
+  .topic-card ul { list-style: none; display: grid; gap: 0.5rem; }
+  .topic-card a { display: block; color: #fff; text-decoration: none; font-size: 0.92rem; line-height: 1.35; padding: 0.55rem 0.7rem; border-radius: 10px; background: rgba(255, 255, 255, 0.03); transition: background 0.2s, color 0.2s; }
+  .topic-card a:hover { background: rgba(255, 20, 147, 0.12); color: var(--soft-pink); }
+  .topic-kind { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--disco-gold); margin-bottom: 0.15rem; }
+  .topic-swipe { display: none; font-size: 0.8rem; color: rgba(255, 255, 255, 0.6); margin-top: 0.8rem; }
+  .topics-more { margin-top: 2rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+  .topics-more a { color: var(--neon-pink); font-weight: 600; text-decoration: none; }
+  .topics-more a:hover { text-decoration: underline; }
+
+  /* ============ TOOLS ============ */
+  .tools { background: var(--deep-plum); text-align: center; padding-top: 4.5rem; padding-bottom: 4.5rem; }
+  .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; max-width: 860px; margin: 1.5rem auto 0; text-align: left; }
+  .tool-card { display: block; text-decoration: none; color: #fff; padding: 1.8rem; border-radius: 20px; background: linear-gradient(145deg, rgba(255, 20, 147, 0.1), rgba(255, 215, 0, 0.04)); border: 1px solid var(--glass-border); transition: border-color 0.3s, transform 0.3s; }
+  .tool-card:hover { border-color: var(--hot-pink); transform: translateY(-4px); }
+  .tool-icon { font-size: 1.8rem; display: block; margin-bottom: 0.6rem; }
+  .tool-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.5rem; }
+  .tool-card p { font-size: 0.95rem; color: rgba(255, 255, 255, 0.7); line-height: 1.6; margin-bottom: 1rem; }
+  .tool-go { color: var(--neon-pink); font-weight: 600; }
+
+  @media (max-width: 1000px) {
+    .topic-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 700px) {
+    .sponsor-strip, .tool-grid { grid-template-columns: 1fr; }
+  }
   @media (max-width: 600px) {
-    .sponsor-card { padding: 2rem 1.5rem; }
-    .sponsor-books { flex-direction: column; align-items: center; }
-    .sponsor-book { width: 100%; max-width: 260px; }
+    /* Topics become a swipeable row so the page stays short on phones */
+    .topic-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 0.9rem; margin: 0 -1.2rem; padding: 0 1.2rem 0.6rem; scrollbar-width: none; }
+    .topic-grid::-webkit-scrollbar { display: none; }
+    .topic-card { flex: 0 0 82%; scroll-snap-align: center; }
+    .topic-swipe { display: block; }
+    .tool-card { padding: 1.4rem; }
+    .about-visual { display: none; }
   }
 
 /* Respect the "reduce motion" setting on phones and computers */
@@ -532,13 +560,9 @@
 <nav id="navbar" role="navigation" aria-label="Main navigation">
   <a href="#" class="nav-logo">The Wedding Police</a>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#about">About</a></li>
-    <li><a href="blog/">Blog</a></li>
-    <li><a href="budget-calculator.html">Budget Calc</a></li>
-    <li><a href="wedding-checklist.html">Checklist</a></li>
     <li><a href="episodes/">Episodes</a></li>
-    <li><a href="https://www.facebook.com/profile.php?id=61586443233812" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-    <li><a href="https://www.instagram.com/theweddingpolicepodcast/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+    <li><a href="blog/">Blog</a></li>
+    <li><a href="#tools">Free Tools</a></li>
     <li><a href="contest.html" style="color:var(--disco-gold);font-weight:700;">🏆 Win a Spot!</a></li>
     <li><a href="#episodes" class="nav-cta">🎧 Listen Now</a></li>
   </ul>
@@ -559,11 +583,11 @@
   <div class="hero-content">
     <div class="hero-image-wrapper">
       <img src="IMG_7503.jpeg" width="1200" height="899" fetchpriority="high" alt="Penny and Jim, hosts of The Wedding Police — a top wedding podcast covering wedding stories, tips, and advice" class="hero-image">
-      <div class="badge-float">🚨 New Episodes</div>
-      <div class="badge-float">💍 Best Wedding Podcast</div>
+      <div class="badge-float">🚨 New Episodes Weekly</div>
+      <div class="badge-float">💍 Hosted by Penny &amp; Jim</div>
     </div>
     <div class="hero-text">
-      <div class="hero-eyebrow">🔊 The #1 Wedding Podcast for Engaged Couples</div>
+      <div class="hero-eyebrow">🎙️ <!-- EP-COUNT:START -->39<!-- EP-COUNT:END --> episodes · New every week</div>
       <h1 class="hero-title">The Wedding Police <span class="hero-title-tag">Podcast</span></h1>
       <p class="hero-subtitle">A wedding podcast hosted by Penny &amp; Jim.</p>
       <!-- HERO-LATEST:START -->
@@ -623,39 +647,6 @@
   </div>
 </div>
 
-<!-- About -->
-<section class="about" id="about">
-  <div class="about-grid">
-    <div class="reveal">
-      <div class="section-label">About the Podcast</div>
-      <h2 class="section-title">The Best Wedding Podcast for Real Stories & Honest Advice</h2>
-      <p class="section-subtitle">
-        The Wedding Police is a wedding podcast hosted by Penny and Jim. Every episode dives into 
-        real wedding stories, wedding planning tips, and the kind of honest bridal advice your 
-        friends are too polite to give. Whether you're an engaged couple planning your big day 
-        or just love a good wedding fail, this is the wedding podcast for you.
-      </p>
-      <div class="about-features">
-        <div class="feature-card"><span class="feature-icon">🚔</span><h3>Wedding Fails & Disasters</h3><p>The most outrageous wedding horror stories, dissected with love and laughs.</p></div>
-        <div class="feature-card"><span class="feature-icon">💒</span><h3>Real Wedding Stories</h3><p>True tales from brides, grooms, wedding planners & guests who lived it.</p></div>
-        <div class="feature-card"><span class="feature-icon">🎤</span><h3>Wedding Planning Tips</h3><p>Practical advice on budgets, vendors, timelines & everything in between.</p></div>
-        <div class="feature-card"><span class="feature-icon">⚖️</span><h3>Bridal Advice & Debates</h3><p>Penny & Jim settle the hottest wedding debates with unfiltered takes.</p></div>
-      </div>
-    </div>
-    <div class="about-visual reveal">
-      <div class="badge-display">
-        <div class="orbit-ring"><div class="orbit-dot"></div></div>
-        <div class="orbit-ring"><div class="orbit-dot"></div></div>
-        <div class="badge-outer">
-          <div class="badge-star">⭐</div>
-          <h3>On Patrol</h3>
-          <p>New wedding podcast episodes with Penny & Jim drop regularly.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- Episodes -->
 <section class="episodes" id="episodes">
   <div class="episodes-container">
@@ -707,116 +698,106 @@
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="faq" id="faq">
-  <div class="faq-container">
-    <div class="reveal" style="text-align:center; margin-bottom:2.5rem;">
-      <div class="section-label" style="justify-content:center;">Frequently Asked Questions</div>
-      <h2 class="section-title">About The Wedding Police Podcast</h2>
+<!-- Topics -->
+<section class="topics" id="topics">
+  <div class="topics-container">
+    <div class="section-label" style="justify-content:center;">Browse by Topic</div>
+    <h2 class="section-title">What Are You Planning?</h2>
+    <p class="section-subtitle" style="margin:0 auto 2.5rem;">Episodes and guides for every corner of the wedding, from the budget to the bachelorette.</p>
+    <div class="topic-grid">
+      <div class="topic-card">
+        <h3><span aria-hidden="true">📋</span> Planning &amp; Budget</h3>
+        <ul>
+          <li><a href="blog/wedding-planning-timeline.html"><span class="topic-kind">📝 Guide</span>Wedding Planning Timeline</a></li>
+          <li><a href="blog/wedding-budget-tips.html"><span class="topic-kind">📝 Guide</span>Wedding Budget Tips</a></li>
+          <li><a href="episodes/destination-weddings.html"><span class="topic-kind">🎧 Episode</span>Destination Weddings</a></li>
+          <li><a href="episodes/going-to-a-bridal-expo.html"><span class="topic-kind">🎧 Episode</span>Going to a Bridal Expo</a></li>
+        </ul>
+      </div>
+      <div class="topic-card">
+        <h3><span aria-hidden="true">👗</span> Dresses &amp; Dress Codes</h3>
+        <ul>
+          <li><a href="blog/bridal-gown-shopping-guide.html"><span class="topic-kind">📝 Guide</span>Bridal Gown Shopping Guide</a></li>
+          <li><a href="blog/wedding-guest-dress-code.html"><span class="topic-kind">📝 Guide</span>Wedding Guest Dress Code</a></li>
+          <li><a href="episodes/decoding-wedding-dress-codes.html"><span class="topic-kind">🎧 Episode</span>Decoding Wedding Dress Codes</a></li>
+          <li><a href="episodes/alterations.html"><span class="topic-kind">🎧 Episode</span>Alterations</a></li>
+        </ul>
+      </div>
+      <div class="topic-card">
+        <h3><span aria-hidden="true">💌</span> Guests &amp; Etiquette</h3>
+        <ul>
+          <li><a href="episodes/wedding-guest-plus-one-or-none.html"><span class="topic-kind">🎧 Episode</span>Plus One or None?</a></li>
+          <li><a href="episodes/kids-at-weddings.html"><span class="topic-kind">🎧 Episode</span>Kids at Weddings</a></li>
+          <li><a href="episodes/unplugged-weddings.html"><span class="topic-kind">🎧 Episode</span>Unplugged Weddings</a></li>
+          <li><a href="blog/how-to-write-wedding-speech.html"><span class="topic-kind">📝 Guide</span>Funny Wedding Speech Examples</a></li>
+        </ul>
+      </div>
+      <div class="topic-card">
+        <h3><span aria-hidden="true">🎉</span> Parties &amp; Reception</h3>
+        <ul>
+          <li><a href="episodes/bachelorette-party-or-financial-crime-scene.html"><span class="topic-kind">🎧 Episode</span>Bachelorette Party or Financial Crime Scene?</a></li>
+          <li><a href="episodes/the-dj.html"><span class="topic-kind">🎧 Episode</span>The DJ</a></li>
+          <li><a href="episodes/gameify-your-wedding.html"><span class="topic-kind">🎧 Episode</span>Gameify Your Wedding</a></li>
+          <li><a href="blog/signature-wedding-cocktails.html"><span class="topic-kind">📝 Guide</span>Signature Wedding Cocktails</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="reveal">
-      <div class="faq-item">
-        <button class="faq-question">What is The Wedding Police podcast? <span class="faq-chevron">▼</span></button>
-        <div class="faq-answer"><p>The Wedding Police is a wedding podcast hosted by Penny and Jim that covers real wedding stories, wedding fails, bridal tips, wedding planning advice, and the funniest moments from ceremonies and receptions. It’s one of the best wedding podcasts for engaged couples looking for honest, hilarious, and helpful content.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">Where can I listen to The Wedding Police? <span class="faq-chevron">▼</span></button>
-        <div class="faq-answer"><p>You can listen to The Wedding Police podcast for free on Spotify and Apple Podcasts. Just search “The Wedding Police” on either platform, or use the embedded players on this page to stream episodes right now.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">Who hosts The Wedding Police podcast? <span class="faq-chevron">▼</span></button>
-        <div class="faq-answer"><p>The Wedding Police is hosted by Penny and Jim. They bring unfiltered wedding advice, hilarious real wedding stories, and honest opinions on everything from bridal gown shopping to wedding speeches and toasts.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">What topics does The Wedding Police cover? <span class="faq-chevron">▼</span></button>
-        <div class="faq-answer"><p>Episodes cover a wide range of wedding topics including wedding fails and disasters, bridal gown shopping tips, wedding speeches and toasts, DIY wedding ideas, signature cocktails, messy weddings, wedding planning tips for engaged couples, and much more.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-question">Is this a good podcast for engaged couples? <span class="faq-chevron">▼</span></button>
-        <div class="faq-answer"><p>Absolutely! The Wedding Police is perfect for engaged couples who want real, honest wedding planning advice without the sugar-coating. Penny and Jim combine humor with practical wedding tips, covering everything from budgets and vendors to bridal gowns and the wildest reception stories.</p></div>
-      </div>
+    <p class="topic-swipe" aria-hidden="true">Swipe for more topics →</p>
+    <p class="topics-more"><a href="episodes/">All episodes →</a> <a href="blog/">All guides →</a></p>
+  </div>
+</section>
+
+<!-- Tools -->
+<section class="tools" id="tools">
+  <div class="tools-container">
+    <div class="section-label" style="justify-content:center;">Free Planning Tools</div>
+    <h2 class="section-title">Plan It Without the Spreadsheet</h2>
+    <div class="tool-grid">
+      <a class="tool-card" href="wedding-checklist.html">
+        <span class="tool-icon" aria-hidden="true">✅</span>
+        <h3>12-Month Wedding Checklist</h3>
+        <p>40 tasks, month by month. Tick them off as you go; your progress saves automatically.</p>
+        <span class="tool-go">Open the checklist →</span>
+      </a>
+      <a class="tool-card" href="budget-calculator.html">
+        <span class="tool-icon" aria-hidden="true">💰</span>
+        <h3>Wedding Budget Calculator</h3>
+        <p>Enter your total and see how much to spend on the venue, food, photos and everything else.</p>
+        <span class="tool-go">Split my budget →</span>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- Sponsors -->
-<section class="sponsors" id="sponsors">
-  <div class="sponsors-container">
-    <div class="reveal" style="margin-bottom: 1rem;">
-      <div class="section-label" style="justify-content:center;">Our Sponsors</div>
-      <h2 class="section-title">Proudly Supported By</h2>
-      <p class="section-subtitle" style="max-width:100%; margin:0.5rem auto 0;">Amazing brands that make The Wedding Police podcast possible.</p>
-    </div>
-    <div class="sponsor-card reveal">
-      <div class="sponsor-badge">⭐ Official Sponsor</div>
-      <h3 class="sponsor-name"><a href="https://willpollock.bigcartel.com/" target="_blank" rel="noopener noreferrer">Will Pollock Press</a></h3>
-      <p class="sponsor-desc">Books that make a difference. From heartwarming children's stories to creative cookbooks, Will Pollock Press creates books you'll actually want on your shelf.</p>
-      <div class="sponsor-books">
-        <a href="https://willpollock.bigcartel.com/product/leaving-triscuit-by-will-pollock" target="_blank" rel="noopener noreferrer" class="sponsor-book">
-          <span class="book-emoji">📖</span>
-          <span class="book-title">Leaving Triscuit</span>
-          <span class="book-price">$20.00</span>
-        </a>
-        <a href="https://willpollock.bigcartel.com/product/gentle-with-gertie-by-will-pollock" target="_blank" rel="noopener noreferrer" class="sponsor-book">
-          <span class="book-emoji">🐾</span>
-          <span class="book-title">Gentle with Gertie</span>
-          <span class="book-price">$15.00</span>
-        </a>
-        <a href="https://willpollock.bigcartel.com/product/pizza-for-good-by-will-pollock" target="_blank" rel="noopener noreferrer" class="sponsor-book">
-          <span class="book-emoji">🍕</span>
-          <span class="book-title">Pizza for Good</span>
-          <span class="book-price">$15.00</span>
-        </a>
+<!-- About -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="section-label">About the Podcast</div>
+      <h2 class="section-title">The Best Wedding Podcast for Real Stories & Honest Advice</h2>
+      <p class="section-subtitle">
+        The Wedding Police is a wedding podcast hosted by Penny and Jim. Every episode dives into 
+        real wedding stories, wedding planning tips, and the kind of honest bridal advice your 
+        friends are too polite to give. Whether you're an engaged couple planning your big day 
+        or just love a good wedding fail, this is the wedding podcast for you.
+      </p>
+      <div class="about-features">
+        <div class="feature-card"><span class="feature-icon">🚔</span><h3>Wedding Fails & Disasters</h3><p>The most outrageous wedding horror stories, dissected with love and laughs.</p></div>
+        <div class="feature-card"><span class="feature-icon">💒</span><h3>Real Wedding Stories</h3><p>True tales from brides, grooms, wedding planners & guests who lived it.</p></div>
+        <div class="feature-card"><span class="feature-icon">🎤</span><h3>Wedding Planning Tips</h3><p>Practical advice on budgets, vendors, timelines & everything in between.</p></div>
+        <div class="feature-card"><span class="feature-icon">⚖️</span><h3>Bridal Advice & Debates</h3><p>Penny & Jim settle the hottest wedding debates with unfiltered takes.</p></div>
       </div>
-      <a href="https://willpollock.bigcartel.com/" target="_blank" rel="noopener noreferrer" class="sponsor-cta">Visit Will Pollock Press →</a>
     </div>
-
-    <div class="sponsor-card reveal">
-      <div class="sponsor-badge">⭐ Official Sponsor</div>
-      <h3 class="sponsor-name"><a href="https://myweddingtrivia.com/" target="_blank" rel="noopener noreferrer">MyWeddingTrivia.com</a></h3>
-      <p class="sponsor-desc">Live interactive trivia your guests play from their phones. No app, no player limits, set up in 5 minutes. Perfect for wedding receptions, bridal showers, and cocktail hours.</p>
-      <div class="sponsor-books">
-        <a href="https://myweddingtrivia.com/" target="_blank" rel="noopener noreferrer" class="sponsor-book">
-          <span class="book-emoji">📱</span>
-          <span class="book-title">Live Trivia</span>
-          <span class="book-price">Play on Phones</span>
-        </a>
-        <a href="https://myweddingtrivia.com/" target="_blank" rel="noopener noreferrer" class="sponsor-book">
-          <span class="book-emoji">🚫</span>
-          <span class="book-title">No App Needed</span>
-          <span class="book-price">Easy Setup</span>
-        </a>
-        <a href="https://myweddingtrivia.com/" target="_blank" rel="noopener noreferrer" class="sponsor-book">
-          <span class="book-emoji">🎉</span>
-          <span class="book-title">Receptions & Showers</span>
-          <span class="book-price">Unlimited Players</span>
-        </a>
+    <div class="about-visual reveal">
+      <div class="badge-display">
+        <div class="orbit-ring"><div class="orbit-dot"></div></div>
+        <div class="orbit-ring"><div class="orbit-dot"></div></div>
+        <div class="badge-outer">
+          <div class="badge-star">⭐</div>
+          <h3>On Patrol</h3>
+          <p>New wedding podcast episodes with Penny & Jim drop regularly.</p>
+        </div>
       </div>
-      <a href="https://myweddingtrivia.com/" target="_blank" rel="noopener noreferrer" class="sponsor-cta">Visit MyWeddingTrivia.com →</a>
-    </div>
-
-    <div class="sponsor-card reveal">
-      <div class="sponsor-badge">🎶 Event Entertainment</div>
-      <h3 class="sponsor-name"><a href="https://www.rgmlentertainment.com/" target="_blank" rel="noopener noreferrer">RGML Entertainment</a></h3>
-      <p class="sponsor-desc">Professional event entertainment that brings the party to life. DJs, photo booths, lighting, and live entertainment for weddings, receptions, and special events.</p>
-      <div class="sponsor-books">
-        <a href="https://www.rgmlentertainment.com/" target="_blank" rel="noopener noreferrer" class="sponsor-book">
-          <span class="book-emoji">🎧</span>
-          <span class="book-title">Professional DJs</span>
-          <span class="book-price">Custom Playlists</span>
-        </a>
-        <a href="https://www.rgmlentertainment.com/" target="_blank" rel="noopener noreferrer" class="sponsor-book">
-          <span class="book-emoji">📸</span>
-          <span class="book-title">Photo Booths</span>
-          <span class="book-price">Instant Memories</span>
-        </a>
-        <a href="https://www.rgmlentertainment.com/" target="_blank" rel="noopener noreferrer" class="sponsor-book">
-          <span class="book-emoji">✨</span>
-          <span class="book-title">Live Entertainment</span>
-          <span class="book-price">Unforgettable Events</span>
-        </a>
-      </div>
-      <a href="https://www.rgmlentertainment.com/" target="_blank" rel="noopener noreferrer" class="sponsor-cta">Visit RGML Entertainment →</a>
     </div>
   </div>
 </section>
@@ -880,6 +861,52 @@
         <a href="https://open.spotify.com/show/00XbQ3oSRLm3CeETc8bwdl" target="_blank" rel="noopener noreferrer" data-ev="rate_click" data-platform="spotify">Rate on Spotify</a>
       </div>
       <p class="rate-how">Apple: scroll to Ratings &amp; Reviews and tap a star. Spotify: open the show in the app and tap the ★ rating.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Sponsors -->
+<section class="sponsors" id="sponsors">
+  <div class="sponsors-container">
+    <div class="section-label" style="justify-content:center;">Our Sponsors</div>
+    <h2 class="section-title sponsors-title">Proudly Supported By</h2>
+    <div class="sponsor-strip">
+      <a class="sponsor-tile" href="https://willpollock.bigcartel.com/" target="_blank" rel="sponsored noopener noreferrer"><strong>Will Pollock Press</strong><span>Children's books and cookbooks you'll actually want on your shelf.</span></a>
+      <a class="sponsor-tile" href="https://myweddingtrivia.com/" target="_blank" rel="sponsored noopener noreferrer"><strong>MyWeddingTrivia.com</strong><span>Live trivia your guests play from their phones. No app needed.</span></a>
+      <a class="sponsor-tile" href="https://www.rgmlentertainment.com/" target="_blank" rel="sponsored noopener noreferrer"><strong>RGML Entertainment</strong><span>DJs, photo booths and lighting for weddings and events.</span></a>
+    </div>
+    <a class="sponsor-become" href="sponsor.html">Want to reach engaged couples? Sponsor the podcast →</a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="faq-container">
+    <div class="reveal" style="text-align:center; margin-bottom:2.5rem;">
+      <div class="section-label" style="justify-content:center;">Frequently Asked Questions</div>
+      <h2 class="section-title">About The Wedding Police Podcast</h2>
+    </div>
+    <div class="reveal">
+      <div class="faq-item">
+        <button class="faq-question">What is The Wedding Police podcast? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer"><p>The Wedding Police is a wedding podcast hosted by Penny and Jim that covers real wedding stories, wedding fails, bridal tips, wedding planning advice, and the funniest moments from ceremonies and receptions. It’s one of the best wedding podcasts for engaged couples looking for honest, hilarious, and helpful content.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Where can I listen to The Wedding Police? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer"><p>You can listen to The Wedding Police podcast for free on Spotify and Apple Podcasts. Just search “The Wedding Police” on either platform, or use the embedded players on this page to stream episodes right now.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Who hosts The Wedding Police podcast? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer"><p>The Wedding Police is hosted by Penny and Jim. They bring unfiltered wedding advice, hilarious real wedding stories, and honest opinions on everything from bridal gown shopping to wedding speeches and toasts.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What topics does The Wedding Police cover? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer"><p>Episodes cover a wide range of wedding topics including wedding fails and disasters, bridal gown shopping tips, wedding speeches and toasts, DIY wedding ideas, signature cocktails, messy weddings, wedding planning tips for engaged couples, and much more.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Is this a good podcast for engaged couples? <span class="faq-chevron">▼</span></button>
+        <div class="faq-answer"><p>Absolutely! The Wedding Police is perfect for engaged couples who want real, honest wedding planning advice without the sugar-coating. Penny and Jim combine humor with practical wedding tips, covering everything from budgets and vendors to bridal gowns and the wildest reception stories.</p></div>
+      </div>
     </div>
   </div>
 </section>

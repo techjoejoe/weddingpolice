@@ -586,6 +586,7 @@ def update_home(eps):
         ''')
     parts = ',\n'.join('    ' + json.dumps({'@type': 'PodcastEpisode', 'name': e['title'], 'url': e['url'],
                                              'datePublished': e['iso_date']}, ensure_ascii=False) for e in latest)
+    replace_block(os.path.join(ROOT, 'index.html'), '<!-- EP-COUNT:START -->', '<!-- EP-COUNT:END -->', str(len(eps)))
     replace_block(os.path.join(ROOT, 'index.html'), '"hasPart": [', '\n  ]', '\n' + parts)
 
 
