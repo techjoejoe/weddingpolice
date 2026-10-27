@@ -193,15 +193,35 @@
   .disco-square { position: absolute; width: 8px; height: 8px; background: rgba(255, 255, 255, 0.1); animation: float-square 15s linear infinite; }
   @keyframes float-square { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; } }
 
-  .hero-content { position: relative; z-index: 2; display: flex; align-items: center; gap: 4rem; max-width: 1200px; width: 100%; overflow: visible; }
-  .hero-image-wrapper { flex-shrink: 0; position: relative; }
-  .hero-image-wrapper::before { content: ''; position: absolute; inset: -4px; border-radius: 24px; background: linear-gradient(135deg, var(--hot-pink), var(--disco-gold), var(--silver), var(--hot-pink)); background-size: 400% 400%; animation: gradient-spin 4s ease infinite; z-index: -1; }
-  @keyframes gradient-spin { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-  .hero-image { width: 600px; height: 450px; border-radius: 20px; object-fit: cover; display: block; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
+  .hero-content { position: relative; z-index: 2; display: flex; align-items: center; max-width: 1200px; width: 100%; overflow: visible; }
+  .hero-text { max-width: min(520px, 44vw); }
 
-  .badge-float { position: absolute; background: var(--glass-white); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 0.6rem 1rem; font-size: 0.85rem; font-weight: 600; animation: badge-bob 3s ease-in-out infinite; white-space: nowrap; }
-  .badge-float:nth-child(2) { top: -15px; right: -30px; animation-delay: 0s; }
-  .badge-float:nth-child(3) { bottom: 20px; left: -40px; animation-delay: 1.5s; }
+  /* The photo: a full-height stage on the right that fades into the dark */
+  .hero-stage { position: absolute; top: 0; right: 0; bottom: 0; width: min(60vw, 1150px); z-index: 1; --px: 0; --py: 0; }
+  .hero-photo {
+    position: absolute; inset: 0; overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 25%), linear-gradient(to bottom, transparent 0, #000 13%, #000 80%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent 0, #000 25%), linear-gradient(to bottom, transparent 0, #000 13%, #000 80%, transparent 100%);
+    mask-composite: intersect;
+    translate: calc(var(--px) * -10px) calc(var(--py) * -8px);
+    transition: translate 0.6s ease-out;
+  }
+  .hero-photo picture { display: block; width: 100%; height: 100%; }
+  .hero-image { width: 100%; height: 100%; object-fit: cover; object-position: 42% 30%; display: block; transform-origin: 55% 35%; animation: hero-zoom 26s ease-in-out infinite alternate; }
+  @keyframes hero-zoom { from { transform: scale(1.02); } to { transform: scale(1.1); } }
+
+  /* Stage lights: two soft beams sweeping across, plus a glint over the disco hats */
+  .hero-beam { position: absolute; top: -20%; width: 45%; height: 140%; pointer-events: none; mix-blend-mode: screen; filter: blur(18px); opacity: 0.55; transform-origin: 50% 0; }
+  .hero-beam:nth-of-type(1) { left: 22%; background: linear-gradient(to bottom, rgba(255, 20, 147, 0.55), rgba(255, 20, 147, 0) 75%); clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%); animation: beam-sway 9s ease-in-out infinite alternate; }
+  .hero-beam:nth-of-type(2) { left: 52%; background: linear-gradient(to bottom, rgba(255, 215, 0, 0.45), rgba(255, 215, 0, 0) 75%); clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%); animation: beam-sway 11s ease-in-out -4s infinite alternate-reverse; }
+  @keyframes beam-sway { from { transform: rotate(-14deg); } to { transform: rotate(14deg); } }
+  .hero-shine { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: overlay; background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, 0.55) 48%, transparent 58%); background-size: 250% 100%; animation: hero-shine 7s ease-in-out 1.5s infinite; }
+  @keyframes hero-shine { 0% { background-position: 120% 0; } 35%, 100% { background-position: -40% 0; } }
+
+  .badge-float { position: absolute; z-index: 3; background: rgba(13, 13, 26, 0.55); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 0.6rem 1rem; font-size: 0.85rem; font-weight: 600; animation: badge-bob 3s ease-in-out infinite; white-space: nowrap; translate: calc(var(--px) * 14px) calc(var(--py) * 10px); transition: translate 0.6s ease-out; }
+  .badge-float:nth-child(2) { top: 58%; right: 3%; animation-delay: 0s; }
+  .badge-float:nth-child(3) { bottom: 9%; left: 30%; animation-delay: 1.5s; }
   @keyframes badge-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
   .hero-text { flex: 1; min-width: 0; overflow: visible; }
@@ -384,15 +404,23 @@
     .mobile-toggle { display: flex; }
   }
 
+  @media (max-width: 999px) {
+    .hero { flex-direction: column; justify-content: flex-start; min-height: auto; padding: 0 2rem 4rem; }
+    .hero-stage { position: relative; width: calc(100% + 4rem); margin: 72px -2rem 0; height: min(95vw, 62vh); min-height: 300px; }
+    .hero-photo { -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%); mask-image: linear-gradient(to bottom, #000 72%, transparent 100%); }
+    .hero-image { object-position: 48% 25%; }
+    .hero-content { margin-top: -2.5rem; }
+    .hero-text { max-width: 640px; margin: 0 auto; }
+    .badge-float:nth-child(2) { top: 6%; right: 4%; }
+    .badge-float:nth-child(3) { bottom: 22%; left: 4%; }
+  }
+
   @media (max-width: 900px) {
     .hero-content { flex-direction: column; text-align: center; }
-    .hero-image { width: 500px; height: 375px; }
     .hero-desc { margin: 0 auto 2rem; }
     .hero-buttons { justify-content: center; }
     .hero-text { width: 100%; }
     .hero-latest { margin-left: auto; margin-right: auto; }
-    .badge-float:nth-child(2) { right: -10px; }
-    .badge-float:nth-child(3) { left: -10px; }
     .about-grid { grid-template-columns: 1fr; gap: 3rem; }
     .about-visual { order: -1; }
     .badge-display { width: 260px; height: 320px; }
@@ -404,19 +432,14 @@
 
   @media (max-width: 600px) {
     nav { padding: 1rem; }
-    .hero { padding: 5rem 1.2rem 3rem; min-height: auto; }
-    .hero-content { gap: 2rem; }
-    .hero-image-wrapper { width: 100%; }
-    .hero-image { width: 100%; height: auto; aspect-ratio: 4/3; max-width: 400px; }
-    .hero-image-wrapper::before { border-radius: 20px; }
+    .hero { padding: 0 1.2rem 3rem; }
+    .hero-stage { width: calc(100% + 2.4rem); margin: 64px -1.2rem 0; }
     .hero-title { font-size: 2rem; white-space: normal; }
     .hero-subtitle { font-size: 1rem; }
     .hero-desc { font-size: 1rem; }
     .hero-buttons { flex-direction: column; align-items: center; }
     .btn { width: 100%; max-width: 300px; justify-content: center; }
-    .badge-float { font-size: 0.75rem; padding: 0.5rem 0.8rem; }
-    .badge-float:nth-child(2) { right: 0; top: -10px; }
-    .badge-float:nth-child(3) { left: 0; bottom: 10px; }
+    .badge-float { font-size: 0.72rem; padding: 0.45rem 0.75rem; }
     section { padding: 3.5rem 1.2rem; }
     .section-title { font-size: 1.6rem; }
     .section-subtitle { font-size: 1rem; }
@@ -580,12 +603,20 @@
   <div class="disco-light"></div>
   <div class="disco-light"></div>
   <div class="disco-squares" id="discoSquares"></div>
-  <div class="hero-content">
-    <div class="hero-image-wrapper">
-      <img src="IMG_7503.jpeg" width="1200" height="899" fetchpriority="high" alt="Penny and Jim, hosts of The Wedding Police — a top wedding podcast covering wedding stories, tips, and advice" class="hero-image">
-      <div class="badge-float">🚨 New Episodes Weekly</div>
-      <div class="badge-float">💍 Hosted by Penny &amp; Jim</div>
+  <div class="hero-stage" id="heroStage">
+    <div class="hero-photo">
+      <picture>
+        <source type="image/webp" srcset="img/hero-720.webp 720w, img/hero-1100.webp 1100w, img/hero-1600.webp 1600w, img/hero-2000.webp 2000w" sizes="(min-width: 1000px) 60vw, 100vw">
+        <img src="IMG_7503.jpeg" width="1200" height="899" fetchpriority="high" alt="Penny and Jim, hosts of The Wedding Police podcast, in mirror-ball police hats on a red carpet" class="hero-image">
+      </picture>
+      <span class="hero-beam" aria-hidden="true"></span>
+      <span class="hero-beam" aria-hidden="true"></span>
+      <span class="hero-shine" aria-hidden="true"></span>
     </div>
+    <div class="badge-float">🚨 New Episodes Weekly</div>
+    <div class="badge-float">💍 Hosted by Penny &amp; Jim</div>
+  </div>
+  <div class="hero-content">
     <div class="hero-text">
       <div class="hero-eyebrow">🎙️ <!-- EP-COUNT:START -->39<!-- EP-COUNT:END --> episodes · New every week</div>
       <h1 class="hero-title">The Wedding Police <span class="hero-title-tag">Podcast</span></h1>
@@ -1051,6 +1082,16 @@
 
   let lastSparkle = 0;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const stage = document.getElementById('heroStage');
+  if (!reduceMotion && window.matchMedia('(hover: hover) and (min-width: 1000px)').matches) {
+    const hero = document.querySelector('.hero');
+    hero.addEventListener('mousemove', (e) => {
+      const r = hero.getBoundingClientRect();
+      stage.style.setProperty('--px', ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
+      stage.style.setProperty('--py', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
+    });
+    hero.addEventListener('mouseleave', () => { stage.style.setProperty('--px', 0); stage.style.setProperty('--py', 0); });
+  }
   document.querySelector('.hero').addEventListener('mousemove', (e) => {
     if (reduceMotion) return;
     const now = Date.now();
